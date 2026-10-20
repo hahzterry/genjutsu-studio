@@ -98,6 +98,7 @@ def head(*, path, title, description, og_title=None, og_type="website", image, e
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{root}styles.css?v={ASSET_VER}" />
+  <script data-goatcounter="https://genjutsu-trends.goatcounter.com/count" async src="{root}goatcounter.js?v={ASSET_VER}"></script>
 {extra_ld}
 </head>
 <body>
