@@ -1,0 +1,29 @@
+# Tell Bing (and other IndexNow engines) about the site's pages after every deploy, so new or
+# changed pages are crawled within hours. The key is public by design: it's served at /cc662bbcccdfb5b71823c28da57ad0ae.txt.
+name: IndexNow ping
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for the deploy, then submit the sitemap's URLs
+        run: |
+          set -euo pipefail
+          KEY=cc662bbcccdfb5b71823c28da57ad0ae
+          HOST=genjutsu-trends.com
+          # Pages deploys take a minute or two; wait until the key file is live (max ~5 min).
+          for i in $(seq 1 30); do
+            [ "$(curl -s https://$HOST/$KEY.txt)" = "$KEY" ] && break
+            sleep 10
+          done
+          URLS=$(curl -sf https://$HOST/sitemap.xml | python3 -c 'import json,re,sys;print(json.dumps(re.findall(r"<loc>([^<]+)</loc>", sys.stdin.read())))')
+          BODY=$(python3 -c 'import json,sys;print(json.dumps({"host":sys.argv[1],"key":sys.argv[2],"keyLocation":f"https://{sys.argv[1]}/{sys.argv[2]}.txt","urlList":json.loads(sys.argv[3])}))' "$HOST" "$KEY" "$URLS")
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST https://api.indexnow.org/indexnow -H "Content-Type: application/json; charset=utf-8" -d "$BODY")
+          echo "IndexNow: HTTP $code for $(echo "$URLS" | python3 -c 'import json,sys;print(len(json.load(sys.stdin)))') URLs"
+          test "$code" = 200 -o "$code" = 202
