@@ -3,13 +3,15 @@
 const { createClient } = window.supabase;
 
 // Shared by every page. window.PAGE (inlined by site/build.py) says which page this is:
-//   { kind: "home" }                       trend gallery + "Your videos"
+//   { kind: "home" }                       trend gallery
+//   { kind: "videos" }                     "My videos": the signed-in user's video history
 //   { kind: "trend", trend: {...} }        locked scene, user only adds the photo slots
 //   { kind: "custom" }                     own video, up to 8 photos, own prompt
 const C = window.GENJUTSU_CONFIG;
 const PAGE = window.PAGE || { kind: "home" };
 const T = PAGE.trend;
 const HAS_STUDIO = PAGE.kind === "trend" || PAGE.kind === "custom";
+const HAS_VIDEOS = PAGE.kind === "videos";
 const DEMO = !C.SUPABASE_URL || !C.SUPABASE_ANON_KEY;
 // Test mode (?mock=ok or ?mock=fail): the server fakes the render for allowlisted testers only.
 const MOCK = ["ok", "fail"].includes(new URLSearchParams(location.search).get("mock")) ? new URLSearchParams(location.search).get("mock") : null;
@@ -121,7 +123,7 @@ async function setUser(user) {
   if (!user) { state.jobs = []; renderJobs(); refresh(); return; }
   const resume = state.pendingGenerate; state.pendingGenerate = false;
   $("signin-modal").open && $("signin-modal").close();
-  await Promise.all([loadCredits(), loadJobs()]);
+  await Promise.all([loadCredits(), HAS_VIDEOS ? loadJobs() : null]);
   if (resume) generate();
 }
 async function loadCredits() {
@@ -135,6 +137,7 @@ async function loadCredits() {
 }
 
 on("signin-btn", "click", () => openSignin());
+on("mv-signin", "click", () => openSignin());
 on("signout-btn", "click", async () => {
   if (DEMO) { const d = demoStore.get(); d.email = null; demoStore.set(d); setUser(null); }
   else await sb.auth.signOut();
@@ -375,10 +378,10 @@ async function generate() {
       }));
     }
     state.started = true;
-    state.jobs.unshift(job); renderJobs(); await loadCredits();
-    toast("Generating! You can leave this page — your video will be waiting here.");
-    $("history").scrollIntoView({ behavior: "smooth" });
-    poll();
+    await loadCredits();
+    if (DEMO) { state.jobs.unshift(job); }
+    toast("Generating! Find it in My videos.");
+    const note = $("started-note"); if (note) { note.hidden = false; note.scrollIntoView({ behavior: "smooth", block: "center" }); }
   } catch (e) {
     if (e.status === 402) { await loadCredits(); openBuy(e.message); } else toast(e.message, 6000);
   } finally { busy = false; refresh(); }
@@ -454,8 +457,10 @@ function jobCard(j) {
   return el;
 }
 function renderJobs() {
-  $("history").hidden = !state.jobs.length;
   const box = $("jobs");
+  if (!box) return; // only the My videos page lists videos
+  $("mv-signed-out").hidden = !!state.user;
+  $("mv-empty").hidden = !state.user || state.jobs.length > 0;
   const ids = new Set(state.jobs.map((j) => j.id));
   for (const [id, el] of jobEls) if (!ids.has(id)) { el.remove(); jobEls.delete(id); }
   let prev = null;

@@ -83,7 +83,7 @@ def head(*, path, title, description, og_title=None, og_type="website", image, e
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(description)}" />{'\n  <meta name="robots" content="noindex,nofollow" />' if noindex else ''}
   <link rel="canonical" href="{BASE}{path}" />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+{'' if noindex else '  <meta name="robots" content="index,follow,max-image-preview:large" />'}
   <meta property="og:type" content="{og_type}" />
   <meta property="og:site_name" content="Genjutsu Studio" />
   <meta property="og:title" content="{esc(og_title or title)}" />
@@ -119,7 +119,7 @@ def header(root, app=True, active=""):
     cls = lambda k: ' class="active"' if k == active else ""
     return f"""  <header class="top">
     <a class="brand" href="{root}"><span class="logo">🌀</span> Genjutsu<span class="dim">Studio</span></a>
-    <nav class="nav"><a href="{root}"{cls('trends')}>Trends</a><a href="{root}custom/"{cls('custom')}>Custom</a><a href="{root}pricing/"{cls('pricing')}>Pricing</a></nav>
+    <nav class="nav"><a href="{root}"{cls('trends')}>Trends</a><a href="{root}custom/"{cls('custom')}>Custom</a><a href="{root}pricing/"{cls('pricing')}>Pricing</a><a href="{root}my-videos/"{cls('videos')}>My videos</a></nav>
     <div class="top-actions">
 {actions}
     </div>
@@ -182,10 +182,16 @@ def footer(root, app=True, page=None):
 """
 
 
-HISTORY = """    <section id="history" hidden>
-      <h2>Your videos</h2>
+HISTORY = """    <section id="history">
+      <p class="muted" id="mv-signed-out" hidden>Sign in with the email you used to see your videos.
+        <button id="mv-signin" class="btn primary">Sign in</button></p>
+      <p class="muted" id="mv-empty" hidden>No videos yet. <a href="../">Pick a trend</a> to make your first one.</p>
       <div id="jobs" class="jobs"></div>
     </section>
+"""
+# Shown under the Generate button once a video has started (studio pages).
+STARTED_NOTE = """      <p class="started-note" id="started-note" hidden>✅ Your video is being made. Follow it, watch it and download it in
+        <a href="/my-videos/">My videos</a>. You can close this page.</p>
 """
 
 RES_ROW = """      <div class="row">
@@ -251,7 +257,7 @@ def studio_trend(t, root):
           <button type="button" class="link-btn" id="prompt-reset" hidden>Reset to default</button></div>
         <textarea id="prompt" rows="3" maxlength="2000" readonly>{esc(t['prompt'])}</textarea>
       </div>
-{RES_ROW}    </section>
+{RES_ROW}{STARTED_NOTE}    </section>
 """
 
 
@@ -294,7 +300,7 @@ STUDIO_CUSTOM = """    <section class="card studio" id="studio">
         <span>Prompt <em>(optional)</em></span>
         <textarea id="prompt" rows="2" maxlength="2000" placeholder="e.g. Replace both characters with the uploaded pictures"></textarea>
       </label>
-""" + RES_ROW + """    </section>
+""" + RES_ROW + STARTED_NOTE + """    </section>
 """
 
 
@@ -350,7 +356,6 @@ for t in ALL_TRENDS:
     </section>
 
 {studio_trend(t, root)}
-{HISTORY}
     <section class="seo">
       <h2>About the trend</h2>
       {s['about_html']}
@@ -386,7 +391,7 @@ home_faq = [
     ("How does it work?", "Every trend page has its scene already loaded. You only add a photo for each person. On the Custom page you can upload your own video, up to 8 photos and your own prompt."),
     ("How much does it cost?", "You pay per second of video, with no subscription. At 480p it's about 48 credits per second plus 100 per video (100 credits = $1). Every page shows the exact price before you generate."),
     ("What if the generation fails?", "Your credits are refunded automatically, including when the content is blocked by moderation."),
-    ("Can I close the page while it's generating?", "Yes. Your video keeps rendering. Sign in again and you'll find it under \"Your videos\"."),
+    ("Can I close the page while it's generating?", "Yes. Your video keeps rendering. Sign in again and you'll find it under \"My videos\" in the top menu."),
     ("Do credits expire?", "No. Credits stay on your account until you use them."),
 ]
 item_list = {
@@ -416,7 +421,6 @@ home += f"""
         </a>
     </section>
 
-{HISTORY}
     <section class="seo">
       <h2>What is a Genjutsu trend?</h2>
       <p>Genjutsu is Higgsfield's video-to-video model, released on August 31, 2026. It keeps the motion, camera move and timing of a clip and recasts the
@@ -453,7 +457,6 @@ custom += f"""
     </section>
 
 {STUDIO_CUSTOM}
-{HISTORY}
     <section class="faq">
       <h2>Questions</h2>
 {faq_html(custom_faq)}
@@ -531,6 +534,21 @@ pr += f"""  <main>
 """
 pr += footer("../", app=False)
 write("pricing/index.html", pr)
+
+# ---------------- my videos (private, per user) ----------------
+mv = head(path="my-videos/", title="My videos | Genjutsu Studio", description="Your Genjutsu videos: follow, watch and download them.",
+          image=f"{BASE}og.jpg", noindex=True)
+mv += header("../", active="videos")
+mv += f"""  <main>
+    <div class="crumbs"><a href="../">Trends</a> › My videos</div>
+    <section class="hero small">
+      <h1>My videos</h1>
+      <p class="lead">Every video you've made: follow its progress, watch it and download it. Download your videos to keep a copy.</p>
+    </section>
+{HISTORY}  </main>
+"""
+mv += footer("../", page={"kind": "videos"})
+write("my-videos/index.html", mv)
 
 # ---------------- legal pages ----------------
 LEGAL = [("terms", "Terms of Use", "Terms of use for Genjutsu Studio: credits, refunds, what you may upload, and your videos."),

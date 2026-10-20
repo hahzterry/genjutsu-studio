@@ -246,3 +246,5 @@ main > .crumbs { padding-top: 6px; }
 textarea[readonly] { color: var(--muted); cursor: default; }
 .banner.notice { background: #1e1b4b; color: #e0e7ff; line-height: 1.45; }
 .banner.notice b { color: #fff; }
+.started-note { margin: 14px 0 0; padding: 10px 14px; border-radius: 12px; background: rgba(52, 211, 153, .1); border: 1px solid rgba(52, 211, 153, .35); font-size: 14px; }
+#history .muted .btn { margin-left: 8px; }
