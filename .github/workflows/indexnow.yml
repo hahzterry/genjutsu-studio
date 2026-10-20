@@ -17,9 +17,11 @@ jobs:
           set -euo pipefail
           KEY=cc662bbcccdfb5b71823c28da57ad0ae
           HOST=genjutsu-trends.com
-          # Pages deploys take a minute or two; wait until the key file is live (max ~5 min).
-          for i in $(seq 1 30); do
-            [ "$(curl -s https://$HOST/$KEY.txt)" = "$KEY" ] && break
+          # Pages deploys take a minute or two: wait until the live sitemap matches this commit's (max ~10 min),
+          # so the ping lists the new pages, not the previous deploy's.
+          WANT=$(curl -sf "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/docs/sitemap.xml" | sha256sum)
+          for i in $(seq 1 60); do
+            [ "$(curl -s https://$HOST/$KEY.txt)" = "$KEY" ] && [ "$(curl -s "https://$HOST/sitemap.xml?nocache=$i" | sha256sum)" = "$WANT" ] && break
             sleep 10
           done
           URLS=$(curl -sf https://$HOST/sitemap.xml | python3 -c 'import json,re,sys;print(json.dumps(re.findall(r"<loc>([^<]+)</loc>", sys.stdin.read())))')
