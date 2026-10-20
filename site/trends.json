@@ -746,6 +746,228 @@
       }
     },
     {
+      "slug": "turn-the-lights-off",
+      "name": "Turn the Lights Off: Jon Hamm Club Dance",
+      "short": "Turn the Lights Off club dance",
+      "card_blurb": "The Jon Hamm club meme: eyes closed, swaying alone in a packed dark club. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/turn-the-lights-off.mp4",
+      "poster": "trends/turn-the-lights-off/poster.jpg",
+      "preview_url": "trends/turn-the-lights-off/preview.mp4",
+      "duration": 19.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the man in the dark jacket with his eyes closed, swaying in the middle of the dance floor (Jon Hamm), with the uploaded picture, as a realistic person. Keep the dark club, the blue and red lights, the crowd, his slow dance moves, the camera moves and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Eyes closed, swaying in the club",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Turn the Lights Off AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
+        "description": "Put your face in the viral Turn the Lights Off video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Turn the Lights Off AI Video Generator",
+        "lead": "Be the man in the Jon Hamm club meme: eyes closed, lost in the music in a packed, dark club to <b>\"Turn the Lights Off\"</b>. The 19-second clip is locked in: add one photo and click Generate.",
+        "og_title": "Turn the Lights Off AI Video: Put Your Face in the Viral Clip",
+        "og_tagline": "Turn the Lights Off AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The \"Turn the Lights Off\" meme comes from a TV club scene where Jon Hamm, eyes closed, sways alone in the middle of a crowded dark dance floor to Kato's \"Turn the Lights Off\". The clip became a go-to reaction for \"me when the song comes on\", and the AI trend puts you in his place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Turn the Lights Off clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "Add a clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Turn The Lights Off\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Turn the Lights Off AI video?",
+            "Open this page. The Turn the Lights Off clip is already loaded. Add one photo, then click Generate."
+          ],
+          [
+            "How much does the Turn the Lights Off AI video cost?",
+            "The 19-second clip at 480p costs 1,007 credits (about $10.07). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the man with his eyes closed in the middle of the dance floor. The crowd stays as it is."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit photo of one person. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "cheba-man",
+      "name": "Cheba Man: Tecktonik Stage Dance",
+      "short": "Cheba Man stage dance",
+      "card_blurb": "The Cheba Man Tecktonik dance on a festival stage, crowd filming below. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/cheba-man.mp4",
+      "poster": "trends/cheba-man/poster.jpg",
+      "preview_url": "trends/cheba-man/preview.mp4",
+      "duration": 20.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the dancer in the black T-shirt, sunglasses and grey trousers dancing on the stage with the uploaded picture, as a realistic person. Keep the night festival stage, the city lights and the ZORKA sign, the crowd filming on their phones, his Tecktonik arm moves, the camera moves and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "On the stage, crowd below",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Cheba Man AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
+        "description": "Put your face in the viral Cheba Man video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Cheba Man AI Video Generator",
+        "lead": "Take the stage in the viral <b>Cheba Man</b> Tecktonik dance: arm waves on every beat while the crowd below films on their phones. The 20-second clip is locked in: add one photo and click Generate.",
+        "og_title": "Cheba Man AI Video: Put Your Face in the Viral Clip",
+        "og_tagline": "Cheba Man AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The Cheba Man clip shows a dancer on a festival stage above a packed night crowd, throwing Tecktonik arm waves on every beat while everyone below holds up their phones. It spread as a \"main character\" moment, and the AI trend puts you on that stage.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Cheba Man clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "Add a clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Cheba Man\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Cheba Man AI video?",
+            "Open this page. The Cheba Man clip is already loaded. Add one photo, then click Generate."
+          ],
+          [
+            "How much does the Cheba Man AI video cost?",
+            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the dancer on the stage. The crowd below stays as it is."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit photo of one person. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "bulin-47",
+      "name": "Bulin 47: Street Freestyle",
+      "short": "Bulin 47 freestyle",
+      "card_blurb": "The Bulin 47 street freestyle at a red-lit entrance, rapping at a fan with a speaker. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bulin-47.mp4",
+      "poster": "trends/bulin-47/poster.jpg",
+      "preview_url": "trends/bulin-47/preview.mp4",
+      "duration": 20.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the rapper in the pink shirt and black sunglasses (Bulin 47) with the uploaded picture, as a realistic person. Keep the man with the speaker in front of him, the red-lit venue entrance, the crowd, his hand gestures, the camera moves and timing.",
+      "slots": [
+        {
+          "label": "The rapper",
+          "hint": "Pink shirt and sunglasses",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Bulin 47 AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
+        "description": "Put your face in the viral Bulin 47 video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Bulin 47 AI Video Generator",
+        "lead": "Be the rapper in the viral <b>Bulin 47</b> street freestyle: stopped at a red-lit entrance by a fan with a speaker, you rap straight at him. The 20-second clip is locked in: add one photo and click Generate.",
+        "og_title": "Bulin 47 AI Video: Put Your Face in the Viral Clip",
+        "og_tagline": "Bulin 47 AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The Bulin 47 freestyle was filmed outside a red-lit venue entrance: a fan walks up with a portable speaker playing a dembow beat, and the Dominican artist Bulin 47 answers with an improvised freestyle, hands flying. The clip went viral and became an AI trend where you take the rapper's place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Bulin 47 clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "Add a clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Bulin 47\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Bulin 47 AI video?",
+            "Open this page. The Bulin 47 clip is already loaded. Add one photo, then click Generate."
+          ],
+          [
+            "How much does the Bulin 47 AI video cost?",
+            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the rapper in the pink shirt. The fan with the speaker and the crowd stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit photo of one person. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
       "slug": "qa-4s",
       "hidden": true,
       "name": "QA 4-second test",
