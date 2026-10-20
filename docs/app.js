@@ -41,7 +41,8 @@ function toast(msg, ms = 3500) {
 // Browsers report a few ms extra (AAC priming), so ignore anything under 0.05s past a whole second.
 const clampSecs = (d) => Math.min(30, Math.max(4, Math.ceil(d - 0.05)));
 function estimate() {
-  return state.duration ? Math.ceil(clampSecs(state.duration) * C.CREDITS_PER_SEC[state.res]) + (C.FEE_CREDITS || 0) : 0;
+  // -1e-9: same float-safe rounding as the server, so 20 s x 47.7 is 954, not 955.
+  return state.duration ? Math.ceil(clampSecs(state.duration) * C.CREDITS_PER_SEC[state.res] - 1e-9) + (C.FEE_CREDITS || 0) : 0;
 }
 async function callFn(name, body) {
   const { data, error } = await sb.functions.invoke(name, { body });
@@ -370,7 +371,7 @@ async function generate() {
       ({ job } = await callFn("generate", {
         trend, workflow: state.mode, resolution: state.res,
         prompt: T ? ($("prompt").value.trim() || T.prompt) : $("prompt").value.trim(),
-        video_url, image_urls, duration: state.duration, ...(MOCK ? { mock: MOCK } : {}),
+        video_url, image_urls, duration: state.duration, expected_cost: cost, ...(MOCK ? { mock: MOCK } : {}),
       }));
     }
     state.started = true;

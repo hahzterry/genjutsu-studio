@@ -26,7 +26,7 @@ serve(async (req) => {
       // "exact" = pay for just the credits missing for one video (1 credit = $0.01), no leftovers.
       const n = Math.floor(Number(body.credits));
       const pack = body.pack_id === "exact"
-        ? (n >= 200 && n <= 5000 ? { usd: (n / 100).toFixed(2), credits: n } : null)
+        ? (n >= 200 && n <= 10000 ? { usd: (n / 100).toFixed(2), credits: n } : null)
         : PACKS[body.pack_id];
       if (!pack) return json({ error: "Unknown pack" }, 400);
       const r = await fetch(`${PP_BASE}/v2/checkout/orders`, {

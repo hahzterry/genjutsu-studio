@@ -13,7 +13,7 @@ window.GENJUTSU_CONFIG = {
   ],
   // Display-only cost preview: credits per second + flat fee per video. Keep in sync with
   // the HF_DISCOUNT / MARKUP / FEE_USD secrets (server is authoritative).
-  CREDITS_PER_SEC: { "480p": 15.9, "720p": 34.05, "1080p": 81.6 },
+  CREDITS_PER_SEC: { "480p": 47.7, "720p": 102.15, "1080p": 244.8 }, // Higgsfield list price x 1.5
   FEE_CREDITS: 100,
   // Turn on once custom SMTP is set up and the email templates include {{ .Token }}:
   // sign-in by 6-digit code keeps the visitor on the same page (no new tab from the mail app).

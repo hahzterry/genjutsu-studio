@@ -84,7 +84,8 @@ export function usdToCredits(usd: number): number {
   if (!(discount > 0 && discount <= 1) || !(markup >= 1 && markup <= 10) || !(fee >= 0 && fee <= 20) || !(usd > 0)) {
     throw new Error("pricing config out of range");
   }
-  return Math.max(1, Math.ceil(usd * discount * markup * 100) + Math.round(fee * 100));
+  // -1e-9 keeps float noise (20 x 0.318 x 1.5 x 100 = 954.0000000001) from adding a credit; matches app.js.
+  return Math.max(1, Math.ceil(usd * discount * markup * 100 - 1e-9) + Math.round(fee * 100));
 }
 
 // ---------- storage ----------

@@ -52,9 +52,15 @@ serve(async (req) => {
     return json({ error: "Video generation is temporarily unavailable." }, 503);
   }
   if (b.quote_only) return json({ cost });
+  // Never charge more than the price the visitor was shown (a tab opened before a price change,
+  // or an old cached app.js that doesn't send it at all): ask them to reload instead.
+  const expected = Number(b.expected_cost);
+  if (!Number.isInteger(expected) || cost > expected) {
+    return json({ error: "Prices were updated. Please reload the page to see the current price.", cost }, 409);
+  }
 
   // Caps: videos per user per day, and the site's total spend per day (credits, i.e. cents retail).
-  const caps = { jobs: intEnv("USER_DAILY_JOBS", 10), user: intEnv("USER_DAILY_CREDITS", 2600), site: intEnv("SITE_DAILY_CREDITS", 3000) };
+  const caps = { jobs: intEnv("USER_DAILY_JOBS", 10), user: intEnv("USER_DAILY_CREDITS", 7500), site: intEnv("SITE_DAILY_CREDITS", 15000) };
   if (caps.jobs === null || caps.user === null || caps.site === null) {
     console.error("cap settings invalid", caps);
     return json({ error: "Video generation is temporarily unavailable." }, 503);

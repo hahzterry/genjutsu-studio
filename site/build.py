@@ -7,6 +7,7 @@ add an entry to trends.json, drop a 1200x630 og.jpg in docs/trends/<slug>/
 """
 import html
 import json
+import math
 from datetime import date
 from pathlib import Path
 
@@ -19,7 +20,7 @@ ALL_TRENDS = DATA["trends"]
 # hidden trends (e.g. the 4s QA clip) get a page but stay out of the gallery, links and sitemap
 TRENDS = [t for t in ALL_TRENDS if not t.get("hidden")]
 TODAY = date.today().isoformat()
-CREDITS_PER_SEC_DEFAULT = 15.9  # 480p; keep in sync with docs/config.js
+CREDITS_PER_SEC_DEFAULT = 47.7  # 480p; keep in sync with docs/config.js
 FEE_CREDITS = 100
 # Changes whenever app.js / styles.css / config.js change, so browsers never run a stale copy.
 ASSET_VER = __import__("hashlib").sha1(b"".join((DOCS / f).read_bytes() for f in ("app.js", "styles.css", "config.js"))).hexdigest()[:10]
@@ -102,7 +103,7 @@ def head(*, path, title, description, og_title=None, og_type="website", image, e
 {extra_ld}
 </head>
 <body>
-  <div class="banner notice" role="status">🛠️ We're having a few hiccups right now and are fixing them as fast as we can. Your credits are safe: if a video doesn't come out, its credits come back to your account (automatically in most cases, or within a day if we need to check it). Finished videos are saved under <b>Your videos</b>, so you can close the page and come back anytime.</div>
+  <div class="banner notice" role="status">💜 Dear customers: we're working with our service providers to bring you better prices over the next few days. Stay tuned, more discounts are coming!</div>
   <div id="demo-banner" class="banner" hidden>Demo mode: the backend isn't connected yet, so payments and generation are simulated.</div>
 """
 
@@ -303,7 +304,8 @@ def write(rel, content):
 
 
 def price_text(t):
-    credits = int(-(-min(30, max(4, -(-t["duration"] // 1))) * CREDITS_PER_SEC_DEFAULT // 1)) + FEE_CREDITS
+    secs = min(30, max(4, math.ceil(t["duration"] - 0.05)))  # same rounding as app.js clampSecs
+    credits = math.ceil(secs * CREDITS_PER_SEC_DEFAULT - 1e-9) + FEE_CREDITS
     return f"{credits:,} credits (≈ ${credits / 100:.2f}) at 480p"
 
 
@@ -380,7 +382,7 @@ cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
 home_faq = [
     ("What is Genjutsu Studio?", "A site that lets you make viral AI video trends with Higgsfield's Genjutsu model. Pick a trend, add your photos and generate. No subscription."),
     ("How does it work?", "Every trend page has its scene already loaded. You only add a photo for each person. On the Custom page you can upload your own video, up to 8 photos and your own prompt."),
-    ("How much does it cost?", "You pay per second of video, with no subscription. At 480p it's about 16 credits per second plus 100 per video (100 credits = $1). Every page shows the exact price before you generate."),
+    ("How much does it cost?", "You pay per second of video, with no subscription. At 480p it's about 48 credits per second plus 100 per video (100 credits = $1). Every page shows the exact price before you generate."),
     ("What if the generation fails?", "Your credits are refunded automatically, including when the content is blocked by moderation."),
     ("Can I close the page while it's generating?", "Yes. Your video keeps rendering. Sign in again and you'll find it under \"Your videos\"."),
     ("Do credits expire?", "No. Credits stay on your account until you use them."),
@@ -434,7 +436,7 @@ write("index.html", home)
 custom_faq = [
     ("What can I make on the Custom page?", "Upload any MP4 between 4 and 30 seconds, add 1 to 8 reference photos and, optionally, a prompt. Motion transfer recasts the people in the clip; object swap replaces one person or object."),
     ("What prompt should I write?", "Keep it short and concrete, e.g. \"Replace both characters with the uploaded pictures\" or \"Replace the man in the red shirt with the person in the photo\"."),
-    ("How much does it cost?", "You pay per second of the source video (max 30 s). At 480p it's about 16 credits per second plus 100 per video (100 credits = $1). The exact price shows before you generate."),
+    ("How much does it cost?", "You pay per second of the source video (max 30 s). At 480p it's about 48 credits per second plus 100 per video (100 credits = $1). The exact price shows before you generate."),
 ]
 custom = head(path="custom/", title="Custom Genjutsu Video: Upload Any Clip and Photos (No Subscription)",
               description="Make your own AI video trend with Higgsfield Genjutsu: upload a 4–30 second clip, up to 8 photos and your own prompt. Motion transfer or object swap, pay per video.",
@@ -477,12 +479,12 @@ g += footer("../", app=False)
 write("genjutsu/index.html", g)
 
 # ---------------- pricing ----------------
-RATES = {"480p": 15.9, "720p": 34.05, "1080p": 81.6}  # credits/sec, keep in sync with docs/config.js
+RATES = {"480p": 47.7, "720p": 102.15, "1080p": 244.8}  # credits/sec, keep in sync with docs/config.js
 
 
 def video_price(secs, res):
     secs = min(30, max(4, -(-secs // 1)))
-    return (int(-(-secs * RATES[res] // 1)) + FEE_CREDITS) / 100
+    return (math.ceil(secs * RATES[res] - 1e-9) + FEE_CREDITS) / 100
 
 
 pfaq = [
@@ -493,7 +495,7 @@ pfaq = [
     ("Why do some apps look cheaper?", "Subscription apps advertise \"up to\" numbers based on their cheapest model and shortest clip, and you pay every month whether you use it or not. Here you pay only when you make a video, with Higgsfield Genjutsu, the model that keeps the original scene."),
 ]
 pr = head(path="pricing/", title="Pricing: Pay Per Video, No Subscription | Genjutsu Studio",
-          description="Genjutsu Studio pricing: pay once for the video you make. No subscription, no unused credits. Trend videos from about $3.39 at 480p.",
+          description="Genjutsu Studio pricing: pay once for the video you make. No subscription, no unused credits. Trend videos from about $8.16 at 480p.",
           image=f"{BASE}og.jpg", extra_ld=ld(faq_ld(pfaq), breadcrumbs(("Trends", ""), ("Pricing", "pricing/"))))
 pr += header("../", app=False, active="pricing")
 pr += f"""  <main>
