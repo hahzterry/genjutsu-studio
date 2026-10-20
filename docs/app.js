@@ -18,7 +18,8 @@ if (MOCK && HAS_STUDIO) {
   document.body.prepend(b);
 }
 const sb = DEMO ? null : createClient(C.SUPABASE_URL, C.SUPABASE_ANON_KEY);
-const TERMINAL = new Set(["completed", "failed", "nsfw", "canceled"]);
+// submit_unknown = held for a manual check by the owner: nothing to poll, show its message.
+const TERMINAL = new Set(["completed", "failed", "nsfw", "canceled", "submit_unknown"]);
 const $ = (id) => document.getElementById(id);
 const on = (id, ev, fn) => { const el = $(id); if (el) el.addEventListener(ev, fn); };
 
@@ -173,7 +174,7 @@ function showVideo(src, onReady) {
   v.src = src;
   v.onloadedmetadata = () => {
     if (v.duration < 3.95) { toast("The video must be at least 4 seconds."); return clearVideo(); }
-    if (v.duration > 30) toast("Only the first 30 seconds will be used.");
+    if (v.duration > 30.05) { toast("The video can be at most 30 seconds. Please trim it."); return clearVideo(); }
     state.duration = v.duration; onReady();
     v.hidden = false; v.play().catch(() => {});
     const empty = $("video-drop").querySelector(".drop-empty"); if (empty) empty.hidden = true;
@@ -405,7 +406,7 @@ function poll() {
   }, base * Math.min(8, 2 ** pollErrors));
 }
 const LABEL = { submitting: "Starting", queued: "In queue", in_progress: "Rendering", completed: "Ready",
-  failed: "Failed · refunded", nsfw: "Blocked · refunded", canceled: "Canceled · refunded" };
+  submit_unknown: "Checking", failed: "Failed · refunded", nsfw: "Blocked · refunded", canceled: "Canceled · refunded" };
 // Cards are keyed by job and only rebuilt when their state changes, so a video being watched keeps playing.
 const jobEls = new Map();
 const jobKey = (j) => `${j.status}|${j.output_url || ""}|${j.error || ""}|${!TERMINAL.has(j.status) && age(j) >= GIVE_UP_MS}`;

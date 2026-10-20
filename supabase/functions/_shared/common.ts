@@ -34,6 +34,23 @@ export const admin: SupabaseClient = createClient(
   { auth: { persistSession: false } },
 );
 
+/** True only when PayPal is live. Anything else (unset, "sandbox", typo) counts as test mode. */
+export const PAYMENTS_LIVE = Deno.env.get("PAYPAL_ENV") === "live";
+
+/** Allowlisted test accounts (TEST_EMAILS, comma-separated). */
+export function isTester(user: { email?: string | null; email_confirmed_at?: string | null }): boolean {
+  const list = (Deno.env.get("TEST_EMAILS") ?? "").toLowerCase().split(",").map((s) => s.trim()).filter(Boolean);
+  return !!user.email && !!user.email_confirmed_at && list.includes(user.email.toLowerCase());
+}
+
+/** Integer setting from a secret, with a default when unset. Anything else (typo, "3,000") is null. */
+export function intEnv(name: string, def: number): number | null {
+  const raw = Deno.env.get(name);
+  if (raw === undefined) return def;
+  const n = Number(raw.trim());
+  return raw.trim() !== "" && Number.isInteger(n) && n >= 1 ? n : null;
+}
+
 /** Resolve the calling user from the bearer token, or null. */
 export async function getUser(req: Request) {
   const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
@@ -63,6 +80,10 @@ export function usdToCredits(usd: number): number {
   const discount = Number(Deno.env.get("HF_DISCOUNT") ?? "1");
   const markup = Number(Deno.env.get("MARKUP") ?? "1.5");
   const fee = Number(Deno.env.get("FEE_USD") ?? "0");
+  // A typo'd secret (e.g. MARKUP=0) must not silently sell renders for pennies: refuse to price.
+  if (!(discount > 0 && discount <= 1) || !(markup >= 1 && markup <= 10) || !(fee >= 0 && fee <= 20) || !(usd > 0)) {
+    throw new Error("pricing config out of range");
+  }
   return Math.max(1, Math.ceil(usd * discount * markup * 100) + Math.round(fee * 100));
 }
 
@@ -113,7 +134,8 @@ export async function mp4Duration(url: string): Promise<number | null> {
     if (size === 1) { if (h.length < 16) return null; size = Number(dv.getBigUint64(8)); hdr = 16; }
     if (size < hdr) return null; // size 0 ("to end of file") never wraps a moov we can find
     if (type === "moov") {
-      const moov = await range(off + hdr, off + Math.min(size, 8 * 1024 * 1024) - 1);
+      if (size > 8 * 1024 * 1024) return null; // a 30s clip's index is far smaller; don't price a partial read
+      const moov = await range(off + hdr, off + size - 1);
       return moov ? moovDuration(moov) : null;
     }
     off += size;
@@ -123,49 +145,118 @@ export async function mp4Duration(url: string): Promise<number | null> {
 
 /**
  * Presented length of the movie: the longest of the movie header and each track header.
- * A track with no edit list plays its whole media, so its media header (mdhd) counts too;
- * with an edit list the media may be longer than what plays, so it doesn't.
- * Fragmented MP4s (mvex) keep the real length in the fragments and are rejected, not priced.
+ * The uploader controls those headers, so each track is also checked against what it really
+ * contains: the sum of its sample durations (stts). If a track carries more than 2s beyond
+ * the presented length, or a video track runs faster than 120 fps (frames squeezed into short
+ * timestamps), the file is rejected rather than priced. Fragmented MP4s (mvex) are rejected too.
  */
 function moovDuration(moov: Uint8Array): number | null {
-  let best = 0, movieScale = 0;
+  let movieScale = 0, presented = 0;
+  const tracks: { media: number; samples: number; video: boolean; edited: boolean }[] = [];
   const box = (j: number, end: number) => {
     if (j + 8 > end) return null;
     const m = new DataView(moov.buffer, moov.byteOffset + j, end - j);
     const size = m.getUint32(0);
-    if (size < 8 || j + size > end) return null; // truncated (moov over 8 MB): stop here
+    if (size < 8 || j + size > end) return "bad" as const;
     return { m, size, type: String.fromCharCode(...moov.slice(j + 4, j + 8)), v: moov[j + 8] };
+  };
+  // Walk the children of [start, end); returns false on any malformed or truncated box.
+  const each = (start: number, end: number, fn: (b: { m: DataView; size: number; type: string; v: number }, at: number) => boolean) => {
+    for (let j = start; j < end;) {
+      const b = box(j, end);
+      if (b === null) return end - j === 0;
+      if (b === "bad") return false;
+      if (!fn(b, j)) return false;
+      j += b.size;
+    }
+    return true;
   };
   const hd = (b: { m: DataView; v: number }) => // mvhd/mdhd: [timescale, duration]
     b.v === 1 ? [b.m.getUint32(28), Number(b.m.getBigUint64(32))] : [b.m.getUint32(20), b.m.getUint32(24)];
-  for (let j = 0, b; (b = box(j, moov.length)); j += b.size) {
-    if (b.type === "mvex") return null;
+
+  const ok = each(0, moov.length, (b, j) => {
+    if (b.type === "mvex") return false;
     if (b.type === "mvhd") {
       const [ts, d] = hd(b);
-      if (!ts) return null;
+      if (!ts) return false;
       movieScale = ts;
-      best = Math.max(best, d / ts);
-    } else if (b.type === "trak" && movieScale) {
-      let edited = false, media = 0;
-      const tEnd = j + b.size;
-      for (let k = j + 8, c; (c = box(k, tEnd)); k += c.size) {
-        if (c.type === "edts") edited = true;
-        if (c.type === "tkhd") best = Math.max(best, (c.v === 1 ? Number(c.m.getBigUint64(36)) : c.m.getUint32(28)) / movieScale);
-        if (c.type === "mdia") {
-          for (let l = k + 8, e; (e = box(l, k + c.size)); l += e.size) {
-            if (e.type === "mdhd") { const [ts, d] = hd(e); if (ts) media = d / ts; }
-          }
-        }
-      }
-      if (!edited) best = Math.max(best, media);
+      presented = Math.max(presented, d / ts);
+    } else if (b.type === "trak") {
+      if (!movieScale) return false;
+      const t = { media: 0, samples: 0, video: false, edited: false };
+      let scale = 0, ticks = 0;
+      const good = each(j + 8, j + b.size, (c, k) => {
+        if (c.type === "edts") t.edited = true;
+        if (c.type === "tkhd") presented = Math.max(presented, (c.v === 1 ? Number(c.m.getBigUint64(36)) : c.m.getUint32(28)) / movieScale);
+        if (c.type !== "mdia") return true;
+        return each(k + 8, k + c.size, (e, l) => {
+          if (e.type === "mdhd") { const [ts] = hd(e); scale = ts; }
+          if (e.type === "hdlr") t.video = String.fromCharCode(...moov.slice(l + 16, l + 20)) === "vide";
+          if (e.type !== "minf") return true;
+          return each(l + 8, l + e.size, (f, n) => f.type !== "stbl" ? true : each(n + 8, n + f.size, (g, q) => {
+            if (g.type !== "stts") return true;
+            const entries = g.m.getUint32(12);
+            if (16 + entries * 8 > g.size) return false;
+            for (let i = 0; i < entries; i++) {
+              const count = g.m.getUint32(16 + i * 8), delta = g.m.getUint32(20 + i * 8);
+              t.samples += count; ticks += count * delta;
+            }
+            return true;
+          }));
+        });
+      });
+      if (!good || !scale) return false;
+      t.media = ticks / scale;
+      if (!t.edited) presented = Math.max(presented, t.media);
+      tracks.push(t);
     }
+    return true;
+  });
+  if (!ok || !movieScale || !tracks.length) return null;
+  for (const t of tracks) {
+    if (t.media > presented + 2) return null;
+    if (t.video && t.samples / Math.max(t.media, 0.001) > 120) return null;
   }
-  return movieScale ? best : null;
+  return presented;
+}
+
+type Submit = { ok: true; request_id: string; status: string } | { ok: false; fatal: boolean };
+
+/**
+ * Send a job to Higgsfield exactly once. Higgsfield doesn't document whether it de-duplicates on
+ * Idempotency-Key, so a resubmit could start a second paid render: we never retry.
+ * fatal = Higgsfield clearly rejected it (4xx) or we never sent it: refund. Otherwise (network error,
+ * 5xx, a reply without request_id) it may be rendering: the caller holds the credits for review.
+ */
+export async function submitToHiggsfield(job: Job): Promise<Submit> {
+  let input;
+  try { // uploads live in a private bucket: hand Higgsfield short-lived signed URLs
+    const sign = (u: string) => (inputPath(u) ? signInput(inputPath(u)!) : Promise.resolve(u));
+    const images = (Array.isArray(job.image_urls) ? job.image_urls : []).map(String);
+    input = { video_url: await sign(String(job.video_url)), image_urls: await Promise.all(images.map(sign)), prompt: job.prompt ?? "", resolution: job.resolution };
+  } catch (e) {
+    console.error("signing failed", job.id, e);
+    return { ok: false, fatal: true }; // nothing was sent
+  }
+  const hook = `${SB_URL}/functions/v1/hf-webhook?secret=${Deno.env.get("WEBHOOK_SECRET")}`;
+  try {
+    const r = await fetch(`${HF_BASE}/higgsfield/genjutsu/${job.workflow}/v1.0?hf_webhook=${encodeURIComponent(hook)}`, {
+      method: "POST", headers: hfHeaders({ "Idempotency-Key": job.id }), body: JSON.stringify(input),
+    });
+    const sub = await r.json().catch(() => ({}));
+    if (r.ok && sub.request_id) return { ok: true, request_id: String(sub.request_id), status: String(sub.status ?? "queued") };
+    console.error("higgsfield submit failed", job.id, r.status, JSON.stringify(sub).slice(0, 500));
+    return { ok: false, fatal: r.status >= 400 && r.status < 500 };
+  } catch (e) {
+    console.error("higgsfield submit threw", job.id, e);
+    return { ok: false, fatal: false };
+  }
 }
 
 /** Fetch status from Higgsfield, persist it on the job, refund on failure. */
 export async function syncJob(job: Job) {
-  if (!job.hf_request_id || TERMINAL.has(job.status)) return job;
+  if (TERMINAL.has(job.status)) return job;
+  if (!job.hf_request_id) return job; // submitting, or submit_unknown awaiting manual review
   if (job.hf_request_id.startsWith("mock:")) return syncMockJob(job);
   const r = await fetch(`${HF_BASE}/requests/${job.hf_request_id}/status`, { headers: hfHeaders() });
   if (!r.ok) return job;
@@ -180,14 +271,23 @@ export async function syncJob(job: Job) {
   const { data } = await admin.from("jobs").update(patch).eq("id", job.id).select().single();
   if (["failed", "nsfw", "canceled"].includes(s.status)) await admin.rpc("refund_job", { p_job: job.id });
   if (TERMINAL.has(s.status)) await deleteInputs(job);
-  if (s.status === "completed" && s.video?.url && job.billed_secs) { // pricing sanity check
+  if (s.status === "completed" && s.video?.url && job.billed_secs && job.cost) { // pricing check on the real output
     const out = await mp4Duration(s.video.url).catch(() => null);
-    if (out && out > job.billed_secs + 1) console.warn("output longer than billed", job.id, out, job.billed_secs);
+    const secs = out === null ? null : Math.min(30, Math.ceil(out - 0.05));
+    if (secs !== null && secs > job.billed_secs) {
+      const extra = Math.ceil((job.cost / job.billed_secs) * (secs - job.billed_secs));
+      const { data: took } = await admin.rpc("charge_surcharge", { p_job: job.id, p_credits: extra });
+      console.warn("output longer than billed: surcharge", job.id, out, job.billed_secs, took);
+    }
   }
   return data ?? job;
 }
 
-type Job = { id: string; hf_request_id: string | null; status: string; created_at?: string; video_url?: string; image_urls?: unknown; billed_secs?: number | null };
+type Job = {
+  id: string; hf_request_id: string | null; status: string; created_at?: string; updated_at?: string;
+  video_url?: string; image_urls?: unknown; billed_secs?: number | null; cost?: number;
+  workflow?: string; resolution?: string; prompt?: string; mock?: boolean;
+};
 const MOCK_OUTPUT = `${PRESETS_PUBLIC}qa-4s.mp4`;
 
 /** Test-mode jobs: queued -> in_progress -> completed/failed over ~20s, no Higgsfield call. */

@@ -1,8 +1,8 @@
 // POST {workflow, resolution, prompt, video_url, image_urls} -> {job}
 // Prices the request from the video's real length, holds the credits, submits to Higgsfield.
 import {
-  admin, deleteInputs, FALLBACK_USD_PER_SEC, getUser, HF_BASE, hfHeaders, INPUTS_PUBLIC, inputPath, json,
-  mp4Duration, PRESETS_PUBLIC, RESOLUTIONS, serve, signInput, usdToCredits, WORKFLOWS,
+  admin, deleteInputs, FALLBACK_USD_PER_SEC, getUser, INPUTS_PUBLIC, json,
+  intEnv, isTester, mp4Duration, PAYMENTS_LIVE, PRESETS_PUBLIC, RESOLUTIONS, serve, submitToHiggsfield, usdToCredits, WORKFLOWS,
 } from "../_shared/common.ts";
 
 serve(async (req) => {
@@ -33,29 +33,52 @@ serve(async (req) => {
   // Test mode: allowlisted testers can fake the Higgsfield call (mock "ok" or "fail").
   // Credits are still charged and refunded so the whole money path is exercised.
   const mock = b.mock === "ok" || b.mock === "fail" ? b.mock : null;
-  if (mock) {
-    const testers = (Deno.env.get("TEST_EMAILS") ?? "").toLowerCase().split(",").map((s) => s.trim()).filter(Boolean);
-    if (!testers.includes(String(user.email ?? "").toLowerCase())) return json({ error: "Test mode is not enabled for this account." }, 403);
-  }
+  if (mock && !isTester(user)) return json({ error: "Test mode is not enabled for this account." }, 403);
+  // While payments are in test mode, credits may be fake: only testers may start real renders.
+  // Kill switch: set RENDERS_PAUSED=1 to stop every real render immediately.
+  if (!mock && Deno.env.get("RENDERS_PAUSED") === "1") return json({ error: "Video generation is paused for maintenance. Please try again later." }, 503);
+  if (!mock && !PAYMENTS_LIVE && !isTester(user)) return json({ error: "Video generation isn't open yet. Please check back soon." }, 403);
 
   // Price from the file itself, never from what the browser says. Higgsfield bills per started
   // second of output (= source length, capped at 30s); ignore container padding under 50ms.
   const secs = await mp4Duration(video_url);
   if (secs === null) return json({ error: "We couldn't read that video. Please upload a standard MP4." }, 400);
   if (secs < 3.95) return json({ error: "The video must be at least 4 seconds." }, 400);
+  if (secs > 30.05) return json({ error: "The video can be at most 30 seconds. Please trim it." }, 400);
   const billed = Math.min(30, Math.max(4, Math.ceil(secs - 0.05)));
-  const cost = usdToCredits(FALLBACK_USD_PER_SEC[resolution] * billed);
+  let cost: number;
+  try { cost = usdToCredits(FALLBACK_USD_PER_SEC[resolution] * billed); } catch (e) {
+    console.error("pricing refused", e);
+    return json({ error: "Video generation is temporarily unavailable." }, 503);
+  }
   if (b.quote_only) return json({ cost });
 
-  const { data: ok } = await admin.rpc("spend_credits", { p_user: user.id, p_amount: cost });
-  if (!ok) return json({ error: "Not enough credits.", cost }, 402);
-
-  const { data: job, error } = await admin.from("jobs").insert({
-    user_id: user.id, trend, workflow, resolution, prompt, video_url, image_urls, cost, billed_secs: billed,
-  }).select().single();
-  if (error || !job) {
-    await admin.rpc("spend_credits", { p_user: user.id, p_amount: -cost }); // give the hold back
-    return json({ error: "Could not create job." }, 500);
+  // Caps: videos per user per day, and the site's total spend per day (credits, i.e. cents retail).
+  const caps = { jobs: intEnv("USER_DAILY_JOBS", 10), user: intEnv("USER_DAILY_CREDITS", 2600), site: intEnv("SITE_DAILY_CREDITS", 3000) };
+  if (caps.jobs === null || caps.user === null || caps.site === null) {
+    console.error("cap settings invalid", caps);
+    return json({ error: "Video generation is temporarily unavailable." }, 503);
+  }
+  const { data: res, error } = await admin.rpc("create_job", {
+    p_user: user.id, p_trend: trend, p_workflow: workflow, p_resolution: resolution, p_prompt: prompt,
+    p_video_url: video_url, p_image_urls: image_urls, p_cost: cost, p_billed_secs: billed, p_mock: !!mock,
+    p_user_daily_jobs: caps.jobs, p_user_daily_credits: caps.user, p_site_daily_credits: caps.site,
+  }).single<{ job_id: string | null; reason: string | null }>();
+  if (error || !res) { console.error("create_job failed", error); return json({ error: "Could not create job." }, 500); }
+  if (res.reason === "no_credits") return json({ error: "Not enough credits.", cost }, 402);
+  if (res.reason === "frozen") return json({ error: "Your account is on hold because of a payment dispute. Contact us to resolve it." }, 403);
+  if (res.reason === "user_limit") return json({ error: "You've reached today's limit of videos. Please try again tomorrow." }, 429);
+  if (res.reason === "site_limit") {
+    console.warn("site daily spend cap reached");
+    return json({ error: "We're at capacity for today. Please try again tomorrow. You were not charged." }, 503);
+  }
+  if (res.reason === "bad_config") { console.error("create_job: bad cap config"); return json({ error: "Video generation is temporarily unavailable." }, 503); }
+  if (!res.job_id) return json({ error: "Could not create job." }, 500);
+  const { data: job } = await admin.from("jobs").select("*").eq("id", res.job_id).single();
+  if (!job) {
+    await admin.from("jobs").update({ status: "failed", error: "Could not start." }).eq("id", res.job_id);
+    await admin.rpc("refund_job", { p_job: res.job_id });
+    return json({ error: "Could not create job. Your credits were refunded." }, 500);
   }
 
   if (mock) {
@@ -72,38 +95,22 @@ serve(async (req) => {
     return json({ error: `${msg} Your credits were refunded.` }, status);
   };
 
-  // Uploads live in a private bucket: hand Higgsfield short-lived signed URLs.
-  let input;
-  try {
-    const sign = (u: string) => (inputPath(u) ? signInput(inputPath(u)!) : Promise.resolve(u));
-    input = { video_url: await sign(video_url), image_urls: await Promise.all(image_urls.map(sign)), prompt, resolution };
-  } catch (e) {
-    console.error("signing failed", e);
-    return fail("The generation service is unavailable right now. Please try again later.", 502);
+  const sub = await submitToHiggsfield(job);
+  if (sub.ok === false && sub.fatal) {
+    return fail("The video or photos weren't accepted. Check the video is 4–30s MP4 and try again.", 400);
   }
-
-  const endpoint = `higgsfield/genjutsu/${workflow}/v1.0`;
-  const hook = `${Deno.env.get("SUPABASE_URL")}/functions/v1/hf-webhook?secret=${Deno.env.get("WEBHOOK_SECRET")}`;
-  let r: Response | null = null, sub: Record<string, unknown> = {};
-  // The Idempotency-Key makes one retry after a network error safe (no double render).
-  for (let attempt = 0; attempt < 2 && !r; attempt++) {
-    try {
-      r = await fetch(`${HF_BASE}/${endpoint}?hf_webhook=${encodeURIComponent(hook)}`, {
-        method: "POST", headers: hfHeaders({ "Idempotency-Key": job.id }), body: JSON.stringify(input),
-      });
-      sub = await r.json().catch(() => ({}));
-    } catch (e) { console.error("higgsfield submit threw", e); }
-  }
-  if (!r || !r.ok || !sub.request_id) {
-    console.error("higgsfield submit failed", r?.status, JSON.stringify(sub));
-    // 4xx other than auth usually means bad input the user can fix; everything else is on us.
-    return fail(r?.status === 422 || r?.status === 400
-      ? "The video or photos weren't accepted. Check the video is 4–30s MP4 and try again."
-      : "The generation service is unavailable right now. Please try again later.", 502);
+  if (sub.ok === false) {
+    // No clear answer: Higgsfield may be rendering it. Hold the credits; the owner reconciles it
+    // by hand (daily report flags it) and either attaches the render or refunds.
+    console.error("SUBMIT_UNKNOWN: reconcile by hand", job.id);
+    const { data: held } = await admin.from("jobs")
+      .update({ status: "submit_unknown", error: "We're checking on this video. If it didn't run, your credits will be refunded within a day.", updated_at: new Date().toISOString() })
+      .eq("id", job.id).select().single();
+    return json({ job: held ?? job });
   }
 
   const { data: saved } = await admin.from("jobs")
-    .update({ hf_request_id: sub.request_id, status: sub.status ?? "queued", updated_at: new Date().toISOString() })
+    .update({ hf_request_id: sub.request_id, status: sub.status, updated_at: new Date().toISOString() })
     .eq("id", job.id).select().single();
   return json({ job: saved });
 });

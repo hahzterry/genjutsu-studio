@@ -13,3 +13,6 @@ verify_jwt = false
 
 [functions.paypal-webhook]
 verify_jwt = false
+
+[functions.daily-report]
+verify_jwt = false

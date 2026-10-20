@@ -1,6 +1,6 @@
 // POST {action:"create", pack_id} -> {order_id}
 // POST {action:"capture", order_id} -> {credits_added, balance}
-import { admin, getUser, json, serve } from "../_shared/common.ts";
+import { admin, getUser, isTester, json, PAYMENTS_LIVE, serve } from "../_shared/common.ts";
 import { PP_BASE, ppToken } from "../_shared/paypal.ts";
 
 // Keep in sync with PACKS in docs/config.js (server is authoritative).
@@ -14,6 +14,8 @@ const PACKS: Record<string, { usd: string; credits: number }> = {
 serve(async (req) => {
   const user = await getUser(req);
   if (!user) return json({ error: "Please sign in first." }, 401);
+  // Test-mode PayPal accepts fake cards, so only allowlisted testers may use it.
+  if (!PAYMENTS_LIVE && !isTester(user)) return json({ error: "Payments aren't open yet. Please check back soon." }, 403);
 
   try {
     const body = await req.json();

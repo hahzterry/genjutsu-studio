@@ -50,3 +50,10 @@ Visitors sign in with email, buy credits via PayPal, and generate videos. No sub
 
 ## Pricing reference (Higgsfield, Sept 2026)
 480p $0.318/s · 720p $0.681/s · 1080p $1.632/s. Source video 4–30 s, 1–8 reference images.
+
+## Spending safety
+- While `PAYPAL_ENV` isn't `live`, only `TEST_EMAILS` accounts can pay or start real renders.
+- `create_job` (migration 005) admits each real render atomically under two caps: `USER_DAILY_JOBS` (default 10 per user per 24h) and `SITE_DAILY_CREDITS` (default 3000 = $30 retail per 24h, site-wide). Refunded jobs don't count.
+- Also capped: `USER_DAILY_CREDITS` (default 2600, one max-length 1080p video). `RENDERS_PAUSED=1` stops all real renders. A PayPal dispute sets `profiles.frozen`, which blocks renders.
+- Each job is submitted to Higgsfield exactly once (no retries: de-duplication isn't documented). A clear 4xx refunds. Anything unclear becomes `submit_unknown` with the credits held. Check the Higgsfield dashboard for that job id (it's the Idempotency-Key). If it rendered, set `hf_request_id` and status `queued`. If not, run `select refund_job('<id>')`, set status `failed`, and delete that job's uploads under `inputs/<user>/` (Storage API).
+- `daily-report` returns aggregates (no personal data) to a scheduled workflow in the private repo `shohamtal/genjutsu-ops`, which opens a daily issue (GitHub emails the owner) and flags anomalies.

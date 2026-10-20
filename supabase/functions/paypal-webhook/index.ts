@@ -1,5 +1,5 @@
 // PayPal webhook: PAYMENT.CAPTURE.COMPLETED adds credits for captures that were pending;
-// PAYMENT.CAPTURE.REFUNDED / REVERSED / DENIED take the credits back.
+// PAYMENT.CAPTURE.REFUNDED / REVERSED / DENIED take the credits back; CUSTOMER.DISPUTE.CREATED freezes the account.
 // Every event is verified with PayPal (verify-webhook-signature) before we act on it.
 import { admin, json, serve } from "../_shared/common.ts";
 import { PP_BASE, ppToken } from "../_shared/paypal.ts";
@@ -23,6 +23,20 @@ serve(async (req) => {
   if (v?.verification_status !== "SUCCESS") return json({ error: "unverified" }, 401);
 
   const type = String(event.event_type);
+  // A dispute (possible stolen card) freezes the account until it's resolved by hand.
+  if (type === "CUSTOMER.DISPUTE.CREATED") {
+    const txs = (event.resource?.disputed_transactions ?? []) as { seller_transaction_id?: string }[];
+    for (const t of txs) {
+      if (!t.seller_transaction_id) continue;
+      const c = await fetch(`${PP_BASE}/v2/payments/captures/${t.seller_transaction_id}`, { headers: pp }).then((r) => r.json()).catch(() => null);
+      const oid = c?.supplementary_data?.related_ids?.order_id;
+      const { data: p } = oid ? await admin.from("payments").select("user_id").eq("order_id", oid).maybeSingle() : { data: null };
+      if (p) await admin.from("profiles").update({ frozen: true }).eq("user_id", p.user_id);
+      console.warn("paypal dispute: account frozen", oid, !!p);
+    }
+    return json({ ok: true });
+  }
+
   const HANDLED = ["PAYMENT.CAPTURE.COMPLETED", "PAYMENT.CAPTURE.REFUNDED", "PAYMENT.CAPTURE.REVERSED", "PAYMENT.CAPTURE.DENIED"];
   if (!HANDLED.includes(type)) return json({ ok: true });
 
