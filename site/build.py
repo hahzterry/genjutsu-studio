@@ -102,6 +102,7 @@ def head(*, path, title, description, og_title=None, og_type="website", image, e
 {extra_ld}
 </head>
 <body>
+  <div class="banner notice" role="status">🛠️ We're having a few hiccups right now and are fixing them as fast as we can. Your credits are safe: if a video doesn't come out, its credits come back to your account (automatically in most cases, or within a day if we need to check it). Finished videos are saved under <b>Your videos</b>, so you can close the page and come back anytime.</div>
   <div id="demo-banner" class="banner" hidden>Demo mode: the backend isn't connected yet, so payments and generation are simulated.</div>
 """
 

@@ -244,3 +244,5 @@ main > .crumbs { padding-top: 6px; }
 .link-btn { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; cursor: pointer; }
 .link-btn:hover { text-decoration: underline; }
 textarea[readonly] { color: var(--muted); cursor: default; }
+.banner.notice { background: #1e1b4b; color: #e0e7ff; line-height: 1.45; }
+.banner.notice b { color: #fff; }
