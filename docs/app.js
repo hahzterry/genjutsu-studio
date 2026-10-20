@@ -171,7 +171,7 @@ on("send-link", "click", async () => {
       email, options: { emailRedirectTo: location.origin + location.pathname },
     });
     if (error) throw error;
-    $("sent-to").textContent = email;
+    $("sent-to").textContent = email; if ($("sent-to-code")) $("sent-to-code").textContent = email;
     $("signin-step1").hidden = true; $("signin-step2").hidden = false;
     $("step2-code").hidden = !C.EMAIL_CODE; $("step2-link").hidden = !!C.EMAIL_CODE;
     if (C.EMAIL_CODE) { $("otp").value = ""; $("otp").focus(); }

@@ -129,8 +129,8 @@ def header(root, app=True, active=""):
 def footer(root, app=True, page=None):
     trend_links = " · ".join(f'<a href="{root}trends/{t["slug"]}/">{esc(t["short"])}</a>' for t in TRENDS)
     out = f"""  <footer>
-    <nav class="foot-links"><a href="{root}">All trends</a> · {trend_links} · <a href="{root}custom/">Custom trend</a> · <a href="{root}pricing/">Pricing</a> · <a href="{root}genjutsu/">Genjutsu without subscription</a></nav>
-    Independent service. Powered by the Higgsfield API. Not affiliated with Higgsfield AI or with the owners of the films and clips referenced.
+    <nav class="foot-links"><a href="{root}">All trends</a> · {trend_links} · <a href="{root}custom/">Custom trend</a> · <a href="{root}pricing/">Pricing</a> · <a href="{root}genjutsu/">About Genjutsu</a> · <a href="{root}terms/">Terms</a> · <a href="{root}privacy/">Privacy</a> · <a href="{root}accessibility/">Accessibility</a></nav>
+    Independent service, not affiliated with or endorsed by Higgsfield AI. Videos are made with Higgsfield's Genjutsu model through its API. Not affiliated with the owners of the films and clips referenced.
   </footer>
 """
     if not app:
@@ -140,17 +140,18 @@ def footer(root, app=True, page=None):
   <dialog id="signin-modal" class="modal">
     <form method="dialog" class="modal-x"><button aria-label="Close">×</button></form>
     <h3>Sign in</h3>
-    <p class="muted">We'll email you a sign-in link. Your credits and videos are saved to your email.</p>
+    <p class="muted">We'll email you a 6-digit sign-in code. Your credits and videos are saved to your email.</p>
     <div id="signin-step1">
       <label class="field-label" for="email">Email</label>
       <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
-      <button id="send-link" class="btn primary wide">Email me a sign-in link</button>
+      <button id="send-link" class="btn primary wide">Email me a sign-in code</button>
     </div>
     <div id="signin-step2" hidden>
       <div id="step2-link">
         <p>We sent a sign-in link to <b id="sent-to"></b>. Open it in this browser and you'll come right back here. Photos you added are saved.</p>
       </div>
       <div id="step2-code" hidden>
+        <p>We sent a 6-digit code to <b id="sent-to-code"></b>. You can also tap the link in the email.</p>
         <label class="field-label" for="otp">Code from the email</label>
         <input id="otp" class="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" />
         <button id="verify-code" class="btn primary wide">Sign in</button>
@@ -169,7 +170,7 @@ def footer(root, app=True, page=None):
     <p class="err" id="buy-err"></p>
   </dialog>
 
-  <div id="toast" class="toast" hidden></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <script>window.PAGE = {json.dumps(page, ensure_ascii=False)}; window.TREND_NAMES = {json.dumps(names, ensure_ascii=False)};</script>
   <script src="{root}config.js?v={ASSET_VER}"></script>
@@ -464,14 +465,14 @@ write("custom/index.html", custom)
 
 # ---------------- genjutsu article ----------------
 gfaq = json.loads((SITE / "genjutsu_faq.json").read_text())
-g = head(path="genjutsu/", title="Higgsfield Genjutsu Without Subscription: Pay-Per-Video Motion Transfer",
-         description="Use Higgsfield Genjutsu (motion transfer and object swap) with no subscription. Limits, price per second, and how to make a video in minutes.",
+g = head(path="genjutsu/", title="Higgsfield Genjutsu Trend Videos: Pay Per Video",
+         description="Make trend videos with Higgsfield's Genjutsu model (motion transfer and object swap), pay per video. Limits, price per second, and how it works. Independent site, not affiliated with Higgsfield.",
          og_type="article", image=f"{BASE}og.jpg", extra_ld=ld(faq_ld(gfaq), breadcrumbs(("Trends", ""), ("Higgsfield Genjutsu", "genjutsu/"))))
 g += header("../", app=False)
 g += f"""  <main>
     <article class="article">
       <div class="crumbs"><a href="../">Trends</a> › Higgsfield Genjutsu</div>
-      <h1>Higgsfield Genjutsu, No Subscription</h1>
+      <h1>Genjutsu Trend Videos, Pay Per Video</h1>
 {(SITE / 'genjutsu_body.html').read_text()}    </article>
   </main>
 """
@@ -530,6 +531,24 @@ pr += f"""  <main>
 pr += footer("../", app=False)
 write("pricing/index.html", pr)
 
+# ---------------- legal pages ----------------
+LEGAL = [("terms", "Terms of Use", "Terms of use for Genjutsu Studio: credits, refunds, what you may upload, and your videos."),
+         ("privacy", "Privacy", "What Genjutsu Studio collects, who processes it, and how long uploads are kept (7 days)."),
+         ("accessibility", "Accessibility", "Accessibility statement for Genjutsu Studio (IS 5568 / WCAG 2.1 AA): what we've done, known limitations, and how to contact us.")]
+for slug, title, desc in LEGAL:
+    page = head(path=f"{slug}/", title=f"{title} | Genjutsu Studio", description=desc, image=f"{BASE}og.jpg",
+                extra_ld=ld(breadcrumbs(("Trends", ""), (title, f"{slug}/"))))
+    page += header("../", app=False)
+    page += f"""  <main>
+    <article class="article">
+      <div class="crumbs"><a href="../">Trends</a> › {title}</div>
+      <h1>{title}</h1>
+{(SITE / 'legal' / f'{slug}.html').read_text()}    </article>
+  </main>
+"""
+    page += footer("../", app=False)
+    write(f"{slug}/index.html", page)
+
 # ---------------- old URLs → new pages ----------------
 REDIRECTS = {"white-chicks-ai-trend/": "trends/white-chicks/", "trends/mafia-daughter/": "trends/storm/"}
 for old, new in REDIRECTS.items():
@@ -541,7 +560,7 @@ for old, new in REDIRECTS.items():
 """)
 
 # ---------------- sitemap / robots ----------------
-urls = [("", "1.0"), ("custom/", "0.7"), ("pricing/", "0.8"), ("genjutsu/", "0.7")] + [(f"trends/{t['slug']}/", "0.9") for t in TRENDS]
+urls = [("", "1.0"), ("custom/", "0.7"), ("pricing/", "0.8"), ("genjutsu/", "0.7"), ("terms/", "0.3"), ("privacy/", "0.3"), ("accessibility/", "0.3")] + [(f"trends/{t['slug']}/", "0.9") for t in TRENDS]
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n" for u, p in urls)
       + "</urlset>\n")

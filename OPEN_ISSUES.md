@@ -3,7 +3,7 @@
 Known gaps we've decided to leave for now.
 
 - **Generated videos live on Higgsfield's CDN, not ours.** `jobs.output_url` points at Higgsfield's storage and we don't know their retention. If they delete old outputs, "Your videos" shows broken players after a few weeks. Fix: on `completed`, copy the MP4 into Supabase storage (`outputs/<user>/<job>.mp4`, ~5 MB each) and store that URL instead.
-- **No Terms / Privacy / Refund pages**, and no "I have permission to use these photos" consent checkbox. The privacy page must also disclose GoatCounter analytics (cookieless, no consent banner needed) and that uploaded photos/videos are kept for 7 days (INPUT_RETENTION_DAYS) for troubleshooting, then deleted.
+- **No "I have permission to use these photos" checkbox** at upload (the Terms require consent, but nothing asks for it). The Accessibility statement names no contact person (Israeli regulations usually expect a named coordinator).
 - **Higgsfield balance has no auto top-up or low-balance alert.**
 - **Watermarked source clips:** Alors on Danse, Industry Baby, Shrek Raindance.
 - **No captcha on sign-in.** Enable Cloudflare Turnstile together with custom SMTP.
