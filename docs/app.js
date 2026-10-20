@@ -77,12 +77,20 @@ const saveDraft = () => draftOp("readwrite", (st) => st.put({
   at: Date.now(), res: state.res, mode: state.mode, images: state.images,
   video: state.video instanceof File ? state.video : null, prompt: $("prompt")?.value || "",
 }, location.pathname));
+// Trend prompt: read-only by default; "Edit prompt" (after a warning) unlocks it, "Reset" restores it.
+function setPromptEditable(on, value) {
+  const p = $("prompt"); if (!p || !T) return;
+  p.readOnly = !on; p.value = on ? (value ?? p.value) : T.prompt;
+  $("prompt-edit").hidden = on; $("prompt-reset").hidden = !on;
+  if (on && value === undefined) p.focus();
+}
 async function restoreDraft() {
   const d = await draftOp("readonly", (st) => st.get(location.pathname));
   if (!d) return;
   draftOp("readwrite", (st) => st.delete(location.pathname));
   if (Date.now() - d.at > 2 * 3600 * 1000) return;
   if (T && d.images?.length === state.images.length) state.images = d.images;
+  if (T && d.prompt && d.prompt !== T.prompt) setPromptEditable(true, d.prompt);
   if (!T) { state.images = d.images || []; if (d.video) setVideo(d.video); if ($("prompt")) $("prompt").value = d.prompt; }
   selectMode(d.mode || state.mode); selectRes(d.res || state.res);
   renderThumbs(); refresh();
@@ -275,12 +283,18 @@ if (HAS_STUDIO && !T) { // custom page: the empty photo zone is a click target t
 on("image-input", "change", (e) => { addImages([...e.target.files], pickSlot); pickSlot = undefined; e.target.value = ""; });
 
 if (HAS_STUDIO) {
+  on("prompt", "input", () => { state.started = false; refresh(); }); // new prompt = new video
+  if (T) {
+    on("prompt-edit", "click", () => {
+      if (confirm("This prompt is tuned for this scene. Changing it can break the result, and the video is still charged. Edit it anyway?")) setPromptEditable(true);
+    });
+    on("prompt-reset", "click", () => { setPromptEditable(false); state.started = false; refresh(); });
+  }
   const zones = [["image-drop", (fs) => addImages(fs)]];
   if (!T) {
     zones.push(["video-drop", (fs) => setVideo(fs[0])]);
     const vd = $("video-drop"); // a <label> around a hidden input isn't focusable on its own
     vd.addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target === vd) { e.preventDefault(); $("video-input").click(); } });
-    on("prompt", "input", () => { state.started = false; refresh(); }); // new prompt = new video
   }
   for (const [zone, handler] of zones) {
     const z = $(zone);
@@ -355,7 +369,7 @@ async function generate() {
       btn.textContent = "Starting…";
       ({ job } = await callFn("generate", {
         trend, workflow: state.mode, resolution: state.res,
-        prompt: T ? T.prompt : $("prompt").value.trim(),
+        prompt: T ? ($("prompt").value.trim() || T.prompt) : $("prompt").value.trim(),
         video_url, image_urls, duration: state.duration, ...(MOCK ? { mock: MOCK } : {}),
       }));
     }

@@ -241,6 +241,12 @@ def studio_trend(t, root):
         <li class="ok">One person per photo</li><li class="ok">Face the camera</li><li class="ok">Good light</li>
         <li class="no">No sunglasses</li><li class="no">No group shots</li>
       </ul>
+      <div class="field prompt-field">
+        <div class="prompt-head"><label for="prompt">Prompt</label>
+          <button type="button" class="link-btn" id="prompt-edit">✏️ Edit prompt</button>
+          <button type="button" class="link-btn" id="prompt-reset" hidden>Reset to default</button></div>
+        <textarea id="prompt" rows="3" maxlength="2000" readonly>{esc(t['prompt'])}</textarea>
+      </div>
 {RES_ROW}    </section>
 """
 
