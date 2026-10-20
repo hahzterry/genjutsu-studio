@@ -589,6 +589,163 @@
       }
     },
     {
+      "slug": "raindance",
+      "name": "Raindance: Dave & Tems (Original Video)",
+      "short": "Raindance pier scene",
+      "card_blurb": "The golden-hour pier moment from Dave & Tems' \"Raindance\" video. Put two faces in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/raindance.mp4",
+      "poster": "trends/raindance/poster.jpg",
+      "preview_url": "trends/raindance/preview.mp4",
+      "duration": 21.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the man in the dark green shirt sitting on the pier (Dave) with the first uploaded picture and the woman in the mint green dress singing by the water (Tems) with the second uploaded picture, as realistic people. Keep their outfits, the wooden pier, the sea and the golden-hour light, the poses, gestures, camera cuts and timing.",
+      "slots": [
+        {
+          "label": "Dave's part",
+          "hint": "Man waiting on the pier",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "Tems' part",
+          "hint": "Woman singing by the water",
+          "example": "assets/examples/white-chicks-b.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Raindance AI Video Generator: Dave & Tems Face Swap (No Subscription)",
+        "description": "Put two faces in the original Dave & Tems \"Raindance\" music video pier scene. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Raindance AI Video Generator (Original Video)",
+        "lead": "Put two faces in the golden-hour pier scene from Dave & Tems' <b>\"Raindance\"</b> music video. The 21-second clip is locked in: add a photo for each part and click Generate.",
+        "og_title": "Raindance AI Video: Put Your Faces in the Dave & Tems Pier Scene",
+        "og_tagline": "Raindance AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>\"Raindance\" by Dave featuring Tems became one of the year's biggest songs, and its music video's golden-hour pier moment became a duet trend of its own: one person waits on the pier, the other walks in singing by the water, and they end up side by side. This is the original music-video version; for the meme mashup, see the <a href=\"../shrek-raindance/\">Shrek Raindance</a> trend.</p><p>Most face swap apps paste a flat face over the clip. <a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera cuts and timing and rebuilds both people from your photos.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Raindance pier clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add two photos",
+            "Add one photo for Dave's part and one for Tems' part. Use clear, front-facing, well-lit photos with one face each."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Raindance\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Raindance AI video?",
+            "Open this page. The Dave & Tems pier clip is already loaded. Add one photo for Dave's part and one for Tems' part, then click Generate."
+          ],
+          [
+            "How much does the Raindance AI video cost?",
+            "The 21-second clip at 480p costs 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The first photo replaces Dave (the man waiting on the pier) and the second replaces Tems (the woman in the mint green dress singing by the water)."
+          ],
+          [
+            "Is this the Shrek version?",
+            "No. This is the original music-video scene. The Shrek and Lord Farquaad version is a separate trend."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "thriller",
+      "name": "Thriller: Michael Jackson Zombie Dance",
+      "short": "Thriller zombie dance",
+      "card_blurb": "Lead the zombies through Michael Jackson's \"Thriller\" street dance. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/thriller.mp4",
+      "poster": "trends/thriller/poster.jpg",
+      "preview_url": "trends/thriller/preview.mp4",
+      "duration": 21.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the lead dancer in the red leather jacket and red trousers (Michael Jackson) with the uploaded picture, keeping the zombie makeup look in the first close-up shots. Keep the zombie dancers, the night street, the blue light, the choreography, camera cuts and timing.",
+      "slots": [
+        {
+          "label": "The lead dancer",
+          "hint": "Red jacket, leads the zombies",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Thriller AI Video Generator: Michael Jackson Zombie Dance Face Swap (No Subscription)",
+        "description": "Put your face in Michael Jackson's \"Thriller\" zombie dance. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Thriller AI Video Generator",
+        "lead": "Lead the zombies in Michael Jackson's <b>\"Thriller\"</b> street dance. The 21-second clip is locked in: add one photo and click Generate.",
+        "og_title": "Thriller AI Video: Lead Michael Jackson's Zombie Dance",
+        "og_tagline": "Thriller AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The \"Thriller\" zombie dance is one of the most copied routines ever: a zombie stare in close-up, then a whole street of ghouls behind the lead doing the shuffle, shoulder rolls and claw arms. The AI trend puts you in the red jacket at the front.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera cuts and timing and rebuilds the lead dancer from your photo, so every move lands on the beat.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Thriller clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "Add a clear, front-facing, well-lit photo of the person who'll lead the dance."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Thriller\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Thriller AI video?",
+            "Open this page. The Thriller dance clip is already loaded. Add one photo for the lead dancer, then click Generate."
+          ],
+          [
+            "How much does the Thriller AI video cost?",
+            "The 21-second clip at 480p costs 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the lead dancer in the red jacket. The zombie dancers behind stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit photo of one person. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
       "slug": "qa-4s",
       "hidden": true,
       "name": "QA 4-second test",

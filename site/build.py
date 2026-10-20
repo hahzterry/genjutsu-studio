@@ -18,7 +18,8 @@ DATA = json.loads((SITE / "trends.json").read_text())
 BASE = DATA["base_url"]
 ALL_TRENDS = DATA["trends"]
 # hidden trends (e.g. the 4s QA clip) get a page but stay out of the gallery, links and sitemap
-TRENDS = [t for t in ALL_TRENDS if not t.get("hidden")]
+# Newest first (by "published"); trends published the same day keep their order in trends.json.
+TRENDS = sorted((t for t in ALL_TRENDS if not t.get("hidden")), key=lambda t: t.get("published", ""), reverse=True)
 TODAY = date.today().isoformat()
 CREDITS_PER_SEC_DEFAULT = 47.7  # 480p; keep in sync with docs/config.js
 FEE_CREDITS = 100
