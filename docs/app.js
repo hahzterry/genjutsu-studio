@@ -1,4 +1,6 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+// supabase-js is self-hosted (docs/vendor-supabase.js, pinned 2.117.2, loaded before this module):
+// no third-party CDN runs code next to the sign-in session.
+const { createClient } = window.supabase;
 
 // Shared by every page. window.PAGE (inlined by site/build.py) says which page this is:
 //   { kind: "home" }                       trend gallery + "Your videos"

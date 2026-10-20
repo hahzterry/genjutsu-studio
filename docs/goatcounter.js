@@ -1,6 +1,7 @@
 // GoatCounter: https://www.goatcounter.com
 // Self-hosted copy of gc.zgo.at/count.js (2026-10-20), so a compromise of their CDN can't run code
-// next to our sign-in session. Only change: the query string sent is limited to utm_* / ref params.
+// next to our sign-in session. Changes: the query string sent is limited to utm_* / ref params, the path
+// is sent without its query string, and a same-site referrer is sent without its query string.
 // This file is released under the ISC license: https://opensource.org/licenses/ISC
 ;(function() {
 	'use strict';
@@ -38,6 +39,7 @@
 		if (typeof(data.p) === 'function') pcb = data.p
 
 		if (is_empty(data.r)) data.r = document.referrer
+		try { var ru = new URL(data.r); if (ru.origin === location.origin) data.r = ru.origin + ru.pathname } catch (e) {}
 		if (is_empty(data.t)) data.t = document.title
 		if (is_empty(data.p)) data.p = get_path()
 		if (vars.no_session) data.ns = (typeof(vars.no_session) === 'function' ? vars.no_session(false) : vars.no_session)

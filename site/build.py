@@ -171,6 +171,7 @@ def footer(root, app=True, page=None):
 
   <script>window.PAGE = {json.dumps(page, ensure_ascii=False)}; window.TREND_NAMES = {json.dumps(names, ensure_ascii=False)};</script>
   <script src="{root}config.js?v={ASSET_VER}"></script>
+  <script src="{root}vendor-supabase.js?v=2.117.2"></script>
   <script type="module" src="{root}app.js?v={ASSET_VER}"></script>
 </body>
 </html>
