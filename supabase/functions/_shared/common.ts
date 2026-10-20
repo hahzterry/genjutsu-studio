@@ -104,7 +104,10 @@ export async function signInput(path: string): Promise<string> {
   return data.signedUrl;
 }
 
-/** Inputs are only needed until Higgsfield has rendered; delete the user's uploads then. */
+/**
+ * Delete a job's uploads now. Normal cleanup is the retention sweep (cleanup-inputs, INPUT_RETENTION_DAYS),
+ * which keeps uploads a few days so the owner can reproduce a failed render.
+ */
 export async function deleteInputs(job: { video_url?: string; image_urls?: unknown }) {
   const urls = [job.video_url, ...(Array.isArray(job.image_urls) ? job.image_urls : [])].map(String);
   const paths = urls.map(inputPath).filter((x): x is string => !!x);
@@ -221,6 +224,12 @@ function moovDuration(moov: Uint8Array): number | null {
   return presented;
 }
 
+/** Owner-only record of the provider's raw replies (table job_debug, unreadable by clients). */
+async function saveDebug(jobId: string, fields: Record<string, unknown>) {
+  const { error } = await admin.from("job_debug").upsert({ job_id: jobId, ...fields, updated_at: new Date().toISOString() });
+  if (error) console.error("saveDebug failed", jobId, error.message);
+}
+
 type Submit = { ok: true; request_id: string; status: string } | { ok: false; fatal: boolean };
 
 /**
@@ -247,9 +256,11 @@ export async function submitToHiggsfield(job: Job): Promise<Submit> {
     const sub = await r.json().catch(() => ({}));
     if (r.ok && sub.request_id) return { ok: true, request_id: String(sub.request_id), status: String(sub.status ?? "queued") };
     console.error("higgsfield submit failed", job.id, r.status, JSON.stringify(sub).slice(0, 500));
+    await saveDebug(job.id, { submit_status: r.status, submit_body: JSON.stringify(sub).slice(0, 4000) });
     return { ok: false, fatal: r.status >= 400 && r.status < 500 };
   } catch (e) {
     console.error("higgsfield submit threw", job.id, e);
+    await saveDebug(job.id, { submit_body: `network error: ${String(e).slice(0, 1000)}` });
     return { ok: false, fatal: false };
   }
 }
@@ -269,9 +280,9 @@ export async function syncJob(job: Job) {
     patch.error = "The render failed. Your credits were refunded.";
   }
   if (s.status === "nsfw") patch.error = "The content was flagged by moderation. Your credits were refunded.";
+  if (["failed", "nsfw", "canceled"].includes(s.status)) await saveDebug(job.id, { final_body: JSON.stringify(s).slice(0, 4000) });
   const { data } = await admin.from("jobs").update(patch).eq("id", job.id).select().single();
   if (["failed", "nsfw", "canceled"].includes(s.status)) await admin.rpc("refund_job", { p_job: job.id });
-  if (TERMINAL.has(s.status)) await deleteInputs(job);
   if (s.status === "completed" && s.video?.url && job.billed_secs && job.cost) { // pricing check on the real output
     const out = await mp4Duration(s.video.url).catch(() => null);
     const secs = out === null ? null : Math.min(30, Math.ceil(out - 0.05));
@@ -302,7 +313,6 @@ async function syncMockJob(job: Job) {
   else Object.assign(patch, { status: "completed", output_url: MOCK_OUTPUT });
   const { data } = await admin.from("jobs").update(patch).eq("id", job.id).select().single();
   if (patch.status === "failed") await admin.rpc("refund_job", { p_job: job.id });
-  if (TERMINAL.has(String(patch.status))) await deleteInputs(job);
   return data ?? job;
 }
 

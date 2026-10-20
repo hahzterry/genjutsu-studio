@@ -1,7 +1,7 @@
 // POST {workflow, resolution, prompt, video_url, image_urls} -> {job}
 // Prices the request from the video's real length, holds the credits, submits to Higgsfield.
 import {
-  admin, deleteInputs, FALLBACK_USD_PER_SEC, getUser, INPUTS_PUBLIC, json,
+  admin, FALLBACK_USD_PER_SEC, getUser, INPUTS_PUBLIC, json,
   intEnv, isTester, mp4Duration, PAYMENTS_LIVE, PRESETS_PUBLIC, RESOLUTIONS, serve, submitToHiggsfield, usdToCredits, WORKFLOWS,
 } from "../_shared/common.ts";
 
@@ -97,7 +97,6 @@ serve(async (req) => {
   const fail = async (msg: string, status: number) => {
     await admin.from("jobs").update({ status: "failed", error: msg, updated_at: new Date().toISOString() }).eq("id", job.id);
     await admin.rpc("refund_job", { p_job: job.id });
-    await deleteInputs(job);
     return json({ error: `${msg} Your credits were refunded.` }, status);
   };
 

@@ -16,3 +16,6 @@ verify_jwt = false
 
 [functions.daily-report]
 verify_jwt = false
+
+[functions.cleanup-inputs]
+verify_jwt = false
