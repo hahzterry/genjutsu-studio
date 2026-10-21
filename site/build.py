@@ -258,8 +258,23 @@ def model_row(t):
           <button data-model="light" class="active">Normal mode (Light)</button>
           <button data-model="full">Stronger model</button>
         </div>
-        <p class="model-note" id="model-note">Normal mode is fast and cheap and uses the first 15 seconds of the scene.</p>
+        <p class="model-note" id="model-note">Normal mode is fast and cheap and uses 15 seconds of the scene.</p>
       </div>
+"""
+
+
+def model_switch(t):
+    if not has_light(t):
+        return """        <div class="c-row"><b>Model</b><span class="tag-strong">Stronger model</span></div>
+        <p class="c-note">This scene is longer than Light mode's 15-second limit, so it uses the stronger model only.</p>
+"""
+    return """        <div class="c-row">
+          <b>Model</b>
+          <button type="button" class="switch" id="model-switch" role="switch" aria-checked="false" aria-label="Stronger model">
+            <span class="lbl on" data-m="light">Light</span><span class="track"><span class="ball"></span></span><span class="lbl" data-m="full">Stronger</span>
+          </button>
+        </div>
+        <p class="c-note" id="model-note">Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger.</p>
 """
 
 
@@ -273,13 +288,7 @@ def studio_trend_c(t, root):
         </div>
       </div>
       <aside class="c-panel card">
-        <div class="c-row">
-          <b>Model</b>
-          <button type="button" class="switch" id="model-switch" role="switch" aria-checked="false" aria-label="Stronger model">
-            <span class="lbl on" data-m="light">Light</span><span class="track"><span class="ball"></span></span><span class="lbl" data-m="full">Stronger</span>
-          </button>
-        </div>
-        <p class="c-note" id="model-note">Light · fast and cheap · uses the first 15 seconds of the scene.</p>
+{model_switch(t)}
         <h3 class="c-h">Photos</h3>
         <div class="drop images" id="image-drop">
           <input type="file" id="image-input" accept="image/jpeg,image/png,image/webp" hidden />
@@ -446,7 +455,7 @@ for t in ALL_TRENDS:
       {'<p><a class="see-example" href="#example">▶ See an example result</a></p>' if t.get("result_sample") else ''}
     </section>
 
-{studio_trend_c(t, root) if has_light(t) else studio_trend(t, root)}
+{studio_trend_c(t, root)}
     <section class="seo">
       <h2>About the trend</h2>
       {s['about_html']}
@@ -593,7 +602,7 @@ def video_price(secs, res):
 pfaq = [
     ("Is there a subscription?", "No. There is no monthly plan and nothing renews. You pay once for the video you are making."),
     ("Do I have to buy credits I won't use?", "No. At checkout, pick \"Just this video\" and you pay exactly that video's price ($2 minimum). Packs are optional, for people who plan to make several videos."),
-    ("How is the price calculated?", "By the length of the video, the resolution and the mode: Normal mode (Light) uses the first 15 seconds and costs much less; the stronger model renders the full scene with more detail. The exact price shows before you click Generate."),
+    ("How is the price calculated?", "By the length of the video, the resolution and the mode: Normal mode (Light) uses 15 seconds of the scene and costs much less; the stronger model renders the full scene with more detail. The exact price shows before you click Generate."),
     ("What if the video fails?", "Failed or moderated generations are refunded automatically to your balance."),
     ("Why do some apps look cheaper?", "Subscription apps advertise \"up to\" numbers based on their cheapest model and shortest clip, and you pay every month whether you use it or not. Here you pay only when you make a video, with Higgsfield Genjutsu, the model that keeps the original scene."),
 ]
@@ -614,7 +623,7 @@ pr += f"""  <main>
 
       <h2>How the price is calculated</h2>
       <p>The price depends on the mode, how long the video is and the resolution you pick. Every trend page has a switch between the two modes.</p>
-      <h3>Normal mode (Light): fast and cheap, first 15 seconds</h3>
+      <h3>Normal mode (Light): fast and cheap, 15 seconds of the scene</h3>
       <table>
         <tr><th>Resolution</th><th>10-second video</th><th>15-second video</th></tr>
 """ + "".join(f"        <tr><td>{r}</td>" + "".join(f"<td>${light_price(x, r):.2f}</td>" for x in (10, 15)) + "</tr>\n" for r in LIGHT_RATES) + f"""      </table>

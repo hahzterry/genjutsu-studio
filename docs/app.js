@@ -240,7 +240,7 @@ function selectModel(model) {
   }
   const n = $("model-note");
   if (n) n.textContent = model === "light"
-    ? ($("model-switch") ? "Light · fast and cheap · uses the first 15 seconds of the scene." : "Normal mode is fast and cheap and uses the first 15 seconds of the scene.")
+    ? ($("model-switch") ? "Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger." : "Normal mode is fast and cheap and uses 15 seconds of the scene.")
     : ($("model-switch") ? "Stronger · full scene, more detail · costs more, takes a bit longer." : "The stronger model renders the full scene with more detail. It costs more and takes a bit longer.");
 }
 function selectRes(res) {
