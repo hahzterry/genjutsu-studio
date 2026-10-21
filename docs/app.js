@@ -33,6 +33,8 @@ const state = {
   images: T ? T.slots.map(() => null) : [], // trend: fixed slots (File|null); custom: File[]
   user: null, credits: 0, jobs: [], pendingGenerate: false, pack: C.PACKS[1].id,
   started: false, // this exact set of inputs was already sent (guards against paying twice)
+  // Trends with a Light clip offer "Normal mode (Light)" (default) or "Stronger model" (full Genjutsu).
+  model: T?.light_video_url ? "light" : "full",
 };
 
 // ---------------- helpers ----------------
@@ -41,12 +43,16 @@ function toast(msg, ms = 3500) {
   clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), ms);
 }
 // Browsers report a few ms extra (AAC priming), so ignore anything under 0.05s past a whole second.
-const LIGHT = T?.model === "light"; // display only: the server picks the model from the preset's name
-const clampSecs = (d) => Math.min(LIGHT ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - 0.05)));
-const rateFor = (res) => (LIGHT ? C.LIGHT_CREDITS_PER_SEC : C.CREDITS_PER_SEC)[res];
+// Display only: the server picks the model from the preset file the request points at.
+const isLight = () => T?.model === "light" || (!!T?.light_video_url && state.model === "light");
+const clampSecs = (d) => Math.min(isLight() ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - 0.05)));
+const rateFor = (res) => (isLight() ? C.LIGHT_CREDITS_PER_SEC : C.CREDITS_PER_SEC)[res];
+const sceneUrl = () => (T?.light_video_url && state.model === "light" ? T.light_video_url : T?.video_url);
+// The preview plays the full scene; Light uses its own 15 s clip, so price it from that clip's length.
+const priceSecs = () => (T?.light_video_url && state.model === "light" ? T.light_duration : state.duration);
 function estimate() {
   // -1e-9: same float-safe rounding as the server, so 20 s x 47.7 is 954, not 955.
-  return state.duration ? Math.ceil(clampSecs(state.duration) * rateFor(state.res) - 1e-9) + (C.FEE_CREDITS || 0) : 0;
+  return state.duration ? Math.ceil(clampSecs(priceSecs()) * rateFor(state.res) - 1e-9) + (C.FEE_CREDITS || 0) : 0;
 }
 async function callFn(name, body) {
   const { data, error } = await sb.functions.invoke(name, { body });
@@ -219,6 +225,14 @@ function selectMode(mode) {
   document.querySelectorAll(".mode").forEach((x) => x.classList.toggle("active", x.dataset.mode === mode));
   state.mode = mode;
 }
+function selectModel(model) {
+  state.started = false; state.model = model;
+  document.querySelectorAll("#model-seg button").forEach((x) => x.classList.toggle("active", x.dataset.model === model));
+  const n = $("model-note");
+  if (n) n.textContent = model === "light"
+    ? "Normal mode is fast and cheap and uses the first 15 seconds of the scene."
+    : "The stronger model renders the full scene with more detail. It costs more and takes a bit longer.";
+}
 function selectRes(res) {
   state.started = false;
   document.querySelectorAll("#res-seg button").forEach((x) => x.classList.toggle("active", x.dataset.res === res));
@@ -310,6 +324,7 @@ if (HAS_STUDIO) {
   }
   document.querySelectorAll(".mode").forEach((b) => (b.onclick = () => { selectMode(b.dataset.mode); refresh(); }));
   document.querySelectorAll("#res-seg button").forEach((b) => (b.onclick = () => { selectRes(b.dataset.res); refresh(); }));
+  document.querySelectorAll("#model-seg button").forEach((b) => (b.onclick = () => { selectModel(b.dataset.model); refresh(); }));
 }
 
 function refresh() {
@@ -325,8 +340,8 @@ function refresh() {
         ? `You have <b>${state.credits.toLocaleString()}</b> credits, so <b>${(state.credits - cost).toLocaleString()}</b> will be left after this video.`
         : `You have <b>${state.credits.toLocaleString()}</b> credits. You need <b>${(cost - state.credits).toLocaleString()}</b> more.`)
       : "Sign in to see your balance.";
-    bd.innerHTML = `<div class="bd-math"><span>${clampSecs(state.duration)} sec video</span><span>×</span><span>${rate} credits/sec at ${state.res}</span>${C.FEE_CREDITS ? `<span>+</span><span>${C.FEE_CREDITS} per video</span>` : ""}<span>=</span><b>${cost.toLocaleString()} credits</b></div>
-      <div class="bd-note">Output length matches the source video (max ${LIGHT ? C.LIGHT_MAX_SECS : 30} s). ${bal} Credits are held when you start and refunded automatically if it fails.</div>`;
+    bd.innerHTML = `<div class="bd-math"><span>${clampSecs(priceSecs())} sec video</span><span>×</span><span>${rate} credits/sec at ${state.res}</span>${C.FEE_CREDITS ? `<span>+</span><span>${C.FEE_CREDITS} per video</span>` : ""}<span>=</span><b>${cost.toLocaleString()} credits</b></div>
+      <div class="bd-note">Output length matches the source video (max ${isLight() ? C.LIGHT_MAX_SECS : 30} s). ${bal} Credits are held when you start and refunded automatically if it fails.</div>`;
   }
   const need = T ? (T.min_photos ?? state.images.length) : 1;
   const have = photos().length;
@@ -371,7 +386,7 @@ async function generate() {
       d.jobs.unshift(job); demoStore.set(d);
     } else {
       const [video_url, ...image_urls] = await Promise.all([
-        state.video instanceof File ? upload(state.video) : state.video.url, ...photos().map(upload)]);
+        state.video instanceof File ? upload(state.video) : (T ? sceneUrl() : state.video.url), ...photos().map(upload)]);
       btn.textContent = "Starting…";
       ({ job } = await callFn("generate", {
         trend, workflow: state.mode, resolution: state.res,
@@ -393,7 +408,7 @@ async function generate() {
 async function loadJobs() {
   if (DEMO) state.jobs = demoStore.get().jobs;
   else {
-    const { data } = await sb.from("jobs").select("*").order("created_at", { ascending: false }).limit(50);
+    const { data } = await sb.from("jobs").select("*").is("hidden_at", null).order("created_at", { ascending: false }).limit(50);
     state.jobs = data || [];
   }
   renderJobs(); poll();
@@ -443,10 +458,11 @@ function jobCard(j) {
   if (LABEL[j.status]) st.classList.add(j.status);
   if (j.status === "completed" && j.output_url) {
     el.insertAdjacentHTML("beforeend", `<video controls playsinline preload="metadata"></video>
-      <div class="job-actions"><a class="btn" href="#">Download</a></div>`);
+      <div class="job-actions"><a class="btn" href="#">Download</a><button type="button" class="btn share-btn">↗ Share</button></div>`);
     el.querySelector("video").src = j.output_url;
     const a = el.querySelector("a"); a.href = j.output_url;
     a.onclick = (e) => { e.preventDefault(); download(j.output_url, `genjutsu-${j.trend || "video"}-${j.id.slice(0, 8)}.mp4`, a); };
+    el.querySelector(".share-btn").onclick = (e) => shareJob(j, e.currentTarget);
   } else if (!TERMINAL.has(j.status)) {
     const late = age(j) >= GIVE_UP_MS;
     el.insertAdjacentHTML("beforeend", late
@@ -455,8 +471,35 @@ function jobCard(j) {
   } else if (j.error) {
     const p = document.createElement("p"); p.className = "err"; p.textContent = j.error; el.appendChild(p);
   }
+  if (TERMINAL.has(j.status)) {
+    let acts = el.querySelector(".job-actions");
+    if (!acts) { acts = document.createElement("div"); acts.className = "job-actions"; el.appendChild(acts); }
+    const del = document.createElement("button"); del.type = "button"; del.className = "btn ghost"; del.textContent = "🗑 Delete";
+    del.onclick = () => deleteJob(j, del); acts.appendChild(del);
+  }
   el._key = jobKey(j);
   return el;
+}
+// Share: the server makes a public link (/watch/?v=…) to this one finished video; anyone can open it.
+async function shareJob(j, btn) {
+  const label = btn.textContent; btn.disabled = true; btn.textContent = "Creating link…";
+  try {
+    const { url } = await callFn("share", { job_id: j.id });
+    const name = window.TREND_NAMES?.[j.trend] || "my AI video";
+    const data = { title: "My Genjutsu video", text: `I made this ${name} video with Genjutsu Trends 🎬`, url };
+    if (navigator.share) { try { await navigator.share(data); return; } catch (e) { if (e?.name === "AbortError") return; } }
+    await navigator.clipboard.writeText(url);
+    toast("Link copied. Anyone with it can watch this video.", 5000);
+  } catch (e) { toast(e.message || "Couldn't create the link.", 5000); }
+  finally { btn.disabled = false; btn.textContent = label; }
+}
+async function deleteJob(j, btn) {
+  if (!confirm("Delete this video from My videos? Its share link will stop working. Download it first if you want to keep it.")) return;
+  btn.disabled = true;
+  try {
+    await callFn("jobs", { job_id: j.id, action: "hide" });
+    state.jobs = state.jobs.filter((x) => x.id !== j.id); renderJobs();
+  } catch (e) { btn.disabled = false; toast(e.message || "Couldn't delete it.", 5000); }
 }
 function renderJobs() {
   const box = $("jobs");

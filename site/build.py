@@ -18,6 +18,16 @@ DATA = json.loads((SITE / "trends.json").read_text())
 BASE = DATA["base_url"]
 ALL_TRENDS = DATA["trends"]
 # hidden trends (e.g. the 4s QA clip) get a page but stay out of the gallery, links and sitemap
+# Retired slugs keep a name, so old videos made on them don't show up as "Custom".
+TREND_ALIASES = {"hotel-lobby-v2": "hotel-lobby"}
+
+
+def trend_names():
+    names = {t["slug"]: t["short"] for t in ALL_TRENDS}
+    names.update({old: names[new] for old, new in TREND_ALIASES.items() if new in names})
+    return names
+
+
 # Newest first (by "published"); trends published the same day keep their order in trends.json.
 TRENDS = sorted((t for t in ALL_TRENDS if not t.get("hidden")), key=lambda t: t.get("published", ""), reverse=True)
 TODAY = date.today().isoformat()
@@ -136,7 +146,7 @@ def footer(root, app=True, page=None):
 """
     if not app:
         return out + "</body>\n</html>\n"
-    names = {t["slug"]: t["short"] for t in ALL_TRENDS}
+    names = trend_names()
     return out + f"""
   <dialog id="signin-modal" class="modal">
     <form method="dialog" class="modal-x"><button aria-label="Close">×</button></form>
@@ -215,6 +225,44 @@ def photos_text(t):
     return f"{m}–{n} photos" if m < n else f"{n} photo{'s' if n > 1 else ''}"
 
 
+def has_light(t):
+    return bool(t.get("light_video_url"))
+
+
+def prompt_block(t):
+    if not has_light(t):  # classic small prompt box (pilot: only Light-enabled trends get the prominent one)
+        return f"""      <div class="field prompt-field">
+        <div class="prompt-head"><label for="prompt">Prompt</label>
+          <button type="button" class="link-btn" id="prompt-edit">✏️ Edit prompt</button>
+          <button type="button" class="link-btn" id="prompt-reset" hidden>Reset to default</button></div>
+        <textarea id="prompt" rows="3" maxlength="2000" readonly>{esc(t['prompt'])}</textarea>
+      </div>
+"""
+    return f"""      <div class="field prompt-field prominent">
+        <div class="prompt-head"><label for="prompt">✍️ Prompt: what Genjutsu will do</label></div>
+        <p class="prompt-hint">This is the instruction sent with your photos. Edit it to change clothes, style or details.</p>
+        <textarea id="prompt" rows="4" maxlength="2000" readonly>{esc(t['prompt'])}</textarea>
+        <div class="prompt-actions">
+          <button type="button" class="btn" id="prompt-edit">✏️ Edit prompt</button>
+          <button type="button" class="btn ghost" id="prompt-reset" hidden>↺ Reset to default</button>
+        </div>
+      </div>
+"""
+
+
+def model_row(t):
+    if not has_light(t):
+        return ""
+    return """      <div class="model-row">
+        <div class="seg" id="model-seg" role="group" aria-label="Model">
+          <button data-model="light" class="active">Normal mode (Light)</button>
+          <button data-model="full">Stronger model</button>
+        </div>
+        <p class="model-note" id="model-note">Normal mode is fast and cheap and uses the first 15 seconds of the scene.</p>
+      </div>
+"""
+
+
 def studio_trend(t, root):
     n = len(t["slots"])
     rs = t.get("result_sample")
@@ -251,13 +299,7 @@ def studio_trend(t, root):
         <li class="ok">One person per photo</li><li class="ok">Face the camera</li><li class="ok">Good light</li>
         <li class="no">No sunglasses</li><li class="no">No group shots</li>
       </ul>
-      <div class="field prompt-field">
-        <div class="prompt-head"><label for="prompt">Prompt</label>
-          <button type="button" class="link-btn" id="prompt-edit">✏️ Edit prompt</button>
-          <button type="button" class="link-btn" id="prompt-reset" hidden>Reset to default</button></div>
-        <textarea id="prompt" rows="3" maxlength="2000" readonly>{esc(t['prompt'])}</textarea>
-      </div>
-{RES_ROW}{STARTED_NOTE}    </section>
+{prompt_block(t)}{model_row(t)}{RES_ROW}{STARTED_NOTE}    </section>
 """
 
 
@@ -320,6 +362,13 @@ def trend_credits(t):
     return math.ceil(secs * (LIGHT_CREDITS_PER_SEC_DEFAULT if light else CREDITS_PER_SEC_DEFAULT) - 1e-9) + FEE_CREDITS
 
 
+def price_chip(t):
+    if has_light(t):
+        lt = dict(t, model="light", duration=t["light_duration"])
+        return f"Normal mode: {price_text(lt)} · Stronger model: {price_text(dict(t, model='full'))}"
+    return f"Full scene: {price_text(t)}"
+
+
 def price_text(t):
     credits = trend_credits(t)
     return f"{credits:,} credits (≈ ${credits / 100:.2f}) at 480p"
@@ -331,7 +380,8 @@ for t in ALL_TRENDS:
     root = "../../"
     s = t["seo"]
     page = {"kind": "trend", "trend": {
-        **{k: t[k] for k in ("slug", "short", "video_url", "mode", "resolution", "prompt")}, "model": t.get("model", "full"),
+        **{k: t[k] for k in ("slug", "short", "video_url", "mode", "resolution", "prompt")}, "model": t.get("model", "full"), "duration": t["duration"],
+        "light_video_url": t.get("light_video_url"), "light_duration": t.get("light_duration"),
         "poster": rel(root, t["poster"]),
         "preview_url": rel(root, t.get("preview_url", t["video_url"])),
         "slots": [{**s, "example": rel(root, s["example"]) if s.get("example") else None} for s in t["slots"]],
@@ -359,7 +409,7 @@ for t in ALL_TRENDS:
     <section class="hero small">
       <h1>{esc(s['h1'])}</h1>
       <p class="lead">{s['lead']}</p>
-      <p class="price-chip">Full scene: {price_text(t)} · no subscription</p>
+      <p class="price-chip">{price_chip(t)} · no subscription</p>
       {'<p><a class="see-example" href="#example">▶ See an example result</a></p>' if t.get("result_sample") else ''}
     </section>
 
@@ -392,7 +442,7 @@ for t in ALL_TRENDS:
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
           <div class="tc-media"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" loading="lazy" /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
           <div class="tc-body"><b>{esc(t['name'])}</b><span>{esc(t['card_blurb'])}</span>
-            <span class="tc-meta">{photos_text(t)} · {-(-t['duration'] // 1):.0f}s · {price_text(t)}</span></div>
+            <span class="tc-meta">{photos_text(t)} · {-(-t['duration'] // 1):.0f}s · {('from ' + price_text(dict(t, model='light', duration=t['light_duration']))) if has_light(t) else price_text(t)}</span></div>
         </a>""" for t in TRENDS)
 home_faq = [
     ("What is Genjutsu Studio?", "A site that lets you make viral AI video trends with Higgsfield's Genjutsu model. Pick a trend, add your photos and generate. No subscription."),
@@ -543,6 +593,32 @@ pr += f"""  <main>
 pr += footer("../", app=False)
 write("pricing/index.html", pr)
 
+# ---------------- watch (public share links) ----------------
+w = head(path="watch/", title="Watch this AI video | Genjutsu Studio", description="An AI trend video made with Genjutsu. Make your own in minutes.",
+         image=f"{BASE}og.jpg", noindex=True)
+w += header("../", app=False)
+w += f"""  <main>
+    <section class="hero small watch">
+      <p class="muted" id="watch-loading">Loading the video…</p>
+      <div id="watch-found" hidden>
+        <h1 id="watch-title">Made with Genjutsu</h1>
+        <video id="watch-video" controls playsinline autoplay muted loop hidden></video>
+        <p><a class="btn primary big" id="watch-cta" href="../">Make your own AI video →</a></p>
+        <p class="muted">Pick a viral trend, add your photos, get your video in minutes. Pay per video, no subscription.</p>
+      </div>
+      <div id="watch-missing" hidden>
+        <h1>This video isn't available</h1>
+        <p class="muted">The link may be wrong, or the owner deleted the video.</p>
+        <p><a class="btn primary big" href="../">Browse trends →</a></p>
+      </div>
+    </section>
+  </main>
+  <script src="../config.js?v={ASSET_VER}"></script>
+  <script src="../watch.js?v={ASSET_VER}"></script>
+"""
+w += footer("../", app=False)
+write("watch/index.html", w)
+
 # ---------------- my videos (private, per user) ----------------
 mv = head(path="my-videos/", title="My videos | Genjutsu Studio", description="Your Genjutsu videos: follow, watch and download them.",
           image=f"{BASE}og.jpg", noindex=True)
@@ -577,7 +653,8 @@ for slug, title, desc in LEGAL:
     write(f"{slug}/index.html", page)
 
 # ---------------- old URLs → new pages ----------------
-REDIRECTS = {"white-chicks-ai-trend/": "trends/white-chicks/", "trends/mafia-daughter/": "trends/storm/"}
+REDIRECTS = {"white-chicks-ai-trend/": "trends/white-chicks/", "trends/mafia-daughter/": "trends/storm/",
+             "trends/hotel-lobby-v2/": "trends/hotel-lobby/"}
 for old, new in REDIRECTS.items():
     write(f"{old}index.html", f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8" /><title>Moved</title>
@@ -587,7 +664,7 @@ for old, new in REDIRECTS.items():
 """)
 
 # Display names for the server's "video ready" emails (supabase/functions/_shared/email.ts).
-write("trend-names.json", json.dumps({t["slug"]: t["short"] for t in ALL_TRENDS}, ensure_ascii=False))
+write("trend-names.json", json.dumps(trend_names(), ensure_ascii=False))
 
 # ---------------- sitemap / robots ----------------
 urls = [("", "1.0"), ("custom/", "0.7"), ("pricing/", "0.8"), ("genjutsu/", "0.7"), ("terms/", "0.3"), ("privacy/", "0.3"), ("accessibility/", "0.3")] + [(f"trends/{t['slug']}/", "0.9") for t in TRENDS]

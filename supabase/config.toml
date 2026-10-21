@@ -19,3 +19,6 @@ verify_jwt = false
 
 [functions.cleanup-inputs]
 verify_jwt = false
+
+[functions.share]
+verify_jwt = false

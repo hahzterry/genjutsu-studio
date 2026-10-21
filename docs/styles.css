@@ -248,3 +248,14 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 .banner.notice b { color: #fff; }
 .started-note { margin: 14px 0 0; padding: 10px 14px; border-radius: 12px; background: rgba(52, 211, 153, .1); border: 1px solid rgba(52, 211, 153, .35); font-size: 14px; }
 #history .muted .btn { margin-left: 8px; }
+.prompt-field.prominent { margin-top: 16px; padding: 14px; border-radius: 14px; border: 1px solid var(--accent); background: rgba(139, 92, 246, .08); }
+.prompt-field.prominent .prompt-head { font-size: 15px; color: var(--text); }
+.prompt-hint { margin: 0 0 8px; font-size: 13px; color: var(--muted); }
+.prompt-actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.model-row { margin-top: 14px; }
+.model-row .seg { width: 100%; }
+.model-row .seg button { flex: 1; }
+.model-note { margin: 6px 2px 0; font-size: 13px; color: var(--muted); }
+.job-actions .btn + .btn { margin-left: 8px; }
+.watch video { display: block; width: 100%; max-width: 420px; max-height: 70vh; margin: 16px auto; border-radius: 14px; background: #000; }
+.watch h1 { font-size: 26px; }
