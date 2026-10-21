@@ -750,13 +750,13 @@
       "name": "Turn the Lights Off: Jon Hamm Club Dance",
       "short": "Turn the Lights Off club dance",
       "card_blurb": "The Jon Hamm club meme: eyes closed, swaying alone in a packed dark club. One face in.",
-      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/turn-the-lights-off.mp4",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/turn-the-lights-off-v2.mp4",
       "poster": "trends/turn-the-lights-off/poster.jpg",
       "preview_url": "trends/turn-the-lights-off/preview.mp4",
-      "duration": 19.0,
+      "duration": 20.0,
       "mode": "motion-transfer",
       "resolution": "480p",
-      "prompt": "Replace the man in the dark jacket with his eyes closed, swaying in the middle of the dance floor (Jon Hamm), with the uploaded picture, as a realistic person. Keep the dark club, the blue and red lights, the crowd, his slow dance moves, the camera moves and timing.",
+      "prompt": "Replace the man in the dark jacket with his eyes closed, swaying in the middle of the crowded dance floor (Jon Hamm), with the uploaded picture, as a realistic person. Keep the dark club, the blue and green lights, the crowd, his slow dance moves, the camera moves and timing.",
       "slots": [
         {
           "label": "The dancer",
@@ -769,10 +769,10 @@
         "title": "Turn the Lights Off AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
         "description": "Put your face in the viral Turn the Lights Off video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
         "h1": "Turn the Lights Off AI Video Generator",
-        "lead": "Be the man in the Jon Hamm club meme: eyes closed, lost in the music in a packed, dark club to <b>\"Turn the Lights Off\"</b>. The 19-second clip is locked in: add one photo and click Generate.",
+        "lead": "Be the man in the Jon Hamm club meme: eyes closed, lost in the music in a packed, dark club. The 20-second clip is locked in: add one photo and click Generate.",
         "og_title": "Turn the Lights Off AI Video: Put Your Face in the Viral Clip",
         "og_tagline": "Turn the Lights Off AI face swap · Genjutsu · Pay per video",
-        "about_html": "<p>The \"Turn the Lights Off\" meme comes from a TV club scene where Jon Hamm, eyes closed, sways alone in the middle of a crowded dark dance floor to Kato's \"Turn the Lights Off\". The clip became a go-to reaction for \"me when the song comes on\", and the AI trend puts you in his place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "about_html": "<p>The \"Turn the Lights Off\" meme comes from a TV club scene where Jon Hamm, eyes closed, sways alone in the middle of a crowded dark dance floor. The clip became a go-to reaction for \"me when the song comes on\", and the AI trend puts you in his place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
           [
             "Open this page",
@@ -792,7 +792,7 @@
           ],
           [
             "Download and post",
-            "Download the MP4 and post it with \"Turn The Lights Off\" as the sound."
+            "Download the MP4 and post it with the trend's sound."
           ]
         ],
         "faq": [
@@ -802,7 +802,7 @@
           ],
           [
             "How much does the Turn the Lights Off AI video cost?",
-            "The 19-second clip at 480p costs 1,007 credits (about $10.07). 720p and 1080p are sharper and cost more. No subscription."
+            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
