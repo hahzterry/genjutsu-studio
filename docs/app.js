@@ -42,10 +42,12 @@ function toast(msg, ms = 3500) {
   const t = $("toast"); t.textContent = msg; t.hidden = false;
   clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), ms);
 }
-// Browsers report a few ms extra (AAC priming), so ignore anything under 0.05s past a whole second.
+// Billed like Higgsfield: every started second. Trend durations are measured from the preset file;
+// for an upload the browser's figure can be a few ms off (AAC priming), so allow 0.05 s there and
+// let the server's exact price win (see the 409 confirm in generate()).
 // Display only: the server picks the model from the preset file the request points at.
 const isLight = () => T?.model === "light" || (!!T?.light_video_url && state.model === "light");
-const clampSecs = (d) => Math.min(isLight() ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - 0.05)));
+const clampSecs = (d) => Math.min(isLight() ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - (T ? 0.001 : 0.05))));
 const rateFor = (res) => (isLight() ? C.LIGHT_CREDITS_PER_SEC : C.CREDITS_PER_SEC)[res];
 const sceneUrl = () => (T?.light_video_url && state.model === "light" ? T.light_video_url : T?.video_url);
 // Light uses its own 15 s clip, so price it from that clip's length; the stronger model from the full scene.
@@ -74,8 +76,9 @@ async function callFn(name, body) {
   const { data, error } = await sb.functions.invoke(name, { body });
   if (error) {
     let msg = error.message;
-    try { const j = await error.context.json(); msg = j.error || msg; } catch {}
-    const e = new Error(msg); e.status = error.context?.status; throw e;
+    let cost;
+    try { const j = await error.context.json(); msg = j.error || msg; cost = j.cost; } catch {}
+    const e = new Error(msg); e.status = error.context?.status; e.cost = cost; throw e;
   }
   return data;
 }
@@ -400,7 +403,7 @@ let busy = false;
 async function generate() {
   if (!HAS_STUDIO || !state.video || !photos().length || busy) return;
   if (!state.user) { state.pendingGenerate = true; saveDraft(); return openSignin(); }
-  const cost = estimate();
+  let cost = estimate();
   if (state.credits < cost) { state.pendingGenerate = true; return openBuy(`This video costs about ${cost.toLocaleString()} credits. You have ${state.credits.toLocaleString()}.`); }
 
   if (state.started && !confirm(`You already started this exact video. Make it again for ${cost.toLocaleString()} credits?`)) return;
@@ -420,11 +423,20 @@ async function generate() {
       const [video_url, ...image_urls] = await Promise.all([
         state.video instanceof File ? upload(state.video) : (T ? sceneUrl() : state.video.url), ...photos().map(upload)]);
       btn.textContent = "Starting…";
-      ({ job } = await callFn("generate", {
+      const body = {
         trend, workflow: state.mode, resolution: state.res,
         prompt: T ? ($("prompt").value.trim() || T.prompt) : $("prompt").value.trim(),
         video_url, image_urls, duration: state.duration, expected_cost: cost, ...(MOCK ? { mock: MOCK } : {}),
-      }));
+      };
+      try { ({ job } = await callFn("generate", body)); } catch (e) {
+        // An uploaded video can measure a little longer in the file than in the browser: show the
+        // server's exact price and let the visitor confirm it (never charge more than they agreed to).
+        if (e.status !== 409 || T || !Number.isInteger(e.cost) || e.cost <= cost) throw e;
+        if (state.credits < e.cost) { state.pendingGenerate = true; return openBuy(`This video costs ${e.cost.toLocaleString()} credits. You have ${state.credits.toLocaleString()}.`); }
+        if (!confirm(`Your video runs a fraction of a second past a whole second, so it costs ${e.cost.toLocaleString()} credits (we bill every started second). Make it for ${e.cost.toLocaleString()} credits?`)) return;
+        cost = e.cost;
+        ({ job } = await callFn("generate", { ...body, expected_cost: e.cost }));
+      }
     }
     state.started = true;
     await loadCredits();

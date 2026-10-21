@@ -331,8 +331,8 @@
           ]
         ]
       },
-      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt-04.mp4",
-      "light_duration": 15.015,
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt-04b.mp4",
+      "light_duration": 14.973,
       "light_preview_url": "trends/apt/preview-light.mp4",
       "light_start": 4
     },
@@ -699,10 +699,10 @@
       "name": "Thriller: Michael Jackson Zombie Dance",
       "short": "Thriller zombie dance",
       "card_blurb": "Lead the zombies through Michael Jackson's \"Thriller\" street dance. One face in.",
-      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/thriller.mp4",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/thriller-21.mp4",
       "poster": "trends/thriller/poster.jpg",
       "preview_url": "trends/thriller/preview.mp4",
-      "duration": 21.0,
+      "duration": 20.988,
       "mode": "motion-transfer",
       "resolution": "480p",
       "prompt": "Replace the lead dancer in the red leather jacket and red trousers (Michael Jackson) with the uploaded picture, keeping the zombie makeup look in the first close-up shots. Keep the zombie dancers, the night street, the blue light, the choreography, camera cuts and timing.",
@@ -767,8 +767,8 @@
           ]
         ]
       },
-      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller.mp4",
-      "light_duration": 15.015,
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller-15.mp4",
+      "light_duration": 14.982,
       "light_preview_url": "trends/thriller/preview-light.mp4"
     },
     {
@@ -1461,8 +1461,8 @@
           ]
         ]
       },
-      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-jawn-dance.mp4",
-      "light_duration": 12.004
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-jawn-dance-12.mp4",
+      "light_duration": 12.0
     },
     {
       "slug": "jawn-baby",
@@ -1618,8 +1618,8 @@
           ]
         ]
       },
-      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-yeahh-yeahh.mp4",
-      "light_duration": 11.006
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-yeahh-yeahh-11.mp4",
+      "light_duration": 11.0
     },
     {
       "slug": "qa-4s",

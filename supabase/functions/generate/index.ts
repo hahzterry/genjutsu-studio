@@ -39,17 +39,17 @@ serve(async (req) => {
   if (!mock && Deno.env.get("RENDERS_PAUSED") === "1") return json({ error: "Video generation is paused for maintenance. Please try again later." }, 503);
   if (!mock && !PAYMENTS_LIVE && !isTester(user)) return json({ error: "Video generation isn't open yet. Please check back soon." }, 403);
 
-  // Price from the file itself, never from what the browser says. Higgsfield bills per started
-  // second of output (= source length, capped at 30s); ignore container padding under 50ms.
+  // Price from the file itself, never from what the browser says. Higgsfield bills every started
+  // second of the source (10.01 s is billed as 11 s), so we round up the same way (1 ms float slack).
   const secs = await mp4Duration(video_url);
   if (secs === null) return json({ error: "We couldn't read that video. Please upload a standard MP4." }, 400);
   if (secs < 3.95) return json({ error: "The video must be at least 4 seconds." }, 400);
-  if (secs > 30.05) return json({ error: "The video can be at most 30 seconds. Please trim it." }, 400);
+  if (secs > 30.001) return json({ error: "The video can be at most 30 seconds. Please trim it." }, 400);
   const light = isLight(video_url);
   if (light && workflow !== "motion-transfer") return json({ error: "This trend only supports motion transfer." }, 400);
   // Light presets must be ≤15 s: Higgsfield bills the source's length too, so a longer one would be undercharged.
-  if (light && secs > LIGHT_MAX_SECS + 0.05) { console.error("light preset too long", video_url, secs); return json({ error: "This trend is temporarily unavailable." }, 503); }
-  const billed = Math.min(light ? LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(secs - 0.05)));
+  if (light && secs > LIGHT_MAX_SECS + 0.001) { console.error("light preset too long", video_url, secs); return json({ error: "This trend is temporarily unavailable." }, 503); }
+  const billed = Math.min(light ? LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(secs - 0.001)));
   let cost: number;
   try { cost = usdToCredits(light ? LIGHT_USD_PER_SEC[resolution] * billed * 2 : FALLBACK_USD_PER_SEC[resolution] * billed); } catch (e) {
     console.error("pricing refused", e);

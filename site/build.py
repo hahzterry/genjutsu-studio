@@ -408,7 +408,7 @@ LIGHT_CREDITS_PER_SEC_DEFAULT = 15  # 480p Genjutsu Light (2 x $0.05 x 1.5 x 100
 
 def trend_credits(t):
     light = t.get("model") == "light"
-    secs = min(15 if light else 30, max(4, math.ceil(t["duration"] - 0.05)))  # same rounding as app.js clampSecs
+    secs = min(15 if light else 30, max(4, math.ceil(t["duration"] - 0.001)))  # every started second, like Higgsfield and app.js clampSecs
     return math.ceil(secs * (LIGHT_CREDITS_PER_SEC_DEFAULT if light else CREDITS_PER_SEC_DEFAULT) - 1e-9) + FEE_CREDITS
 
 

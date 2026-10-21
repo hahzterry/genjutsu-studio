@@ -12,6 +12,10 @@ committed+pushed, deployed (`supabase functions deploy`, GitHub Pages) or applie
 - Spawn a fresh security-reviewer agent with the diff (`git diff`) and the context of what changed and why.
 - Proceed only after it returns an explicit **ACCEPT**. Fix every finding and re-submit until it accepts.
 - No exceptions for "small" or "copy-only" changes. If the review can't run, don't ship; tell Shoham.
+- Fixed check on every new or changed scene video (`presets/*.mp4`, full and `light-*`): the reviewer runs
+  `ffprobe -show_entries stream=duration:format=duration` and rejects any file whose longest track runs a fraction past
+  a whole second by 0.001–0.05 s (e.g. 15.015 s). Higgsfield bills every started second, so such a file costs us a
+  second we don't charge for. Trim it to end on or just under the whole second. `light-*` files must be ≤ 15.000 s.
 
 ### Deploys must not break users mid-action
 - Stay backward compatible with what's live: apply DB migrations first and keep them additive (never drop or rename
