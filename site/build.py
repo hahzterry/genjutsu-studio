@@ -630,6 +630,22 @@ mv += f"""  <main>
       <p class="lead">Every video you've made: follow its progress, watch it and download it. Download your videos to keep a copy.</p>
     </section>
 {HISTORY}  </main>
+  <dialog id="share-modal" class="modal">
+    <form method="dialog" class="modal-x"><button aria-label="Close">×</button></form>
+    <h3>Share your video</h3>
+    <p class="muted">Anyone with this link can watch the video. No sign-in needed.</p>
+    <div class="share-row">
+      <input id="share-url" type="text" readonly aria-label="Share link" />
+      <button type="button" id="share-copy" class="btn primary">Copy link</button>
+    </div>
+    <div class="share-apps">
+      <a id="share-wa" class="btn" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a id="share-x" class="btn" target="_blank" rel="noopener noreferrer">X</a>
+      <a id="share-fb" class="btn" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <button type="button" id="share-more" class="btn ghost" hidden>More…</button>
+    </div>
+    <p class="fine">Deleting the video turns this link off.</p>
+  </dialog>
 """
 mv += footer("../", page={"kind": "videos"})
 write("my-videos/index.html", mv)

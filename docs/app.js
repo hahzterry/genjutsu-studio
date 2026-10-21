@@ -481,18 +481,32 @@ function jobCard(j) {
   return el;
 }
 // Share: the server makes a public link (/watch/?v=…) to this one finished video; anyone can open it.
+// Our own pop-up (link + Copy + a few apps); the system share sheet is only an optional "More…".
 async function shareJob(j, btn) {
   const label = btn.textContent; btn.disabled = true; btn.textContent = "Creating link…";
   try {
     const { url } = await callFn("share", { job_id: j.id });
-    const name = window.TREND_NAMES?.[j.trend] || "my AI video";
-    const data = { title: "My Genjutsu video", text: `I made this ${name} video with Genjutsu Trends 🎬`, url };
-    if (navigator.share) { try { await navigator.share(data); return; } catch (e) { if (e?.name === "AbortError") return; } }
-    await navigator.clipboard.writeText(url);
-    toast("Link copied. Anyone with it can watch this video.", 5000);
+    if (!/^https:\/\/genjutsu-trends\.com\/watch\/\?v=[A-Za-z0-9_-]{22}$/.test(url)) throw new Error("Couldn't create the link.");
+    const name = window.TREND_NAMES?.[j.trend] || "AI";
+    const text = `I made this ${name} video with Genjutsu Trends 🎬`;
+    $("share-url").value = url;
+    $("share-wa").href = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
+    $("share-x").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    $("share-fb").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    const more = $("share-more");
+    more.hidden = !navigator.share;
+    more.onclick = () => navigator.share({ title: "My Genjutsu video", text, url }).catch(() => {});
+    $("share-copy").textContent = "Copy link";
+    $("share-modal").showModal();
+    $("share-url").select();
   } catch (e) { toast(e.message || "Couldn't create the link.", 5000); }
   finally { btn.disabled = false; btn.textContent = label; }
 }
+on("share-copy", "click", async () => {
+  const inp = $("share-url");
+  try { await navigator.clipboard.writeText(inp.value); } catch { inp.select(); document.execCommand("copy"); }
+  $("share-copy").textContent = "Copied ✓";
+});
 async function deleteJob(j, btn) {
   if (!confirm("Delete this video from My videos? Its share link will stop working. Download it first if you want to keep it.")) return;
   btn.disabled = true;

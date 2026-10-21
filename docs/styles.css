@@ -259,3 +259,7 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 .job-actions .btn + .btn { margin-left: 8px; }
 .watch video { display: block; width: 100%; max-width: 420px; max-height: 70vh; margin: 16px auto; border-radius: 14px; background: #000; }
 .watch h1 { font-size: 26px; }
+.share-row { display: flex; gap: 8px; margin: 12px 0; }
+.share-row input { flex: 1; min-width: 0; background: var(--card2); border: 1px solid var(--line); border-radius: 12px; color: var(--text); padding: 10px 12px; font: inherit; font-size: 14px; }
+.share-apps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.share-apps .btn { text-decoration: none; }
