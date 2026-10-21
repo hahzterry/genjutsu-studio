@@ -283,6 +283,7 @@ export async function syncJob(job: Job) {
   if (["failed", "nsfw", "canceled"].includes(s.status)) await saveDebug(job.id, { final_body: JSON.stringify(s).slice(0, 4000) });
   const { data } = await admin.from("jobs").update(patch).eq("id", job.id).select().single();
   if (["failed", "nsfw", "canceled"].includes(s.status)) await admin.rpc("refund_job", { p_job: job.id });
+  if (TERMINAL.has(s.status) && data) await (await import("./email.ts")).notifyJobDone(data); // once per job
   if (s.status === "completed" && s.video?.url && job.billed_secs && job.cost) { // pricing check on the real output
     const out = await mp4Duration(s.video.url).catch(() => null);
     const secs = out === null ? null : Math.min(30, Math.ceil(out - 0.05));
@@ -313,6 +314,7 @@ async function syncMockJob(job: Job) {
   else Object.assign(patch, { status: "completed", output_url: MOCK_OUTPUT });
   const { data } = await admin.from("jobs").update(patch).eq("id", job.id).select().single();
   if (patch.status === "failed") await admin.rpc("refund_job", { p_job: job.id });
+  if (TERMINAL.has(String(patch.status)) && data) await (await import("./email.ts")).notifyJobDone(data);
   return data ?? job;
 }
 

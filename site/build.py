@@ -578,6 +578,9 @@ for old, new in REDIRECTS.items():
 <body><p>This page moved to <a href="{BASE}{new}">{BASE}{new}</a>.</p></body></html>
 """)
 
+# Display names for the server's "video ready" emails (supabase/functions/_shared/email.ts).
+write("trend-names.json", json.dumps({t["slug"]: t["short"] for t in ALL_TRENDS}, ensure_ascii=False))
+
 # ---------------- sitemap / robots ----------------
 urls = [("", "1.0"), ("custom/", "0.7"), ("pricing/", "0.8"), ("genjutsu/", "0.7"), ("terms/", "0.3"), ("privacy/", "0.3"), ("accessibility/", "0.3")] + [(f"trends/{t['slug']}/", "0.9") for t in TRENDS]
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
