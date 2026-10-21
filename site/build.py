@@ -263,6 +263,41 @@ def model_row(t):
 """
 
 
+def studio_trend_c(t, root):
+    """Design C: video on the left, one control panel on the right (stacks on phones)."""
+    return f"""    <section class="studio studio-c" id="studio">
+      <div class="c-media">
+        <div class="drop locked" id="video-drop">
+          <video id="video-preview" muted loop playsinline autoplay hidden></video>
+          <span class="lock-tag">🔒 {esc(t['short'])}</span>
+          <button type="button" class="eq-sound" aria-label="Play with sound"
+            onclick="const v=document.getElementById('video-preview');v.muted=!v.muted;v.play();this.textContent=v.muted?'🔇':'🔊';this.ariaLabel=v.muted?'Play with sound':'Mute'">🔇</button>
+        </div>
+      </div>
+      <aside class="c-panel card">
+        <div class="c-row">
+          <b>Model</b>
+          <button type="button" class="switch" id="model-switch" role="switch" aria-checked="false" aria-label="Stronger model">
+            <span class="lbl on" data-m="light">Light</span><span class="track"><span class="ball"></span></span><span class="lbl" data-m="full">Stronger</span>
+          </button>
+        </div>
+        <p class="c-note" id="model-note">Light · fast and cheap · uses the first 15 seconds of the scene.</p>
+        <h3 class="c-h">Photos</h3>
+        <div class="drop images" id="image-drop">
+          <input type="file" id="image-input" accept="image/jpeg,image/png,image/webp" hidden />
+          <div class="drop-empty" id="image-empty"></div>
+          <div class="thumbs" id="thumbs" hidden></div>
+        </div>
+        <p class="c-note">One person per photo, facing the camera, good light, no sunglasses.</p>
+        <div class="c-head"><h3 class="c-h"><label for="prompt">Prompt</label></h3>
+          <button type="button" class="link-btn" id="prompt-reset" hidden>↺ Reset to default</button></div>
+        <textarea id="prompt" rows="4" maxlength="2000">{esc(t['prompt'])}</textarea>
+        <h3 class="c-h">Resolution</h3>
+{RES_ROW}{STARTED_NOTE}      </aside>
+    </section>
+"""
+
+
 def studio_trend(t, root):
     n = len(t["slots"])
     rs = t.get("result_sample")
@@ -413,7 +448,7 @@ for t in ALL_TRENDS:
       {'<p><a class="see-example" href="#example">▶ See an example result</a></p>' if t.get("result_sample") else ''}
     </section>
 
-{studio_trend(t, root)}
+{studio_trend_c(t, root) if has_light(t) else studio_trend(t, root)}
     <section class="seo">
       <h2>About the trend</h2>
       {s['about_html']}
@@ -447,7 +482,7 @@ cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
 home_faq = [
     ("What is Genjutsu Studio?", "A site that lets you make viral AI video trends with Higgsfield's Genjutsu model. Pick a trend, add your photos and generate. No subscription."),
     ("How does it work?", "Every trend page has its scene already loaded. You only add a photo for each person. On the Custom page you can upload your own video, up to 8 photos and your own prompt."),
-    ("How much does it cost?", "You pay per second of video, with no subscription. At 480p it's about 48 credits per second plus 100 per video (100 credits = $1). Every page shows the exact price before you generate."),
+    ("How much does it cost?", "You pay per second of video, with no subscription. At 480p it's 15 credits per second in Normal mode (Light, up to 15 seconds) or about 48 with the stronger model, plus 100 per video (100 credits = $1). Every page shows the exact price before you generate."),
     ("What if the generation fails?", "Your credits are refunded automatically, including when the content is blocked by moderation."),
     ("Can I close the page while it's generating?", "Yes. Your video keeps rendering. Sign in again and you'll find it under \"My videos\" in the top menu."),
     ("Do credits expire?", "No. Credits stay on your account until you use them."),
@@ -543,6 +578,13 @@ write("genjutsu/index.html", g)
 
 # ---------------- pricing ----------------
 RATES = {"480p": 47.7, "720p": 102.15, "1080p": 244.8}  # credits/sec, keep in sync with docs/config.js
+LIGHT_RATES = {"480p": 15, "720p": 30, "1080p": 60}  # Normal mode (Light), output + source billed; keep in sync
+FROM_PRICE = min(trend_credits(dict(t, model="light", duration=t["light_duration"])) for t in TRENDS if has_light(t)) / 100
+
+
+def light_price(secs, res):
+    secs = min(15, max(4, -(-secs // 1)))
+    return (math.ceil(secs * LIGHT_RATES[res] - 1e-9) + FEE_CREDITS) / 100
 
 
 def video_price(secs, res):
@@ -553,12 +595,12 @@ def video_price(secs, res):
 pfaq = [
     ("Is there a subscription?", "No. There is no monthly plan and nothing renews. You pay once for the video you are making."),
     ("Do I have to buy credits I won't use?", "No. At checkout, pick \"Just this video\" and you pay exactly that video's price ($2 minimum). Packs are optional, for people who plan to make several videos."),
-    ("How is the price calculated?", "By the length of the video and the resolution you pick. The exact price shows before you click Generate."),
+    ("How is the price calculated?", "By the length of the video, the resolution and the mode: Normal mode (Light) uses the first 15 seconds and costs much less; the stronger model renders the full scene with more detail. The exact price shows before you click Generate."),
     ("What if the video fails?", "Failed or moderated generations are refunded automatically to your balance."),
     ("Why do some apps look cheaper?", "Subscription apps advertise \"up to\" numbers based on their cheapest model and shortest clip, and you pay every month whether you use it or not. Here you pay only when you make a video, with Higgsfield Genjutsu, the model that keeps the original scene."),
 ]
 pr = head(path="pricing/", title="Pricing: Pay Per Video, No Subscription | Genjutsu Studio",
-          description="Genjutsu Studio pricing: pay once for the video you make. No subscription, no unused credits. Trend videos from about $8.16 at 480p.",
+          description=f"Genjutsu Studio pricing: pay once for the video you make. No subscription, no unused credits. Trend videos from about ${FROM_PRICE:.2f} at 480p.",
           image=f"{BASE}og.jpg", extra_ld=ld(faq_ld(pfaq), breadcrumbs(("Trends", ""), ("Pricing", "pricing/"))))
 pr += header("../", app=False, active="pricing")
 pr += f"""  <main>
@@ -573,7 +615,12 @@ pr += f"""  <main>
       </div>
 
       <h2>How the price is calculated</h2>
-      <p>The price depends on how long the video is and the resolution you pick. Here are some examples:</p>
+      <p>The price depends on the mode, how long the video is and the resolution you pick. Every trend page has a switch between the two modes.</p>
+      <h3>Normal mode (Light): fast and cheap, first 15 seconds</h3>
+      <table>
+        <tr><th>Resolution</th><th>10-second video</th><th>15-second video</th></tr>
+""" + "".join(f"        <tr><td>{r}</td>" + "".join(f"<td>${light_price(x, r):.2f}</td>" for x in (10, 15)) + "</tr>\n" for r in LIGHT_RATES) + f"""      </table>
+      <h3>Stronger model: full scene, more detail</h3>
       <table>
         <tr><th>Resolution</th><th>10-second video</th><th>20-second video</th><th>30-second video</th></tr>
 """ + "".join(f"        <tr><td>{r}</td>" + "".join(f"<td>${video_price(x, r):.2f}</td>" for x in (10, 20, 30)) + "</tr>\n" for r in RATES) + f"""      </table>

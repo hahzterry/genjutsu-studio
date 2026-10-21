@@ -91,6 +91,11 @@ const saveDraft = () => draftOp("readwrite", (st) => st.put({
 // Trend prompt: read-only by default; "Edit prompt" (after a warning) unlocks it, "Reset" restores it.
 function setPromptEditable(on, value) {
   const p = $("prompt"); if (!p || !T) return;
+  if (!$("prompt-edit")) { // design C: always-editable box; Reset shows only when the text was changed
+    if (on && value !== undefined) p.value = value; else if (!on) p.value = T.prompt;
+    $("prompt-reset").hidden = p.value.trim() === T.prompt.trim();
+    return;
+  }
   p.readOnly = !on; p.value = on ? (value ?? p.value) : T.prompt;
   $("prompt-edit").hidden = on; $("prompt-reset").hidden = !on;
   if (on && value === undefined) p.focus();
@@ -228,10 +233,15 @@ function selectMode(mode) {
 function selectModel(model) {
   state.started = false; state.model = model;
   document.querySelectorAll("#model-seg button").forEach((x) => x.classList.toggle("active", x.dataset.model === model));
+  const sw = $("model-switch");
+  if (sw) {
+    sw.classList.toggle("strong", model === "full"); sw.setAttribute("aria-checked", String(model === "full"));
+    sw.querySelectorAll(".lbl").forEach((l) => l.classList.toggle("on", l.dataset.m === model));
+  }
   const n = $("model-note");
   if (n) n.textContent = model === "light"
-    ? "Normal mode is fast and cheap and uses the first 15 seconds of the scene."
-    : "The stronger model renders the full scene with more detail. It costs more and takes a bit longer.";
+    ? ($("model-switch") ? "Light · fast and cheap · uses the first 15 seconds of the scene." : "Normal mode is fast and cheap and uses the first 15 seconds of the scene.")
+    : ($("model-switch") ? "Stronger · full scene, more detail · costs more, takes a bit longer." : "The stronger model renders the full scene with more detail. It costs more and takes a bit longer.");
 }
 function selectRes(res) {
   state.started = false;
@@ -303,7 +313,12 @@ if (HAS_STUDIO && !T) { // custom page: the empty photo zone is a click target t
 on("image-input", "change", (e) => { addImages([...e.target.files], pickSlot); pickSlot = undefined; e.target.value = ""; });
 
 if (HAS_STUDIO) {
-  on("prompt", "input", () => { state.started = false; refresh(); }); // new prompt = new video
+  on("prompt", "input", () => { // new prompt = new video
+    state.started = false;
+    if (T && !$("prompt-edit") && $("prompt-reset")) $("prompt-reset").hidden = $("prompt").value.trim() === T.prompt.trim();
+    refresh();
+  });
+  on("model-switch", "click", () => { selectModel(state.model === "light" ? "full" : "light"); refresh(); });
   if (T) {
     on("prompt-edit", "click", () => {
       if (confirm("This prompt is tuned for this scene. Changing it can break the result, and the video is still charged. Edit it anyway?")) setPromptEditable(true);

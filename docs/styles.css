@@ -263,3 +263,29 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 .share-row input { flex: 1; min-width: 0; background: var(--card2); border: 1px solid var(--line); border-radius: 12px; color: var(--text); padding: 10px 12px; font: inherit; font-size: 14px; }
 .share-apps { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
 .share-apps .btn { text-decoration: none; }
+
+/* Design C (trend pages with a Light clip): video left, control panel right; stacks on phones. */
+.studio-c { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; align-items: start; margin: 18px 0 28px; }
+.studio-c .c-media { position: sticky; top: 16px; }
+.studio-c .drop.locked { aspect-ratio: auto; min-height: 0; }
+.studio-c .drop.locked video { border-radius: 16px; }
+.c-panel { padding: 18px; }
+.c-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.c-head { display: flex; justify-content: space-between; align-items: baseline; }
+.c-h { margin: 16px 0 8px; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.c-note { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+.studio-c .drop.images { min-height: 0; }
+.studio-c #prompt { min-height: 96px; }
+.switch { display: inline-flex; align-items: center; gap: 10px; border: 0; background: none; padding: 4px; font-weight: 700; font-size: 14px; }
+.switch .track { width: 50px; height: 28px; border-radius: 999px; background: var(--card2); border: 1px solid var(--line); position: relative; transition: .2s; }
+.switch .ball { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: .2s; }
+.switch.strong .track { background: linear-gradient(90deg, var(--accent), var(--accent2)); border-color: transparent; }
+.switch.strong .ball { left: 25px; }
+.switch .lbl { color: var(--muted); } .switch .lbl.on { color: var(--text); }
+.switch:focus-visible { outline: 2px solid var(--accent); border-radius: 999px; }
+@media (max-width: 760px) { .studio-c { grid-template-columns: 1fr; } .studio-c .c-media { position: static; } }
+/* Generate button in Higgsfield's lime (the colour the Genjutsu sites share). Pilot: design C only. */
+.studio-c #generate-btn { background: #c8f03c; background: oklch(89% .2 124); color: #10160a; color: oklch(17% .03 130);
+  border: 0; box-shadow: 0 0 30px -6px oklch(89% .2 124); }
+.studio-c #generate-btn:hover:not(:disabled) { filter: brightness(1.05); }
+.studio-c #generate-btn:disabled { opacity: .5; box-shadow: none; }

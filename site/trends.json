@@ -66,7 +66,7 @@
           ],
           [
             "How much does the White Chicks AI video cost?",
-            "The full 19-second car scene at 480p costs 1,007 credits (about $10.07). 720p and 1080p are sharper and cost more."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 19-second clip for 1,007 credits (about $10.07). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Is there a White Chicks AI template without CapCut?",
@@ -86,7 +86,9 @@
       "result_sample": {
         "video": "trends/white-chicks/result-sample.mp4",
         "poster": "trends/white-chicks/result-poster.jpg"
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-white-chicks.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "hotel-lobby",
@@ -150,7 +152,7 @@
           ],
           [
             "How much does the Hotel Lobby AI video cost?",
-            "The full 16-second clip at 480p costs 864 credits (about $8.64). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 16-second clip for 864 credits (about $8.64). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -231,7 +233,7 @@
           ],
           [
             "How much does the Alors on Danse AI video cost?",
-            "The full 15-second clip at 480p costs 816 credits (about $8.16). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 15-second clip for 816 credits (about $8.16). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -246,7 +248,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-alors-on-danse.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "apt",
@@ -310,7 +314,7 @@
           ],
           [
             "How much does the APT. AI video cost?",
-            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 20-second clip for 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -325,7 +329,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt.mp4",
+      "light_duration": 15.014
     },
     {
       "slug": "industry-baby",
@@ -414,7 +420,7 @@
           ],
           [
             "How much does the Industry Baby AI video cost?",
-            "The 25-second clip at 480p costs 1,293 credits (about $12.93), whether you add 1 photo or 8. 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 25-second clip for 1,293 credits (about $12.93). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -429,7 +435,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-industry-baby.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "storm",
@@ -497,7 +505,7 @@
           ],
           [
             "How much does it cost?",
-            "The 30-second clip at 480p costs 1,531 credits (about $15.31), with one photo or two. 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 30-second clip for 1,531 credits (about $15.31). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Is this the mafia boss's daughter video?",
@@ -513,7 +521,9 @@
           ]
         ]
       },
-      "min_photos": 1
+      "min_photos": 1,
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-storm.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "shrek-raindance",
@@ -573,7 +583,7 @@
           ],
           [
             "How much does it cost?",
-            "The 29-second clip at 480p costs 1,484 credits (about $14.84). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 29-second clip for 1,484 credits (about $14.84). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -588,7 +598,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-shrek-raindance.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "raindance",
@@ -652,7 +664,7 @@
           ],
           [
             "How much does the Raindance AI video cost?",
-            "The 21-second clip at 480p costs 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 21-second clip for 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -671,7 +683,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-raindance.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "thriller",
@@ -730,7 +744,7 @@
           ],
           [
             "How much does the Thriller AI video cost?",
-            "The 21-second clip at 480p costs 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 21-second clip for 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -745,7 +759,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller.mp4",
+      "light_duration": 15.015
     },
     {
       "slug": "turn-the-lights-off",
@@ -804,7 +820,7 @@
           ],
           [
             "How much does the Turn the Lights Off AI video cost?",
-            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 20-second clip for 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -819,7 +835,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-turn-the-lights-off.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "cheba-man",
@@ -878,7 +896,7 @@
           ],
           [
             "How much does the Cheba Man AI video cost?",
-            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 20-second clip for 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -893,7 +911,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-cheba-man.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "bulin-47",
@@ -952,7 +972,7 @@
           ],
           [
             "How much does the Bulin 47 AI video cost?",
-            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 20-second clip for 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -967,7 +987,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bulin-47.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "bad-times",
@@ -1026,7 +1048,7 @@
           ],
           [
             "How much does the Bad Times AI video cost?",
-            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 20-second clip for 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -1041,7 +1063,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "bad-times-pet",
@@ -1100,7 +1124,7 @@
           ],
           [
             "How much does the Bad Times Pet AI video cost?",
-            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 20-second clip for 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -1115,7 +1139,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times-pet.mp4",
+      "light_duration": 15.0
     },
     {
       "slug": "i-feel-like-nicole",
@@ -1179,7 +1205,7 @@
           ],
           [
             "How much does the I Feel Like Nicole AI video cost?",
-            "The 14-second clip at 480p costs 768 credits (about $7.68). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 14-second version at 480p costs 310 credits (about $3.10). The stronger model renders the full 14-second clip for 768 credits (about $7.68). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -1194,7 +1220,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-i-feel-like-nicole.mp4",
+      "light_duration": 13.607
     },
     {
       "slug": "nicole-kidman-dance",
@@ -1253,7 +1281,7 @@
           ],
           [
             "How much does the Nicole Kidman Dance AI video cost?",
-            "The 14-second clip at 480p costs 768 credits (about $7.68). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 14-second version at 480p costs 310 credits (about $3.10). The stronger model renders the full 14-second clip for 768 credits (about $7.68). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -1268,7 +1296,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-nicole-kidman-dance.mp4",
+      "light_duration": 13.607
     },
     {
       "slug": "jawn-dance",
@@ -1327,7 +1357,7 @@
           ],
           [
             "How much does the The Jawn Dance AI video cost?",
-            "The 12-second clip at 480p costs 673 credits (about $6.73). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 12-second version at 480p costs 280 credits (about $2.80). The stronger model renders the full 12-second clip for 673 credits (about $6.73). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -1342,7 +1372,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-jawn-dance.mp4",
+      "light_duration": 12.004
     },
     {
       "slug": "yeahh-yeahh",
@@ -1406,7 +1438,7 @@
           ],
           [
             "How much does the Yeahh Yeahh AI video cost?",
-            "The 11-second clip at 480p costs 625 credits (about $6.25). 720p and 1080p are sharper and cost more. No subscription."
+            "In Normal mode (Light), the 11-second version at 480p costs 265 credits (about $2.65). The stronger model renders the full 11-second clip for 625 credits (about $6.25). 720p and 1080p are sharper and cost more. No subscription."
           ],
           [
             "Who goes where?",
@@ -1421,7 +1453,9 @@
             "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
           ]
         ]
-      }
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-yeahh-yeahh.mp4",
+      "light_duration": 11.006
     },
     {
       "slug": "qa-4s",
