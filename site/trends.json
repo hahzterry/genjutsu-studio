@@ -968,6 +968,460 @@
       }
     },
     {
+      "slug": "bad-times",
+      "name": "Bad Times: Dispute Dance",
+      "short": "Bad Times dispute dance",
+      "card_blurb": "The \"Bad Times\" dispute dance: big, dramatic arguing moves in the kitchen. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times.mp4",
+      "poster": "trends/bad-times/poster.jpg",
+      "preview_url": "trends/bad-times/preview.mp4",
+      "duration": 20.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the woman in the grey cropped T-shirt and black leggings dancing in the kitchen with the uploaded picture, as a realistic person. Keep the kitchen, her outfit, the dramatic arguing gestures, close-ups to the camera, the camera moves and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Grey top, kitchen",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Bad Times AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
+        "description": "Put your face in the viral Bad Times video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Bad Times AI Video Generator",
+        "lead": "Do the viral <b>\"Bad Times\"</b> dispute dance: big, dramatic arguing moves straight into the camera. The 20-second clip is locked in: add one photo and click Generate.",
+        "og_title": "Bad Times AI Video: Your Face in the Viral Trend",
+        "og_tagline": "Bad Times AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The \"Bad Times\" trend is set to Imael Angel's song: a dancer in a kitchen acts out a heated argument, with pointing, eye rolls and dramatic close-ups on every line. It became a widely copied dance, and the AI trend puts you in the argument.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Bad Times clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Bad Times\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Bad Times AI video?",
+            "Open this page. The Bad Times clip is already loaded. Add one photo, then click Generate."
+          ],
+          [
+            "How much does the Bad Times AI video cost?",
+            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the dancer in the grey top. The kitchen and the moves stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "bad-times-pet",
+      "name": "Bad Times Pet: Your Pet Does the Dispute Dance",
+      "short": "Bad Times pet dance",
+      "card_blurb": "Your pet does the \"Bad Times\" dispute dance in the kitchen. One pet photo in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times-pet.mp4",
+      "poster": "trends/bad-times-pet/poster.jpg",
+      "preview_url": "trends/bad-times-pet/preview.mp4",
+      "duration": 20.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the dancing tabby cat standing upright in the kitchen with the animal in the uploaded picture, keeping it the same kind of animal as in the photo, standing upright and dancing like a person. Keep the kitchen, the dramatic dance moves, the camera moves and timing.",
+      "slots": [
+        {
+          "label": "Your pet",
+          "hint": "A clear photo of your pet",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Bad Times Pet AI Video Generator: Put Your Pet in the Viral Trend (No Subscription)",
+        "description": "Put your pet in the viral Bad Times Pet video. The clip is preloaded: add one photo of your pet and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Bad Times Pet AI Video Generator",
+        "lead": "Your pet does the viral <b>\"Bad Times\"</b> dispute dance, standing upright in the kitchen. The 20-second clip is locked in: add one photo of your pet and click Generate.",
+        "og_title": "Bad Times Pet AI Video: Your Pet in the Viral Trend",
+        "og_tagline": "Bad Times Pet AI pet video · Genjutsu · Pay per video",
+        "about_html": "<p>The pet version of the \"Bad Times\" trend swaps the dancer for a cat that stands upright and throws the same dramatic arguing moves. Cats, dogs and other pets all get the full routine.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds your pet from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Bad Times Pet clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo of your pet",
+            "A clear, well-lit photo of your pet, with its face and body visible."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Bad Times\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Bad Times Pet AI video?",
+            "Open this page. The Bad Times Pet clip is already loaded. Add one photo of your pet, then click Generate."
+          ],
+          [
+            "How much does the Bad Times Pet AI video cost?",
+            "The 20-second clip at 480p costs 1,054 credits (about $10.54). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The animal in your photo replaces the dancing cat. The kitchen and the moves stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, well-lit photo of one pet, facing the camera, with nothing covering it."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "i-feel-like-nicole",
+      "name": "I Feel Like Nicole: Street Duo Dance",
+      "short": "I Feel Like Nicole duo",
+      "card_blurb": "The \"I Feel Like Nicole\" duo routine on a city street. Put two faces in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/i-feel-like-nicole.mp4",
+      "poster": "trends/i-feel-like-nicole/poster.jpg",
+      "preview_url": "trends/i-feel-like-nicole/preview.mp4",
+      "duration": 13.6,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the blonde woman in the black jacket on the left with the first uploaded picture and the woman in the cap and light jacket on the right with the second uploaded picture, as realistic people. Keep their outfits, the city street, the choreography, the camera and timing.",
+      "slots": [
+        {
+          "label": "Left dancer",
+          "hint": "Blonde, black jacket",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "Right dancer",
+          "hint": "Cap, light jacket",
+          "example": "assets/examples/white-chicks-b.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "I Feel Like Nicole AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
+        "description": "Put your face in the viral I Feel Like Nicole video. The clip is preloaded: add 2 photos and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "I Feel Like Nicole AI Video Generator",
+        "lead": "Dance the <b>\"I Feel Like Nicole\"</b> routine with a friend on a city street. The 14-second clip is locked in: add a photo for each dancer and click Generate.",
+        "og_title": "I Feel Like Nicole AI Video: Your Face in the Viral Trend",
+        "og_tagline": "I Feel Like Nicole AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>\"I feel like Nicole\" is the hook of ADÉLA's song \"Nicole Kidman\", and its routine took over TikTok. This version is the side-by-side street duo, and the AI trend puts you and a friend in it.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds both people from your photos.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The I Feel Like Nicole clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add 2 photos",
+            "Add one clear, front-facing, well-lit photo for each part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Nicole Kidman\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the I Feel Like Nicole AI video?",
+            "Open this page. The I Feel Like Nicole clip is already loaded. Add 2 photos, then click Generate."
+          ],
+          [
+            "How much does the I Feel Like Nicole AI video cost?",
+            "The 14-second clip at 480p costs 768 credits (about $7.68). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The first photo replaces the blonde dancer on the left and the second replaces the dancer in the cap on the right."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "nicole-kidman-dance",
+      "name": "Nicole Kidman Dance: Solo Routine",
+      "short": "Nicole Kidman dance",
+      "card_blurb": "The \"Nicole Kidman\" solo routine, straight to the camera. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/nicole-kidman-dance.mp4",
+      "poster": "trends/nicole-kidman-dance/poster.jpg",
+      "preview_url": "trends/nicole-kidman-dance/preview.mp4",
+      "duration": 13.6,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the woman with long curly hair in the light blue top and jeans dancing in the bedroom with the uploaded picture, as a realistic person. Keep the room, her outfit, the choreography, the camera and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Curly hair, blue top",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Nicole Kidman Dance AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
+        "description": "Put your face in the viral Nicole Kidman Dance video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Nicole Kidman Dance AI Video Generator",
+        "lead": "Dance the viral <b>\"Nicole Kidman\"</b> routine solo, straight to the camera. The 14-second clip is locked in: add one photo and click Generate.",
+        "og_title": "Nicole Kidman Dance AI Video: Your Face in the Viral Trend",
+        "og_tagline": "Nicole Kidman Dance AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>ADÉLA's \"Nicole Kidman\" turned into a huge TikTok dance trend. This is the classic solo version filmed at home, and the AI trend puts you in it.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Nicole Kidman Dance clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Nicole Kidman\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Nicole Kidman Dance AI video?",
+            "Open this page. The Nicole Kidman Dance clip is already loaded. Add one photo, then click Generate."
+          ],
+          [
+            "How much does the Nicole Kidman Dance AI video cost?",
+            "The 14-second clip at 480p costs 768 credits (about $7.68). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the dancer. The room and the routine stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "jawn-dance",
+      "name": "The Jawn Dance: Wait for the Drop",
+      "short": "The Jawn dance",
+      "card_blurb": "The Jawn dance: deadpan with a drink, waiting for the drop. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/jawn-dance.mp4",
+      "poster": "trends/jawn-dance/poster.jpg",
+      "preview_url": "trends/jawn-dance/preview.mp4",
+      "duration": 12.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the man in the brown tweed jacket and red tie holding a teddy bear in the garden with the uploaded picture, as a realistic person. Keep his outfit and teddy bear, the garden, the deadpan wait, the dance on the drop, the camera and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Tweed jacket, teddy bear",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "The Jawn Dance AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
+        "description": "Put your face in the viral The Jawn Dance video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "The Jawn Dance AI Video Generator",
+        "lead": "Do <b>The Jawn</b> dance: stand deadpan, wait for the beat to drop, then bounce. The 12-second clip is locked in: add one photo and click Generate.",
+        "og_title": "The Jawn Dance AI Video: Your Face in the Viral Trend",
+        "og_tagline": "The Jawn Dance AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The Jawn dance trend is all about the wait: you stand still and straight-faced while the song builds, then grin and bounce side to side when the beat drops. This garden version stars a tweed-jacket, teddy-bear character, and the AI trend puts you in his place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The The Jawn Dance clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one photo",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"The Jawn\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the The Jawn Dance AI video?",
+            "Open this page. The The Jawn Dance clip is already loaded. Add one photo, then click Generate."
+          ],
+          [
+            "How much does the The Jawn Dance AI video cost?",
+            "The 12-second clip at 480p costs 673 credits (about $6.73). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your photo replaces the man in the tweed jacket. The garden and the teddy bear stay."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
+      "slug": "yeahh-yeahh",
+      "name": "Yeahh Yeahh: Car Seat Dance Duo",
+      "short": "Yeahh Yeahh car dance",
+      "card_blurb": "Two friends in red sunglasses seat-dancing in the car. Put two faces in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/yeahh-yeahh.mp4",
+      "poster": "trends/yeahh-yeahh/poster.jpg",
+      "preview_url": "trends/yeahh-yeahh/preview.mp4",
+      "duration": 11.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the woman in the blue sweater on the left with the first uploaded picture and the woman in the black and white striped top on the right with the second uploaded picture, as realistic people. Keep the red sunglasses, the car interior, their seat-dance moves, the camera and timing.",
+      "slots": [
+        {
+          "label": "Left seat",
+          "hint": "Blue sweater",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "Right seat",
+          "hint": "Striped top",
+          "example": "assets/examples/white-chicks-b.jpg"
+        }
+      ],
+      "published": "2026-10-21",
+      "seo": {
+        "title": "Yeahh Yeahh AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
+        "description": "Put your face in the viral Yeahh Yeahh video. The clip is preloaded: add 2 photos and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Yeahh Yeahh AI Video Generator",
+        "lead": "Seat-dance with a friend in the viral <b>\"Yeahh Yeahh\"</b> car clip, red sunglasses on. The 11-second clip is locked in: add a photo for each seat and click Generate.",
+        "og_title": "Yeahh Yeahh AI Video: Your Face in the Viral Trend",
+        "og_tagline": "Yeahh Yeahh AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The \"Yeahh Yeahh\" car clip shows two friends in matching red sunglasses throwing synchronized seat-dance moves in the front of a car. The AI trend puts you and a friend in those seats.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds both people from your photos.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Yeahh Yeahh clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add 2 photos",
+            "Add one clear, front-facing, well-lit photo for each part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Yeahh Yeahh\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Yeahh Yeahh AI video?",
+            "Open this page. The Yeahh Yeahh clip is already loaded. Add 2 photos, then click Generate."
+          ],
+          [
+            "How much does the Yeahh Yeahh AI video cost?",
+            "The 11-second clip at 480p costs 625 credits (about $6.25). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The first photo replaces the woman in the blue sweater on the left and the second replaces the woman in the striped top on the right."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      }
+    },
+    {
       "slug": "qa-4s",
       "hidden": true,
       "name": "QA 4-second test",
