@@ -594,30 +594,40 @@ pr += footer("../", app=False)
 write("pricing/index.html", pr)
 
 # ---------------- watch (public share links) ----------------
-w = head(path="watch/", title="Watch this AI video | Genjutsu Studio", description="An AI trend video made with Genjutsu. Make your own in minutes.",
-         image=f"{BASE}og.jpg", noindex=True)
-w += header("../", app=False)
-w += f"""  <main>
+# One page per trend (watch/<slug>/), so link previews (WhatsApp, X, iMessage) show that trend's image and
+# name: crawlers don't run JS. watch/ itself is the generic page (custom videos, old links).
+def watch_page(path, root, title, image):
+    w = head(path=path, title=f"{title} | Genjutsu Studio",
+             description="An AI trend video made with Genjutsu. Make your own in minutes.", image=image, noindex=True)
+    w += header(root, app=False)
+    w += f"""  <main>
     <section class="hero small watch">
       <p class="muted" id="watch-loading">Loading the video…</p>
       <div id="watch-found" hidden>
         <h1 id="watch-title">Made with Genjutsu</h1>
         <video id="watch-video" controls playsinline autoplay muted loop hidden></video>
-        <p><a class="btn primary big" id="watch-cta" href="../">Make your own AI video →</a></p>
+        <p><a class="btn primary big" id="watch-cta" href="{root}">Make your own AI video →</a></p>
         <p class="muted">Pick a viral trend, add your photos, get your video in minutes. Pay per video, no subscription.</p>
       </div>
       <div id="watch-missing" hidden>
         <h1>This video isn't available</h1>
         <p class="muted">The link may be wrong, or the owner deleted the video.</p>
-        <p><a class="btn primary big" href="../">Browse trends →</a></p>
+        <p><a class="btn primary big" href="{root}">Browse trends →</a></p>
       </div>
     </section>
   </main>
-  <script src="../config.js?v={ASSET_VER}"></script>
-  <script src="../watch.js?v={ASSET_VER}"></script>
+  <script src="{root}config.js?v={ASSET_VER}"></script>
+  <script src="{root}watch.js?v={ASSET_VER}"></script>
 """
-w += footer("../", app=False)
-write("watch/index.html", w)
+    w += footer(root, app=False)
+    write(f"{path}index.html", w)
+
+
+watch_page("watch/", "../", "Watch this AI video", f"{BASE}og.jpg")
+BY_SLUG = {t["slug"]: t for t in ALL_TRENDS}
+for slug, name in trend_names().items():  # every slug a job can carry, incl. hidden and retired ones
+    t = BY_SLUG.get(TREND_ALIASES.get(slug, slug))
+    watch_page(f"watch/{slug}/", "../../", f"Watch this {name} AI video", og_image(f"trends/{t['slug']}/", t) if t else f"{BASE}og.jpg")
 
 # ---------------- my videos (private, per user) ----------------
 mv = head(path="my-videos/", title="My videos | Genjutsu Studio", description="Your Genjutsu videos: follow, watch and download them.",

@@ -486,7 +486,7 @@ async function shareJob(j, btn) {
   const label = btn.textContent; btn.disabled = true; btn.textContent = "Creating link…";
   try {
     const { url } = await callFn("share", { job_id: j.id });
-    if (!/^https:\/\/genjutsu-trends\.com\/watch\/\?v=[A-Za-z0-9_-]{22}$/.test(url)) throw new Error("Couldn't create the link.");
+    if (!/^https:\/\/genjutsu-trends\.com\/watch\/([a-z0-9-]{1,40}\/)?\?v=[A-Za-z0-9_-]{22}$/.test(url)) throw new Error("Couldn't create the link.");
     const name = window.TREND_NAMES?.[j.trend] || "AI";
     const text = `I made this ${name} video with Genjutsu Trends 🎬`;
     $("share-url").value = url;

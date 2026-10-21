@@ -1,4 +1,5 @@
-// POST {job_id} (signed in, own finished job) -> {url}: creates (or reuses) the job's public share link.
+// POST {job_id} (signed in, own finished job) -> {url}: creates (or reuses) the job's public share link,
+// https://genjutsu-trends.com/watch/<trend>/?v=<token> (or /watch/?v=… for custom videos).
 // GET ?v=<token> (public) -> {video_url, trend}: what /watch/ needs to show one shared video.
 import { admin, getUser, json, serve } from "../_shared/common.ts";
 
@@ -24,7 +25,7 @@ serve(async (req) => {
   if (!user) return json({ error: "Please sign in first." }, 401);
   const { job_id } = await req.json().catch(() => ({}));
   if (typeof job_id !== "string") return json({ error: "Not found" }, 404);
-  const { data: job } = await admin.from("jobs").select("id, status, share_token, output_url")
+  const { data: job } = await admin.from("jobs").select("id, status, share_token, output_url, trend")
     .eq("id", job_id).eq("user_id", user.id).is("hidden_at", null).maybeSingle();
   if (!job || job.status !== "completed" || !job.output_url) return json({ error: "Only finished videos can be shared." }, 400);
   let token = job.share_token;
@@ -39,5 +40,7 @@ serve(async (req) => {
     }
   }
   if (!token) return json({ error: "Could not create the link." }, 500);
-  return json({ url: `${SITE}watch/?v=${token}` });
+  // Per-trend watch page so link previews show the trend's image (build.py makes one for every slug).
+  const slug = /^[a-z0-9-]{1,40}$/.test(job.trend ?? "") && job.trend !== "custom" ? `${job.trend}/` : "";
+  return json({ url: `${SITE}watch/${slug}?v=${token}` });
 });
