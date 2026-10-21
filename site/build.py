@@ -311,9 +311,17 @@ def write(rel, content):
     print("wrote", rel)
 
 
+LIGHT_CREDITS_PER_SEC_DEFAULT = 15  # 480p Genjutsu Light (2 x $0.05 x 1.5 x 100); keep in sync with docs/config.js
+
+
+def trend_credits(t):
+    light = t.get("model") == "light"
+    secs = min(15 if light else 30, max(4, math.ceil(t["duration"] - 0.05)))  # same rounding as app.js clampSecs
+    return math.ceil(secs * (LIGHT_CREDITS_PER_SEC_DEFAULT if light else CREDITS_PER_SEC_DEFAULT) - 1e-9) + FEE_CREDITS
+
+
 def price_text(t):
-    secs = min(30, max(4, math.ceil(t["duration"] - 0.05)))  # same rounding as app.js clampSecs
-    credits = math.ceil(secs * CREDITS_PER_SEC_DEFAULT - 1e-9) + FEE_CREDITS
+    credits = trend_credits(t)
     return f"{credits:,} credits (≈ ${credits / 100:.2f}) at 480p"
 
 
@@ -323,7 +331,7 @@ for t in ALL_TRENDS:
     root = "../../"
     s = t["seo"]
     page = {"kind": "trend", "trend": {
-        **{k: t[k] for k in ("slug", "short", "video_url", "mode", "resolution", "prompt")},
+        **{k: t[k] for k in ("slug", "short", "video_url", "mode", "resolution", "prompt")}, "model": t.get("model", "full"),
         "poster": rel(root, t["poster"]),
         "preview_url": rel(root, t.get("preview_url", t["video_url"])),
         "slots": [{**s, "example": rel(root, s["example"]) if s.get("example") else None} for s in t["slots"]],

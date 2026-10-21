@@ -1,7 +1,7 @@
 // POST {workflow, resolution, prompt, video_url, image_urls} -> {job}
 // Prices the request from the video's real length, holds the credits, submits to Higgsfield.
 import {
-  admin, FALLBACK_USD_PER_SEC, getUser, INPUTS_PUBLIC, json,
+  admin, FALLBACK_USD_PER_SEC, getUser, INPUTS_PUBLIC, isLight, json, LIGHT_MAX_SECS, LIGHT_USD_PER_SEC,
   intEnv, isTester, mp4Duration, PAYMENTS_LIVE, PRESETS_PUBLIC, RESOLUTIONS, serve, submitToHiggsfield, usdToCredits, WORKFLOWS,
 } from "../_shared/common.ts";
 
@@ -45,9 +45,13 @@ serve(async (req) => {
   if (secs === null) return json({ error: "We couldn't read that video. Please upload a standard MP4." }, 400);
   if (secs < 3.95) return json({ error: "The video must be at least 4 seconds." }, 400);
   if (secs > 30.05) return json({ error: "The video can be at most 30 seconds. Please trim it." }, 400);
-  const billed = Math.min(30, Math.max(4, Math.ceil(secs - 0.05)));
+  const light = isLight(video_url);
+  if (light && workflow !== "motion-transfer") return json({ error: "This trend only supports motion transfer." }, 400);
+  // Light presets must be ≤15 s: Higgsfield bills the source's length too, so a longer one would be undercharged.
+  if (light && secs > LIGHT_MAX_SECS + 0.05) { console.error("light preset too long", video_url, secs); return json({ error: "This trend is temporarily unavailable." }, 503); }
+  const billed = Math.min(light ? LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(secs - 0.05)));
   let cost: number;
-  try { cost = usdToCredits(FALLBACK_USD_PER_SEC[resolution] * billed); } catch (e) {
+  try { cost = usdToCredits(light ? LIGHT_USD_PER_SEC[resolution] * billed * 2 : FALLBACK_USD_PER_SEC[resolution] * billed); } catch (e) {
     console.error("pricing refused", e);
     return json({ error: "Video generation is temporarily unavailable." }, 503);
   }

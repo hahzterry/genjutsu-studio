@@ -14,6 +14,10 @@ window.GENJUTSU_CONFIG = {
   // Display-only cost preview: credits per second + flat fee per video. Keep in sync with
   // the HF_DISCOUNT / MARKUP / FEE_USD secrets (server is authoritative).
   CREDITS_PER_SEC: { "480p": 47.7, "720p": 102.15, "1080p": 244.8 }, // Higgsfield list price x 1.5
+  // Genjutsu Light trends (model: "light", max 15 s): Higgsfield bills output + source seconds,
+  // so per video second it's 2 x the Light rate ($0.05/0.10/0.20), x 1.5.
+  LIGHT_CREDITS_PER_SEC: { "480p": 15, "720p": 30, "1080p": 60 },
+  LIGHT_MAX_SECS: 15,
   FEE_CREDITS: 100,
   // Sign-in by 6-digit code (needs custom SMTP + {{ .Token }} in the email templates, both set
   // 2026-10-21 via Resend): keeps the visitor on the same page (no new tab from the mail app).

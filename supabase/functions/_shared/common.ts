@@ -65,6 +65,11 @@ export const WORKFLOWS = ["motion-transfer", "object-swap"] as const;
 export const RESOLUTIONS = ["480p", "720p", "1080p"] as const;
 // USD per second of output, used only when the estimate endpoint is unavailable.
 export const FALLBACK_USD_PER_SEC: Record<string, number> = { "480p": 0.318, "720p": 0.681, "1080p": 1.632 };
+// Genjutsu Light (motion transfer only, uses the first 15 s). It bills output seconds PLUS the source
+// video's seconds, so a job costs rate x 2 x seconds. Chosen only by the server, from the preset's name:
+// presets/light-<slug>.mp4. Custom uploads always use full Genjutsu.
+export const LIGHT_USD_PER_SEC: Record<string, number> = { "480p": 0.05, "720p": 0.10, "1080p": 0.20 };
+export const LIGHT_MAX_SECS = 15;
 export const TERMINAL = new Set(["completed", "failed", "nsfw", "canceled"]);
 
 export function hfHeaders(extra: Record<string, string> = {}) {
@@ -92,6 +97,7 @@ export function usdToCredits(usd: number): number {
 const SB_URL = Deno.env.get("SUPABASE_URL")!;
 export const INPUTS_PUBLIC = `${SB_URL}/storage/v1/object/public/inputs/`; // URL shape the client sends
 export const PRESETS_PUBLIC = `${SB_URL}/storage/v1/object/public/presets/`;
+export const isLight = (videoUrl?: string) => !!videoUrl && videoUrl.startsWith(`${PRESETS_PUBLIC}light-`);
 const srk = () => Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 /** Object path inside the private "inputs" bucket for a client-sent URL, or null. */
@@ -250,7 +256,8 @@ export async function submitToHiggsfield(job: Job): Promise<Submit> {
   }
   const hook = `${SB_URL}/functions/v1/hf-webhook?secret=${Deno.env.get("WEBHOOK_SECRET")}`;
   try {
-    const r = await fetch(`${HF_BASE}/higgsfield/genjutsu/${job.workflow}/v1.0?hf_webhook=${encodeURIComponent(hook)}`, {
+    const endpoint = isLight(job.video_url) ? "higgsfield/genjutsu-light/motion-transfer/v1.0" : `higgsfield/genjutsu/${job.workflow}/v1.0`;
+    const r = await fetch(`${HF_BASE}/${endpoint}?hf_webhook=${encodeURIComponent(hook)}`, {
       method: "POST", headers: hfHeaders({ "Idempotency-Key": job.id }), body: JSON.stringify(input),
     });
     const sub = await r.json().catch(() => ({}));

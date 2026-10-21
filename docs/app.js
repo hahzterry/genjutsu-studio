@@ -41,10 +41,12 @@ function toast(msg, ms = 3500) {
   clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), ms);
 }
 // Browsers report a few ms extra (AAC priming), so ignore anything under 0.05s past a whole second.
-const clampSecs = (d) => Math.min(30, Math.max(4, Math.ceil(d - 0.05)));
+const LIGHT = T?.model === "light"; // display only: the server picks the model from the preset's name
+const clampSecs = (d) => Math.min(LIGHT ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - 0.05)));
+const rateFor = (res) => (LIGHT ? C.LIGHT_CREDITS_PER_SEC : C.CREDITS_PER_SEC)[res];
 function estimate() {
   // -1e-9: same float-safe rounding as the server, so 20 s x 47.7 is 954, not 955.
-  return state.duration ? Math.ceil(clampSecs(state.duration) * C.CREDITS_PER_SEC[state.res] - 1e-9) + (C.FEE_CREDITS || 0) : 0;
+  return state.duration ? Math.ceil(clampSecs(state.duration) * rateFor(state.res) - 1e-9) + (C.FEE_CREDITS || 0) : 0;
 }
 async function callFn(name, body) {
   const { data, error } = await sb.functions.invoke(name, { body });
@@ -313,7 +315,7 @@ if (HAS_STUDIO) {
 function refresh() {
   if (!HAS_STUDIO) return;
   const cost = estimate();
-  const rate = C.CREDITS_PER_SEC[state.res];
+  const rate = rateFor(state.res);
   $("cost").innerHTML = cost ? `≈ <b>${cost.toLocaleString()} credits</b> <span>($${(cost / 100).toFixed(2)})</span>` : "Add a video to see the price";
   const bd = $("breakdown");
   bd.hidden = !cost;
@@ -324,7 +326,7 @@ function refresh() {
         : `You have <b>${state.credits.toLocaleString()}</b> credits. You need <b>${(cost - state.credits).toLocaleString()}</b> more.`)
       : "Sign in to see your balance.";
     bd.innerHTML = `<div class="bd-math"><span>${clampSecs(state.duration)} sec video</span><span>×</span><span>${rate} credits/sec at ${state.res}</span>${C.FEE_CREDITS ? `<span>+</span><span>${C.FEE_CREDITS} per video</span>` : ""}<span>=</span><b>${cost.toLocaleString()} credits</b></div>
-      <div class="bd-note">Output length matches the source video (max 30 s). ${bal} Credits are held when you start and refunded automatically if it fails.</div>`;
+      <div class="bd-note">Output length matches the source video (max ${LIGHT ? C.LIGHT_MAX_SECS : 30} s). ${bal} Credits are held when you start and refunded automatically if it fails.</div>`;
   }
   const need = T ? (T.min_photos ?? state.images.length) : 1;
   const have = photos().length;
