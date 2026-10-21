@@ -331,9 +331,10 @@
           ]
         ]
       },
-      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt.mp4",
-      "light_duration": 15.014,
-      "light_preview_url": "trends/apt/preview-light.mp4"
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt-04.mp4",
+      "light_duration": 15.015,
+      "light_preview_url": "trends/apt/preview-light.mp4",
+      "light_start": 4
     },
     {
       "slug": "industry-baby",
@@ -688,9 +689,10 @@
           ]
         ]
       },
-      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-raindance.mp4",
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-raindance-04.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/raindance/preview-light.mp4"
+      "light_preview_url": "trends/raindance/preview-light.mp4",
+      "light_start": 4
     },
     {
       "slug": "thriller",

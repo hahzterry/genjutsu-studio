@@ -278,6 +278,13 @@ def model_switch(t):
 """
 
 
+def short_chip(t):
+    """Chip on trends longer than Light's 15 s: app.js shows it only while the Light model is selected."""
+    if not t.get("light_preview_url"):
+        return ""
+    return '          <span class="short-chip" id="short-chip" hidden>⏱ Shorter version · 15 s</span>'
+
+
 def studio_trend_c(t, root):
     """Design C: video on the left, one control panel on the right (stacks on phones)."""
     return f"""    <section class="studio studio-c" id="studio">
@@ -285,6 +292,7 @@ def studio_trend_c(t, root):
         <div class="drop locked" id="video-drop">
           <video id="video-preview" muted loop playsinline autoplay controls controlslist="nodownload noplaybackrate" hidden></video>
           <span class="lock-tag">🔒 {esc(t['short'])}</span>
+{short_chip(t)}
         </div>
       </div>
       <aside class="c-panel card">

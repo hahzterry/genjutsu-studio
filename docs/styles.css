@@ -292,3 +292,10 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 /* Design C: the scene video has native controls (play/pause, progress bar, sound); tag moves out of their way. */
 .studio-c .lock-tag { top: 10px; bottom: auto; }
 .tag-strong { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(167,139,250,.15); color: var(--accent); }
+.short-chip { position: absolute; right: 10px; top: 10px; z-index: 2; pointer-events: none; background: #c8f03c; background: oklch(89% .2 124);
+  color: #10160a; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 99px; box-shadow: 0 2px 10px rgba(0,0,0,.35); }
+.short-chip[hidden] { display: none; }
+.short-chip.pop { animation: chip-pop .45s ease-out; }
+@keyframes chip-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .short-chip.pop { animation: none; } }
+@media (max-width: 520px) { .short-chip { right: auto; left: 10px; top: 44px; } }

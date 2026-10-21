@@ -51,13 +51,20 @@ const sceneUrl = () => (T?.light_video_url && state.model === "light" ? T.light_
 // Light uses its own 15 s clip, so price it from that clip's length; the stronger model from the full scene.
 const priceSecs = () => (T?.light_video_url && state.model === "light" ? T.light_duration : (T?.duration || state.duration));
 // Trends longer than Light's 15 s have a second preview: the switch shows exactly what each mode will render.
+// "Shorter version" chip on the video: shown only while Light is on, so the switch visibly changes the preview.
+function shortChip() {
+  const c = $("short-chip");
+  if (!c) return;
+  const show = state.model === "light";
+  if (show && c.hidden) { c.classList.remove("pop"); void c.offsetWidth; c.classList.add("pop"); }
+  c.hidden = !show;
+}
 function swapPreview() {
   if (!T?.light_preview_url) return;
+  shortChip();
   const v = $("video-preview"), src = state.model === "light" ? T.light_preview_url : (T.preview_url || T.video_url);
   if (v.getAttribute("src") === src) return;
   v.src = src; v.play().catch(() => {});
-  const tag = document.querySelector("#video-drop .lock-tag");
-  if (tag) tag.textContent = state.model === "light" ? `🔒 ${T.short} · 15 s Light version` : `🔒 ${T.short} · full scene`;
 }
 function estimate() {
   // -1e-9: same float-safe rounding as the server, so 20 s x 47.7 is 954, not 955.
@@ -647,7 +654,7 @@ if (T) {
   $("video-preview").poster = T.poster || "";
   // Preview plays from GitHub Pages; the API gets the storage URL.
   showVideo(T.light_preview_url && state.model === "light" ? T.light_preview_url : (T.preview_url || T.video_url), () => { state.video = { url: T.video_url }; });
-  if (T.light_preview_url) { const tag = document.querySelector("#video-drop .lock-tag"); if (tag) tag.textContent = `🔒 ${T.short} · 15 s Light version`; }
+  if (T.light_preview_url) shortChip();
 }
 if (HAS_STUDIO) { selectMode(state.mode); selectRes(state.res); renderThumbs(); restoreDraft(); }
 refresh();
