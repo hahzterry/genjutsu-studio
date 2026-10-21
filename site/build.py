@@ -424,6 +424,7 @@ for t in ALL_TRENDS:
     page = {"kind": "trend", "trend": {
         **{k: t[k] for k in ("slug", "short", "video_url", "mode", "resolution", "prompt")}, "model": t.get("model", "full"), "duration": t["duration"],
         "light_video_url": t.get("light_video_url"), "light_duration": t.get("light_duration"),
+        "light_preview_url": rel(root, t["light_preview_url"]) if t.get("light_preview_url") else None,
         "poster": rel(root, t["poster"]),
         "preview_url": rel(root, t.get("preview_url", t["video_url"])),
         "slots": [{**s, "example": rel(root, s["example"]) if s.get("example") else None} for s in t["slots"]],

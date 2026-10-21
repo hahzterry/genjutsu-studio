@@ -48,8 +48,17 @@ const isLight = () => T?.model === "light" || (!!T?.light_video_url && state.mod
 const clampSecs = (d) => Math.min(isLight() ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - 0.05)));
 const rateFor = (res) => (isLight() ? C.LIGHT_CREDITS_PER_SEC : C.CREDITS_PER_SEC)[res];
 const sceneUrl = () => (T?.light_video_url && state.model === "light" ? T.light_video_url : T?.video_url);
-// The preview plays the full scene; Light uses its own 15 s clip, so price it from that clip's length.
-const priceSecs = () => (T?.light_video_url && state.model === "light" ? T.light_duration : state.duration);
+// Light uses its own 15 s clip, so price it from that clip's length; the stronger model from the full scene.
+const priceSecs = () => (T?.light_video_url && state.model === "light" ? T.light_duration : (T?.duration || state.duration));
+// Trends longer than Light's 15 s have a second preview: the switch shows exactly what each mode will render.
+function swapPreview() {
+  if (!T?.light_preview_url) return;
+  const v = $("video-preview"), src = state.model === "light" ? T.light_preview_url : (T.preview_url || T.video_url);
+  if (v.getAttribute("src") === src) return;
+  v.src = src; v.play().catch(() => {});
+  const tag = document.querySelector("#video-drop .lock-tag");
+  if (tag) tag.textContent = state.model === "light" ? `🔒 ${T.short} · 15 s Light version` : `🔒 ${T.short} · full scene`;
+}
 function estimate() {
   // -1e-9: same float-safe rounding as the server, so 20 s x 47.7 is 954, not 955.
   return state.duration ? Math.ceil(clampSecs(priceSecs()) * rateFor(state.res) - 1e-9) + (C.FEE_CREDITS || 0) : 0;
@@ -238,6 +247,7 @@ function selectModel(model) {
     sw.classList.toggle("strong", model === "full"); sw.setAttribute("aria-checked", String(model === "full"));
     sw.querySelectorAll(".lbl").forEach((l) => l.classList.toggle("on", l.dataset.m === model));
   }
+  swapPreview();
   const n = $("model-note");
   if (n) n.textContent = model === "light"
     ? ($("model-switch") ? "Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger." : "Normal mode is fast and cheap and uses 15 seconds of the scene.")
@@ -636,7 +646,8 @@ async function renderPayPal() {
 if (T) {
   $("video-preview").poster = T.poster || "";
   // Preview plays from GitHub Pages; the API gets the storage URL.
-  showVideo(T.preview_url || T.video_url, () => { state.video = { url: T.video_url }; });
+  showVideo(T.light_preview_url && state.model === "light" ? T.light_preview_url : (T.preview_url || T.video_url), () => { state.video = { url: T.video_url }; });
+  if (T.light_preview_url) { const tag = document.querySelector("#video-drop .lock-tag"); if (tag) tag.textContent = `🔒 ${T.short} · 15 s Light version`; }
 }
 if (HAS_STUDIO) { selectMode(state.mode); selectRes(state.res); renderThumbs(); restoreDraft(); }
 refresh();

@@ -88,7 +88,8 @@
         "poster": "trends/white-chicks/result-poster.jpg"
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-white-chicks.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/white-chicks/preview-light.mp4"
     },
     {
       "slug": "hotel-lobby",
@@ -331,7 +332,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt.mp4",
-      "light_duration": 15.014
+      "light_duration": 15.014,
+      "light_preview_url": "trends/apt/preview-light.mp4"
     },
     {
       "slug": "industry-baby",
@@ -437,7 +439,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-industry-baby.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/industry-baby/preview-light.mp4"
     },
     {
       "slug": "storm",
@@ -600,7 +603,8 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-shrek-raindance-04.mp4",
       "light_duration": 15.0,
-      "light_start": 4
+      "light_start": 4,
+      "light_preview_url": "trends/shrek-raindance/preview-light.mp4"
     },
     {
       "slug": "raindance",
@@ -685,7 +689,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-raindance.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/raindance/preview-light.mp4"
     },
     {
       "slug": "thriller",
@@ -761,7 +766,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller.mp4",
-      "light_duration": 15.015
+      "light_duration": 15.015,
+      "light_preview_url": "trends/thriller/preview-light.mp4"
     },
     {
       "slug": "turn-the-lights-off",
@@ -837,7 +843,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-turn-the-lights-off.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/turn-the-lights-off/preview-light.mp4"
     },
     {
       "slug": "cheba-man",
@@ -913,7 +920,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-cheba-man.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/cheba-man/preview-light.mp4"
     },
     {
       "slug": "bulin-47",
@@ -989,7 +997,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bulin-47.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/bulin-47/preview-light.mp4"
     },
     {
       "slug": "bad-times",
@@ -1065,7 +1074,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/bad-times/preview-light.mp4"
     },
     {
       "slug": "bad-times-pet",
@@ -1141,7 +1151,8 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times-pet.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "light_preview_url": "trends/bad-times-pet/preview-light.mp4"
     },
     {
       "slug": "i-feel-like-nicole",
