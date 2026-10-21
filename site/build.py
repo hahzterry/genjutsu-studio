@@ -268,10 +268,8 @@ def studio_trend_c(t, root):
     return f"""    <section class="studio studio-c" id="studio">
       <div class="c-media">
         <div class="drop locked" id="video-drop">
-          <video id="video-preview" muted loop playsinline autoplay hidden></video>
+          <video id="video-preview" muted loop playsinline autoplay controls controlslist="nodownload noplaybackrate" hidden></video>
           <span class="lock-tag">🔒 {esc(t['short'])}</span>
-          <button type="button" class="eq-sound" aria-label="Play with sound"
-            onclick="const v=document.getElementById('video-preview');v.muted=!v.muted;v.play();this.textContent=v.muted?'🔇':'🔊';this.ariaLabel=v.muted?'Play with sound':'Mute'">🔇</button>
         </div>
       </div>
       <aside class="c-panel card">

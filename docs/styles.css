@@ -289,3 +289,5 @@ textarea[readonly] { color: var(--muted); cursor: default; }
   border: 0; box-shadow: 0 0 30px -6px oklch(89% .2 124); }
 .studio-c #generate-btn:hover:not(:disabled) { filter: brightness(1.05); }
 .studio-c #generate-btn:disabled { opacity: .5; box-shadow: none; }
+/* Design C: the scene video has native controls (play/pause, progress bar, sound); tag moves out of their way. */
+.studio-c .lock-tag { top: 10px; bottom: auto; }
