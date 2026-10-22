@@ -50,9 +50,9 @@ def rel(root, p):
 
 
 def ld(*objs):
-    return "\n".join(
-        f'  <script type="application/ld+json">{json.dumps(o, ensure_ascii=False)}</script>' for o in objs
-    )
+    # <, > and & as \u escapes: no value can close the script tag early; still valid JSON-LD.
+    js = lambda o: json.dumps(o, ensure_ascii=False).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    return "\n".join(f'  <script type="application/ld+json">{js(o)}</script>' for o in objs if o)
 
 
 def breadcrumbs(*items):
@@ -459,12 +459,22 @@ for t in ALL_TRENDS:
         "@context": "https://schema.org", "@type": "WebApplication", "name": f"{t['name']} AI video generator",
         "url": BASE + path, "applicationCategory": "MultimediaApplication", "operatingSystem": "Any (web browser)",
         "description": s["description"], "image": og_image(path, t),
-        "offers": {"@type": "AggregateOffer", "priceCurrency": "USD", "lowPrice": "5", "highPrice": "40", "offerCount": "3"},
+    }
+    # Product markup (ChatGPT shopping / Google product results): the trend video at its lowest real price,
+    # i.e. what the page itself shows first (Light at 480p when the trend has a Light clip).
+    low = trend_credits(dict(t, model="light", duration=t["light_duration"])) if has_light(t) else trend_credits(dict(t, model="full"))
+    product_ld = None if t.get("hidden") else {
+        "@context": "https://schema.org", "@type": "Product", "name": f"{t['name']} AI video",
+        "description": s["description"], "image": og_image(path, t), "url": BASE + path,
+        "brand": {"@type": "Brand", "name": "Genjutsu Studio"}, "category": "AI video generation",
+        "offers": {"@type": "Offer", "url": BASE + path, "priceCurrency": "USD", "price": f"{low / 100:.2f}",
+                   "availability": "https://schema.org/InStock",
+                   "seller": {"@type": "Organization", "name": "Genjutsu Studio", "url": BASE}},
     }
     steps = "\n".join(f"        <li><b>{esc(n)}.</b> {esc(x)}</li>" for n, x in s["steps"])
     body = head(path=path, title=s["title"], description=s["description"], og_title=s.get("og_title"),
                 image=og_image(path, t), noindex=bool(t.get("hidden")),
-                extra_ld=ld(app_ld, howto, faq_ld(s["faq"]), breadcrumbs(("Trends", ""), (t["short"], path))))
+                extra_ld=ld(app_ld, product_ld, howto, faq_ld(s["faq"]), breadcrumbs(("Trends", ""), (t["short"], path))))
     body += header(root)
     body += f"""
   <main>
