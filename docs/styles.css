@@ -301,3 +301,8 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 @media (max-width: 520px) { .short-chip { right: auto; left: 10px; top: 44px; } }
 .custom-model { margin: 4px 0 14px; }
 .switch:disabled { opacity: .55; cursor: not-allowed; }
+.price-table { overflow-x: auto; margin: 10px 0; }
+.price-table table { border-collapse: collapse; width: 100%; min-width: 320px; font-size: 14px; }
+.price-table th, .price-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.price-table th { background: var(--card); }
+.seo ul { padding-left: 20px; line-height: 1.6; }

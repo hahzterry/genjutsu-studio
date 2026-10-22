@@ -33,6 +33,8 @@ TRENDS = sorted((t for t in ALL_TRENDS if not t.get("hidden")), key=lambda t: t.
 TODAY = date.today().isoformat()
 CREDITS_PER_SEC_DEFAULT = 47.7  # 480p; keep in sync with docs/config.js
 FEE_CREDITS = 100
+RATES = {"480p": 47.7, "720p": 102.15, "1080p": 244.8}  # credits/sec, keep in sync with docs/config.js
+LIGHT_RATES = {"480p": 15, "720p": 30, "1080p": 60}  # Normal mode (Light), output + source billed; keep in sync
 # Changes whenever app.js / styles.css / config.js change, so browsers never run a stale copy.
 ASSET_VER = __import__("hashlib").sha1(b"".join((DOCS / f).read_bytes() for f in ("app.js", "styles.css", "config.js"))).hexdigest()[:10]
 
@@ -227,6 +229,67 @@ def photos_text(t):
 
 def has_light(t):
     return bool(t.get("light_video_url"))
+
+
+# ---- shared trend-page sections (one template for every trend) ----
+def trend_kind(t):
+    if "pet" in t["slug"] or any("pet" in sl["label"].lower() for sl in t["slots"]): return "pet"
+    if t["slug"].endswith("baby") and t["slug"] != "industry-baby": return "baby"
+    return "group" if len(t["slots"]) > 1 else "solo"
+
+
+def billed_secs(d, light):
+    return min(15 if light else 30, max(4, math.ceil(d - 0.001)))
+
+
+def credits_for(secs, rate):
+    return math.ceil(secs * rate - 1e-9) + FEE_CREDITS
+
+
+def price_section(t):
+    rows = []
+    if has_light(t):
+        ls = billed_secs(t["light_duration"], True)
+        rows.append(("Normal mode (Light)", f"{ls} s", [credits_for(ls, LIGHT_RATES[r]) for r in RATES]))
+    fs = billed_secs(t["duration"], False)
+    rows.append(("Stronger model", f"{fs} s", [credits_for(fs, RATES[r]) for r in RATES]))
+    head = "".join(f"<th>{r}</th>" for r in RATES)
+    body = "".join(f"<tr><td>{esc(n)} · {d}</td>" + "".join(f"<td><b>${c / 100:.2f}</b><br><span class=\"muted\">{c:,} cr</span></td>" for c in cs) + "</tr>" for n, d, cs in rows)
+    low = min(min(cs) for _, _, cs in rows)
+    return f"""      <h2>What it costs</h2>
+      <p>One {esc(t['short'] if t['short'].lower().endswith('video') else t['short'] + ' video')} costs from <b>${low / 100:.2f}</b>. You pay once for the video you make: no subscription, no monthly plan, and credits never expire (100 credits = $1).</p>
+      <div class="price-table"><table><tr><th></th>{head}</tr>{body}</table></div>
+      <p>cr = credits. The exact price shows before you click Generate. If a render fails or is blocked by moderation, the credits go back to your account automatically.</p>
+"""
+
+
+def photo_tips(t):
+    k = trend_kind(t)
+    if k == "pet":
+        tips = ["One pet per photo, filling most of the frame", "Its face and body clearly visible, not cut off", "Good, even light (daylight by a window works well)", "No heavy filters, stickers or text on the photo"]
+    else:
+        tips = ["One person per photo, facing the camera", "Face and upper body in frame, not too far away", "Good, even light: daylight by a window works well", "No sunglasses, masks, heavy filters or group shots"]
+        if k == "baby":
+            tips.insert(0, "Use a photo of yourself as an adult: the AI makes the toddler for you. Don't upload photos of real children")
+        if k == "group":
+            n, m = len(t["slots"]), t.get("min_photos", len(t["slots"]))
+            tips.append(f"One photo per part ({n} parts), in the order shown on the page" if m >= n
+                        else f"Only the first photo is required; add up to {n - 1} more for the other parts, in the order shown" if m == 1
+                        else f"The first {m} photos are required; add up to {n - m} more, in the order shown")
+        tips.append("Only use photos of people who agreed to be in the video")
+    return "      <h2>Photo tips</h2>\n      <ul>\n" + "\n".join(f"        <li>{esc(x)}.</li>" for x in tips) + "\n      </ul>\n"
+
+
+def extra_faq(t):
+    q = [("Do I need to download an app?", "No. Everything runs in your browser, on a phone or a computer. Sign in with your email (we send a 6-digit code) and you're ready."),
+         ("How long does it take?", "Usually a few minutes. You can close the tab: the video keeps rendering, it appears under \"My videos\" and we email you when it's ready.")]
+    if has_light(t):
+        q.append(("What's the difference between Normal mode (Light) and the stronger model?",
+                  "Light is fast and much cheaper and renders up to 15 seconds of the scene. The stronger model renders the full scene with more detail, and takes a bit longer."))
+    q += [("Which resolution should I pick?", "480p is the default and looks fine on TikTok, Reels and Shorts. 720p and 1080p are sharper and cost more; the price updates as you switch."),
+          ("What if the video doesn't come out well?", "If the render fails or is blocked by the automatic content check, your credits are refunded automatically. A finished video can't be refunded, because the render has already been paid for, so use a clear, well-lit photo for the best result."),
+          ("Can I download and share it?", "Yes. Download the MP4 from \"My videos\" and post it anywhere, or share a link to it.")]
+    return q
 
 
 def prompt_block(t):
@@ -471,10 +534,11 @@ for t in ALL_TRENDS:
                    "availability": "https://schema.org/InStock",
                    "seller": {"@type": "Organization", "name": "Genjutsu Studio", "url": BASE}},
     }
+    all_faq = s["faq"] + [x for x in extra_faq(t) if x[0] not in {f[0] for f in s["faq"]}]
     steps = "\n".join(f"        <li><b>{esc(n)}.</b> {esc(x)}</li>" for n, x in s["steps"])
     body = head(path=path, title=s["title"], description=s["description"], og_title=s.get("og_title"),
                 image=og_image(path, t), noindex=bool(t.get("hidden")),
-                extra_ld=ld(app_ld, product_ld, howto, faq_ld(s["faq"]), breadcrumbs(("Trends", ""), (t["short"], path))))
+                extra_ld=ld(app_ld, product_ld, howto, faq_ld(all_faq), breadcrumbs(("Trends", ""), (t["short"], path))))
     body += header(root)
     body += f"""
   <main>
@@ -494,11 +558,11 @@ for t in ALL_TRENDS:
       <ol>
 {steps}
       </ol>
-    </section>
+{photo_tips(t)}{price_section(t)}    </section>
 
     <section class="faq">
       <h2>Questions</h2>
-{faq_html(s['faq'])}
+{faq_html(all_faq)}
     </section>
 
     <section class="more">
@@ -616,8 +680,6 @@ g += footer("../", app=False)
 write("genjutsu/index.html", g)
 
 # ---------------- pricing ----------------
-RATES = {"480p": 47.7, "720p": 102.15, "1080p": 244.8}  # credits/sec, keep in sync with docs/config.js
-LIGHT_RATES = {"480p": 15, "720p": 30, "1080p": 60}  # Normal mode (Light), output + source billed; keep in sync
 FROM_PRICE = min(trend_credits(dict(t, model="light", duration=t["light_duration"])) for t in TRENDS if has_light(t)) / 100
 
 
@@ -783,4 +845,18 @@ urls = [("", "1.0"), ("custom/", "0.7"), ("pricing/", "0.8"), ("genjutsu/", "0.7
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
       + "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n" for u, p in urls)
       + "</urlset>\n")
+# llms.txt: a plain summary for AI assistants (ChatGPT, Claude, Perplexity) answering "how do I make X".
+def _low(t):
+    return trend_credits(dict(t, model="light", duration=t["light_duration"])) if has_light(t) else trend_credits(dict(t, model="full"))
+llms = [f"# Genjutsu Studio ({BASE})", "",
+        "> Make viral AI video trends with your own photos, in the browser. Pick a trend, upload a photo for each part, "
+        "and Higgsfield's Genjutsu model puts you in the scene. Pay per video, no subscription, no app.", "",
+        "## Pricing", f"- From ${FROM_PRICE:.2f} per video (Normal mode / Light, 480p). The stronger model and 720p/1080p cost more.",
+        "- 100 credits = $1, credits never expire, failed or blocked renders are refunded automatically.",
+        f"- Full price list: {BASE}pricing/", "",
+        "## Trends (one page each, scene preloaded)"]
+llms += [f"- [{t['name']}]({BASE}trends/{t['slug']}/): {t['card_blurb']} From ${_low(t) / 100:.2f}." for t in TRENDS if not t.get("hidden")]
+llms += ["", "## Other pages", f"- [Custom trend]({BASE}custom/): upload any 4–30 s MP4 (up to 15 s in Light), 1–8 photos and your own prompt.",
+         f"- [About Genjutsu]({BASE}genjutsu/): what the model does and how this site uses it.", ""]
+write("llms.txt", "\n".join(llms))
 write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
