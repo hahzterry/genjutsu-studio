@@ -1,5 +1,5 @@
 // GET with header x-report-secret -> usage aggregates for the owner's daily report.
-// Called only by a scheduled job in a private repo; no personal data is returned.
+// Called only by a scheduled job in a private repo; no personal data is returned (user ids at most).
 import { admin, intEnv, json, safeEqual, serve } from "../_shared/common.ts";
 
 serve(async (req) => {
@@ -9,7 +9,10 @@ serve(async (req) => {
   }
   const { data, error } = await admin.rpc("usage_report");
   if (error) { console.error("usage_report failed", error); return json({ error: "report failed" }, 500); }
-  return json({ ...data, caps: {
+  // Database structure + money sanity checks (no personal data; user ids only). Missing = reported as an alert.
+  const audit = await admin.rpc("schema_audit");
+  if (audit.error) console.error("schema_audit failed", audit.error);
+  return json({ ...data, audit: audit.error ? null : audit.data, caps: {
     user_daily_jobs: intEnv("USER_DAILY_JOBS", 10), user_daily_credits: intEnv("USER_DAILY_CREDITS", 7500),
     site_daily_credits: intEnv("SITE_DAILY_CREDITS", 15000), renders_paused: Deno.env.get("RENDERS_PAUSED") === "1",
   }, payments_live: Deno.env.get("PAYPAL_ENV") === "live" });
