@@ -1,4 +1,4 @@
-// POST {workflow, resolution, prompt, video_url, image_urls} -> {job}
+// POST {workflow, resolution, prompt, video_url, image_urls, model?} -> {job}
 // Prices the request from the video's real length, holds the credits, submits to Higgsfield.
 import {
   admin, FALLBACK_USD_PER_SEC, getUser, INPUTS_PUBLIC, isLight, json, LIGHT_MAX_SECS, LIGHT_USD_PER_SEC,
@@ -45,8 +45,15 @@ serve(async (req) => {
   if (secs === null) return json({ error: "We couldn't read that video. Please upload a standard MP4." }, 400);
   if (secs < 3.95) return json({ error: "The video must be at least 4 seconds." }, 400);
   if (secs > 30.001) return json({ error: "The video can be at most 30 seconds. Please trim it." }, 400);
-  const light = isLight(video_url);
-  if (light && workflow !== "motion-transfer") return json({ error: "This trend only supports motion transfer." }, 400);
+  // Light = a light-* trend preset (picked by file name), or an own upload with model "light".
+  const lightUpload = b.model === "light" && !isPreset;
+  const light = isLight(video_url) || lightUpload;
+  if (light && workflow !== "motion-transfer") {
+    return json({ error: lightUpload ? "Light mode only does motion transfer. Choose Stronger for object swap." : "This trend only supports motion transfer." }, 400);
+  }
+  if (lightUpload && secs > LIGHT_MAX_SECS + 0.001) {
+    return json({ error: "Light mode works with videos up to 15 seconds. Trim your video or choose Stronger." }, 400);
+  }
   // Light presets must be ≤15 s: Higgsfield bills the source's length too, so a longer one would be undercharged.
   if (light && secs > LIGHT_MAX_SECS + 0.001) { console.error("light preset too long", video_url, secs); return json({ error: "This trend is temporarily unavailable." }, 503); }
   const billed = Math.min(light ? LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(secs - 0.001)));
@@ -73,6 +80,7 @@ serve(async (req) => {
     p_user: user.id, p_trend: trend, p_workflow: workflow, p_resolution: resolution, p_prompt: prompt,
     p_video_url: video_url, p_image_urls: image_urls, p_cost: cost, p_billed_secs: billed, p_mock: !!mock,
     p_user_daily_jobs: caps.jobs, p_user_daily_credits: caps.user, p_site_daily_credits: caps.site,
+    p_model: light ? "light" : "full",
   }).single<{ job_id: string | null; reason: string | null }>();
   if (error || !res) { console.error("create_job failed", error); return json({ error: "Could not create job." }, 500); }
   if (res.reason === "no_credits") return json({ error: "Not enough credits.", cost }, 402);

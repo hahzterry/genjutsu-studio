@@ -299,3 +299,5 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 @keyframes chip-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .short-chip.pop { animation: none; } }
 @media (max-width: 520px) { .short-chip { right: auto; left: 10px; top: 44px; } }
+.custom-model { margin: 4px 0 14px; }
+.switch:disabled { opacity: .55; cursor: not-allowed; }

@@ -33,8 +33,8 @@ const state = {
   images: T ? T.slots.map(() => null) : [], // trend: fixed slots (File|null); custom: File[]
   user: null, credits: 0, jobs: [], pendingGenerate: false, pack: C.PACKS[1].id,
   started: false, // this exact set of inputs was already sent (guards against paying twice)
-  // Trends with a Light clip offer "Normal mode (Light)" (default) or "Stronger model" (full Genjutsu).
-  model: T?.light_video_url ? "light" : "full",
+  // Trends with a Light clip, and the Custom page, offer Light (default) or the stronger model (full Genjutsu).
+  model: T?.light_video_url || !T ? "light" : "full",
 };
 
 // ---------------- helpers ----------------
@@ -46,7 +46,9 @@ function toast(msg, ms = 3500) {
 // for an upload the browser's figure can be a few ms off (AAC priming), so allow 0.05 s there and
 // let the server's exact price win (see the 409 confirm in generate()).
 // Display only: the server picks the model from the preset file the request points at.
-const isLight = () => T?.model === "light" || (!!T?.light_video_url && state.model === "light");
+// Custom page: Light only for motion transfer and videos up to 15 s (the server checks the file again).
+const customLightOk = () => !T && state.mode === "motion-transfer" && !(state.duration > C.LIGHT_MAX_SECS + 0.05);
+const isLight = () => T?.model === "light" || (!!T?.light_video_url && state.model === "light") || (customLightOk() && state.model === "light");
 const clampSecs = (d) => Math.min(isLight() ? C.LIGHT_MAX_SECS : 30, Math.max(4, Math.ceil(d - (T ? 0.001 : 0.05))));
 const rateFor = (res) => (isLight() ? C.LIGHT_CREDITS_PER_SEC : C.CREDITS_PER_SEC)[res];
 const sceneUrl = () => (T?.light_video_url && state.model === "light" ? T.light_video_url : T?.video_url);
@@ -248,20 +250,35 @@ function selectMode(mode) {
   state.started = false;
   document.querySelectorAll(".mode").forEach((x) => x.classList.toggle("active", x.dataset.mode === mode));
   state.mode = mode;
+  syncModelUI();
 }
 function selectModel(model) {
   state.started = false; state.model = model;
   document.querySelectorAll("#model-seg button").forEach((x) => x.classList.toggle("active", x.dataset.model === model));
+  syncModelUI();
+  swapPreview();
+}
+// Shows the model that will actually be used (on Custom, Light can be unavailable for this video).
+function syncModelUI() {
+  const model = !T && !customLightOk() ? "full" : state.model;
   const sw = $("model-switch");
   if (sw) {
     sw.classList.toggle("strong", model === "full"); sw.setAttribute("aria-checked", String(model === "full"));
     sw.querySelectorAll(".lbl").forEach((l) => l.classList.toggle("on", l.dataset.m === model));
+    if (!T) sw.disabled = !customLightOk();
   }
-  swapPreview();
   const n = $("model-note");
-  if (n) n.textContent = model === "light"
-    ? ($("model-switch") ? "Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger." : "Normal mode is fast and cheap and uses 15 seconds of the scene.")
-    : ($("model-switch") ? "Stronger · full scene, more detail · costs more, takes a bit longer." : "The stronger model renders the full scene with more detail. It costs more and takes a bit longer.");
+  if (!n) return;
+  const long = !T || T.duration > C.LIGHT_MAX_SECS + 0.001; // only then is Light shorter than the scene
+  if (!T && state.mode !== "motion-transfer") n.textContent = "Object swap uses the stronger model. Light mode does motion transfer only.";
+  else if (!T && !customLightOk()) n.textContent = "Your video is longer than 15 seconds, so it uses the stronger model. Trim it to 15 seconds to use Light.";
+  else if (!T) n.textContent = model === "light" ? "Light · fast and cheap · videos up to 15 seconds." : "Stronger · more detail · videos up to 30 seconds · costs more, takes a bit longer.";
+  else if (sw) n.textContent = model === "light"
+    ? (long ? "Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger." : "Light · fast and cheap.")
+    : (long ? "Stronger · full scene, more detail · costs more, takes a bit longer." : "Stronger · more detail · costs more, takes a bit longer.");
+  else n.textContent = model === "light"
+    ? (long ? "Normal mode is fast and cheap and uses 15 seconds of the scene." : "Normal mode is fast and cheap.")
+    : (long ? "The stronger model renders the full scene with more detail. It costs more and takes a bit longer." : "The stronger model has more detail. It costs more and takes a bit longer.");
 }
 function selectRes(res) {
   state.started = false;
@@ -364,6 +381,7 @@ if (HAS_STUDIO) {
 
 function refresh() {
   if (!HAS_STUDIO) return;
+  if (!T) syncModelUI(); // the video's length decides whether Light is available
   const cost = estimate();
   const rate = rateFor(state.res);
   $("cost").innerHTML = cost ? `≈ <b>${cost.toLocaleString()} credits</b> <span>($${(cost / 100).toFixed(2)})</span>` : "Add a video to see the price";
@@ -427,6 +445,7 @@ async function generate() {
         trend, workflow: state.mode, resolution: state.res,
         prompt: T ? ($("prompt").value.trim() || T.prompt) : $("prompt").value.trim(),
         video_url, image_urls, duration: state.duration, expected_cost: cost, ...(MOCK ? { mock: MOCK } : {}),
+        ...(T ? {} : { model: isLight() ? "light" : "full" }),
       };
       try { ({ job } = await callFn("generate", body)); } catch (e) {
         // An uploaded video can measure a little longer in the file than in the browser: show the

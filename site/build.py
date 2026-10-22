@@ -264,6 +264,8 @@ def model_row(t):
 
 
 def model_switch(t):
+    long = t["duration"] > 15.001  # Light is shorter than the scene only then
+    light_note = "Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger." if long else "Light · fast and cheap."
     if not has_light(t):
         return """        <div class="c-row"><b>Model</b><span class="tag-strong">Stronger model</span></div>
         <p class="c-note">This scene is longer than Light mode's 15-second limit, so it uses the stronger model only.</p>
@@ -274,8 +276,8 @@ def model_switch(t):
             <span class="lbl on" data-m="light">Light</span><span class="track"><span class="ball"></span></span><span class="lbl" data-m="full">Stronger</span>
           </button>
         </div>
-        <p class="c-note" id="model-note">Light · fast and cheap · uses 15 seconds of the scene. For the full scene, choose Stronger.</p>
-"""
+        <p class="c-note" id="model-note">{light_note}</p>
+""".replace("{light_note}", light_note)
 
 
 def short_chip(t):
@@ -392,6 +394,16 @@ STUDIO_CUSTOM = """    <section class="card studio" id="studio">
         <span>Prompt <em>(optional)</em></span>
         <textarea id="prompt" rows="2" maxlength="2000" placeholder="e.g. Replace both characters with the uploaded pictures"></textarea>
       </label>
+
+      <div class="custom-model">
+        <div class="c-row">
+          <b>Model</b>
+          <button type="button" class="switch" id="model-switch" role="switch" aria-checked="false" aria-label="Stronger model">
+            <span class="lbl on" data-m="light">Light</span><span class="track"><span class="ball"></span></span><span class="lbl" data-m="full">Stronger</span>
+          </button>
+        </div>
+        <p class="c-note" id="model-note">Light · fast and cheap · videos up to 15 seconds.</p>
+      </div>
 """ + RES_ROW + STARTED_NOTE + """    </section>
 """
 
@@ -551,7 +563,8 @@ write("index.html", home)
 custom_faq = [
     ("What can I make on the Custom page?", "Upload any MP4 between 4 and 30 seconds, add 1 to 8 reference photos and, optionally, a prompt. Motion transfer recasts the people in the clip; object swap replaces one person or object."),
     ("What prompt should I write?", "Keep it short and concrete, e.g. \"Replace both characters with the uploaded pictures\" or \"Replace the man in the red shirt with the person in the photo\"."),
-    ("How much does it cost?", "You pay per second of the source video (max 30 s). At 480p it's about 48 credits per second plus 100 per video (100 credits = $1). The exact price shows before you generate."),
+    ("How much does it cost?", "You pay per second of the source video. Light mode (motion transfer, videos up to 15 s) costs 15 credits per second at 480p; the stronger model (up to 30 s) costs about 48 credits per second at 480p. Both add 100 credits per video (100 credits = $1). The exact price shows before you generate."),
+    ("What's the difference between Light and Stronger?", "Light is fast and cheap and works with motion transfer on videos up to 15 seconds. The stronger model has more detail, supports object swap and videos up to 30 seconds, and costs more."),
 ]
 custom = head(path="custom/", title="Custom Genjutsu Video: Upload Any Clip and Photos (No Subscription)",
               description="Make your own AI video trend with Higgsfield Genjutsu: upload a 4–30 second clip, up to 8 photos and your own prompt. Motion transfer or object swap, pay per video.",

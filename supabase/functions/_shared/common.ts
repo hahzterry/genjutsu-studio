@@ -67,7 +67,7 @@ export const RESOLUTIONS = ["480p", "720p", "1080p"] as const;
 export const FALLBACK_USD_PER_SEC: Record<string, number> = { "480p": 0.318, "720p": 0.681, "1080p": 1.632 };
 // Genjutsu Light (motion transfer only, uses the first 15 s). It bills output seconds PLUS the source
 // video's seconds, so a job costs rate x 2 x seconds. Chosen only by the server, from the preset's name:
-// presets/light-<slug>.mp4. Custom uploads always use full Genjutsu.
+// presets/light-<slug>.mp4, or by the visitor for an own upload of up to 15 s (stored as jobs.model).
 export const LIGHT_USD_PER_SEC: Record<string, number> = { "480p": 0.05, "720p": 0.10, "1080p": 0.20 };
 export const LIGHT_MAX_SECS = 15;
 export const TERMINAL = new Set(["completed", "failed", "nsfw", "canceled"]);
@@ -256,7 +256,7 @@ export async function submitToHiggsfield(job: Job): Promise<Submit> {
   }
   const hook = `${SB_URL}/functions/v1/hf-webhook?secret=${Deno.env.get("WEBHOOK_SECRET")}`;
   try {
-    const endpoint = isLight(job.video_url) ? "higgsfield/genjutsu-light/motion-transfer/v1.0" : `higgsfield/genjutsu/${job.workflow}/v1.0`;
+    const endpoint = job.model === "light" || isLight(job.video_url) ? "higgsfield/genjutsu-light/motion-transfer/v1.0" : `higgsfield/genjutsu/${job.workflow}/v1.0`;
     const r = await fetch(`${HF_BASE}/${endpoint}?hf_webhook=${encodeURIComponent(hook)}`, {
       method: "POST", headers: hfHeaders({ "Idempotency-Key": job.id }), body: JSON.stringify(input),
     });
@@ -306,7 +306,7 @@ export async function syncJob(job: Job) {
 type Job = {
   id: string; hf_request_id: string | null; status: string; created_at?: string; updated_at?: string;
   video_url?: string; image_urls?: unknown; billed_secs?: number | null; cost?: number;
-  workflow?: string; resolution?: string; prompt?: string; mock?: boolean;
+  workflow?: string; resolution?: string; prompt?: string; mock?: boolean; model?: string;
 };
 const MOCK_OUTPUT = `${PRESETS_PUBLIC}qa-4s.mp4`;
 
