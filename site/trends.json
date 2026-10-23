@@ -2,6 +2,92 @@
   "base_url": "https://genjutsu-trends.com/",
   "trends": [
     {
+      "slug": "gas-station-dance",
+      "name": "Gas Station Dance: Three Friends, One Sunset",
+      "short": "Gas Station Dance trio",
+      "card_blurb": "The viral gas station dance at sunset: a dancer, a selfie and a sports-car entrance. Three faces in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/gas-station-dance.mp4",
+      "poster": "trends/gas-station-dance/poster.jpg",
+      "preview_url": "trends/gas-station-dance/preview.mp4",
+      "duration": 15.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the woman in the lime-yellow top and pink trousers dancing on the forecourt with the first uploaded picture, the man in the white shirt filming a selfie with the second uploaded picture, and the blonde woman stepping out of the grey sports car with the third uploaded picture, all as realistic people. Keep the gas station, the sunset sky, the cars, their outfits, the moves, the camera and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Dances on the forecourt",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "The selfie",
+          "hint": "Films the selfie",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "The car entrance",
+          "hint": "Steps out of the car",
+          "example": "assets/examples/white-chicks-b.jpg"
+        }
+      ],
+      "published": "2026-10-23",
+      "seo": {
+        "title": "Gas Station Dance AI Video Generator: Put 3 Faces in the Viral Trend (No Subscription)",
+        "description": "Put you and two friends in the viral Gas Station Dance video. The clip is preloaded: add three photos and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Gas Station Dance AI Video Generator",
+        "lead": "The viral <b>gas station dance</b>: one friend dances on the forecourt, one films a selfie, one steps out of a sports car at sunset. The 15-second clip is locked in: add three photos and click Generate.",
+        "og_title": "Gas Station Dance AI Video: Three Faces in the Viral Trend",
+        "og_tagline": "Gas Station Dance AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The gas station dance trend is three friends goofing around on a road trip at sunset: one dances on the forecourt, one films a selfie, and one makes a cool entrance from a sports car. No choreography needed. This AI version keeps all three parts.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds all three people from your photos.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Gas Station Dance clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add three photos",
+            "One clear, front-facing, well-lit photo for each part: the dancer, the selfie and the car entrance."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with the gas station dance sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Gas Station Dance AI video?",
+            "Open this page. The Gas Station Dance clip is already loaded. Add three photos, then click Generate."
+          ],
+          [
+            "How much does the Gas Station Dance AI video cost?",
+            "In Normal mode (Light), the 15-second clip at 480p costs 325 credits (about $3.25). The stronger model renders the same 15-second clip for 816 credits (about $8.16). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The first photo becomes the dancer on the forecourt, the second the friend filming the selfie, and the third the friend stepping out of the sports car."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-gas-station-dance.mp4",
+      "light_duration": 15.0
+    },
+    {
       "slug": "white-chicks",
       "name": "White Chicks: A Thousand Miles",
       "short": "White Chicks car scene",
