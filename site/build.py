@@ -826,6 +826,36 @@ for slug, title, desc in LEGAL:
     page += footer("../", app=False)
     write(f"{slug}/index.html", page)
 
+# ---------------- unsubscribe (link in marketing emails; not indexed) ----------------
+unsub = head(path="unsubscribe/", title="Unsubscribe | Genjutsu Studio", description="Stop marketing emails from Genjutsu Studio.",
+             image=f"{BASE}og.jpg", noindex=True)
+unsub = unsub.replace("<head>", '<head>\n  <meta name="referrer" content="no-referrer" />', 1)  # the URL carries a token
+unsub += header("../", app=False)
+unsub += """  <main>
+    <article class="article">
+      <h1>Unsubscribe</h1>
+      <p id="unsub-text">Stop emails about new trends and offers? You'll still get sign-in codes and emails about your own videos.</p>
+      <p><button type="button" class="btn primary" id="unsub-btn">Unsubscribe</button></p>
+    </article>
+  </main>
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search), u = q.get("u") || "", t = q.get("t") || "";
+    var btn = document.getElementById("unsub-btn"), txt = document.getElementById("unsub-text");
+    if (!u || !t) { txt.textContent = "This unsubscribe link is incomplete. Reply to any of our emails and we'll remove you."; btn.hidden = true; return; }
+    btn.onclick = function () {
+      btn.disabled = true;
+      fetch("https://tbljgxkbocunzoqvkoeu.supabase.co/functions/v1/unsubscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ u: u, t: t }) })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (x) { txt.textContent = x.ok ? "Done. You won't get any more marketing emails from us." : (x.j.error || "Something went wrong. Please try again."); btn.hidden = x.ok; btn.disabled = false; })
+        .catch(function () { txt.textContent = "Something went wrong. Please try again."; btn.disabled = false; });
+    };
+  })();
+  </script>
+"""
+unsub += footer("../", app=False)
+write("unsubscribe/index.html", unsub)
+
 # ---------------- old URLs → new pages ----------------
 REDIRECTS = {"white-chicks-ai-trend/": "trends/white-chicks/", "trends/mafia-daughter/": "trends/storm/",
              "trends/hotel-lobby-v2/": "trends/hotel-lobby/"}
