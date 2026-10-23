@@ -2,6 +2,163 @@
   "base_url": "https://genjutsu-trends.com/",
   "trends": [
     {
+      "slug": "smooth-criminal",
+      "name": "Smooth Criminal: Michael Jackson's Lean",
+      "short": "Smooth Criminal dance",
+      "card_blurb": "Michael Jackson's \"Smooth Criminal\": the white suit, the hat and the famous lean. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/smooth-criminal.mp4",
+      "poster": "trends/smooth-criminal/poster.jpg",
+      "preview_url": "trends/smooth-criminal/preview.mp4",
+      "duration": 15.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the face of man in the video with the selfie attached, keep the movements, the shadows and the facial expressions of the man in the video, please also keep the original clothing such as the white suit and blue shirt for the main dancer",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "White suit and hat",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-23",
+      "seo": {
+        "title": "Smooth Criminal AI Video Generator: Put Your Face in Michael Jackson's Dance (No Subscription)",
+        "description": "Put your face in Michael Jackson's \"Smooth Criminal\" dance: white suit, hat and the famous lean. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Smooth Criminal AI Video Generator",
+        "lead": "Be the man in the white suit in Michael Jackson's <b>\"Smooth Criminal\"</b>: from the close-up under the hat to the moves and the famous lean. The 15-second clip is locked in: add one selfie and click Generate.",
+        "og_title": "Smooth Criminal AI Video: Your Face in Michael Jackson's Dance",
+        "og_tagline": "Smooth Criminal AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>\"Annie, are you OK?\" The \"Smooth Criminal\" dance, with its white suit, fedora and gravity-defying lean, is one of the most copied dance scenes ever. This AI version keeps the moves, the shadows and the suit, and puts your face on the dancer.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the dancer from your selfie.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Smooth Criminal clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one selfie",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Smooth Criminal\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Smooth Criminal AI video?",
+            "Open this page. The Smooth Criminal clip is already loaded. Add one selfie, then click Generate."
+          ],
+          [
+            "How much does the Smooth Criminal AI video cost?",
+            "In Normal mode (Light), the 15-second clip at 480p costs 325 credits (about $3.25). The stronger model renders the same 15-second clip for 816 credits (about $8.16). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your face goes on the main dancer in the white suit and hat. His suit, blue shirt, moves and the shadows stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-smooth-criminal.mp4",
+      "light_duration": 15.0,
+      "result_sample": {
+        "video": "trends/smooth-criminal/result-sample.mp4",
+        "poster": "trends/smooth-criminal/result-poster.jpg"
+      }
+    },
+    {
+      "slug": "thriller-red-jacket",
+      "name": "Thriller: The Red Jacket Zombie Dance",
+      "short": "Thriller red jacket dance",
+      "card_blurb": "Michael Jackson's \"Thriller\" in the red leather jacket, leading the zombies. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/thriller-red-jacket.mp4",
+      "poster": "trends/thriller-red-jacket/poster.jpg",
+      "preview_url": "trends/thriller-red-jacket/preview.mp4",
+      "duration": 19.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the face of the man in the red leather jacket with the selfie attached, keep the movements, the shadows and the facial expressions of the man in the video, and keep his red jacket and red trousers and the zombies dancing behind him",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Red leather jacket",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-23",
+      "seo": {
+        "title": "Thriller Red Jacket AI Video Generator: Lead Michael Jackson's Zombies (No Subscription)",
+        "description": "Put your face in Michael Jackson's \"Thriller\" zombie dance, red leather jacket and all. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Thriller Red Jacket AI Video Generator",
+        "lead": "Wear the red leather jacket and lead the zombies in Michael Jackson's <b>\"Thriller\"</b> dance. The 19-second clip is locked in: add one selfie and click Generate.",
+        "og_title": "Thriller AI Video: Your Face in the Red Jacket",
+        "og_tagline": "Thriller AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The \"Thriller\" zombie dance is one of the most famous dance scenes ever filmed: the red leather jacket, the claw hands, the head tilts and a street full of zombies moving in sync. This version puts your face on the lead dancer and keeps everything else.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the dancer from your selfie.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Thriller clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one selfie",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Thriller\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Thriller red jacket AI video?",
+            "Open this page. The Thriller clip is already loaded. Add one selfie, then click Generate."
+          ],
+          [
+            "How much does the Thriller red jacket AI video cost?",
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 19-second clip for 1,007 credits (about $10.07). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your face goes on the lead dancer in the red leather jacket. The zombies, the street and the moves stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller-red-jacket.mp4",
+      "light_duration": 15.0,
+      "light_preview_url": "trends/thriller-red-jacket/preview-light.mp4"
+    },
+    {
       "slug": "gas-station-dance",
       "name": "Gas Station Dance: Three Friends, One Sunset",
       "short": "Gas Station Dance trio",

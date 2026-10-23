@@ -306,3 +306,7 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 .price-table th, .price-table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
 .price-table th { background: var(--card); }
 .seo ul { padding-left: 20px; line-height: 1.6; }
+.example-result { margin: 8px 0 28px; }
+.example-result .ex-video { position: relative; margin: 10px 0 6px; max-width: 360px; }
+.example-result video { width: 100%; display: block; border-radius: 16px; }
+.example-result .eq-sound { position: absolute; right: 10px; bottom: 10px; }

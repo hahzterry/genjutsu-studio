@@ -378,6 +378,23 @@ def studio_trend_c(t, root):
 """
 
 
+def example_section(t, root):
+    """A real result made with this trend (design C pages); the hero's "See an example result" links here."""
+    rs = t.get("result_sample")
+    if not rs:
+        return ""
+    return f"""    <section class="example-result" id="example">
+      <h2>Example result</h2>
+      <figure class="ex-video">
+        <video src="{rel(root, rs['video'])}" poster="{rel(root, rs['poster'])}" muted loop playsinline autoplay preload="metadata"></video>
+        <button type="button" class="eq-sound" aria-label="Play with sound"
+          onclick="const v=this.previousElementSibling;v.muted=!v.muted;v.play();this.textContent=v.muted?'🔇':'🔊';this.ariaLabel=v.muted?'Play with sound':'Mute'">🔇</button>
+      </figure>
+      <p class="muted">An example result made with Genjutsu from {photos_text(t)}.</p>
+    </section>
+"""
+
+
 def studio_trend(t, root):
     n = len(t["slots"])
     rs = t.get("result_sample")
@@ -550,7 +567,7 @@ for t in ALL_TRENDS:
       {'<p><a class="see-example" href="#example">▶ See an example result</a></p>' if t.get("result_sample") else ''}
     </section>
 
-{studio_trend_c(t, root)}
+{studio_trend_c(t, root)}{example_section(t, root)}
     <section class="seo">
       <h2>About the trend</h2>
       {s['about_html']}
