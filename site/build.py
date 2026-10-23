@@ -593,10 +593,13 @@ for t in ALL_TRENDS:
     write(f"{path}index.html", body)
 
 # ---------------- home ----------------
+def card_title(t):
+    """Short card title: the name before ':', or the trend's short name if another trend shares it."""
+    base = t["name"].split(":")[0].strip()
+    return t["short"] if sum(1 for x in TRENDS if x["name"].split(":")[0].strip() == base) > 1 else base
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
           <div class="tc-media"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" loading="lazy" /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
-          <div class="tc-body"><b>{esc(t['name'])}</b><span>{esc(t['card_blurb'])}</span>
-            <span class="tc-meta">{photos_text(t)} · {-(-t['duration'] // 1):.0f}s · {('from ' + price_text(dict(t, model='light', duration=t['light_duration']))) if has_light(t) else price_text(t)}</span></div>
+          <div class="tc-body"><b>{esc(card_title(t))}</b></div>
         </a>""" for t in TRENDS)
 home_faq = [
     ("What is Genjutsu Studio?", "A site that lets you make viral AI video trends with Higgsfield's Genjutsu model. Pick a trend, add your photos and generate. No subscription."),
@@ -628,8 +631,7 @@ home += f"""
 {cards}
         <a class="trend-card custom" href="custom/">
           <div class="tc-media tc-custom"><span>✨</span></div>
-          <div class="tc-body"><b>Custom trend</b><span>Upload any video, up to 8 photos and your own prompt.</span>
-            <span class="tc-meta">Motion transfer or object swap · 4–30s</span></div>
+          <div class="tc-body"><b>Custom trend</b></div>
         </a>
     </section>
 
