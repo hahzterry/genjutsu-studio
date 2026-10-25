@@ -5,7 +5,9 @@ Add a trend: upload its clip + poster to Supabase storage in the public "presets
 add an entry to trends.json, drop a 1200x630 og.jpg in docs/trends/<slug>/
 (optional, falls back to the poster), then run:  python3 site/build.py
 """
+import hashlib
 import html
+import re
 import json
 import math
 import subprocess
@@ -127,7 +129,9 @@ def head(*, path, title, description, og_title=None, og_type="website", image, e
   <meta name="twitter:description" content="{esc(description)}" />
   <meta name="twitter:image" content="{image}" />
   <meta name="theme-color" content="#0b0b10" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌀</text></svg>" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="{root}styles.css?v={ASSET_VER}" />
@@ -405,7 +409,7 @@ def example_section(t, root):
     return f"""    <section class="example-result" id="example">
       <h2>Example result</h2>
       <figure class="ex-video">
-        <video src="{rel(root, rs['video'])}" poster="{rel(root, rs['poster'])}" muted loop playsinline autoplay preload="metadata"></video>
+        <video src="{rel(root, rs['video'])}" poster="{rel(root, rs['poster'])}" muted loop playsinline preload="none" data-autoplay></video>
         <button type="button" class="eq-sound" aria-label="Play with sound"
           onclick="const v=this.previousElementSibling;v.muted=!v.muted;v.play();this.textContent=v.muted?'🔇':'🔊';this.ariaLabel=v.muted?'Play with sound':'Mute'">🔇</button>
       </figure>
@@ -420,7 +424,7 @@ def studio_trend(t, root):
     result = f"""      <div class="eq-result" id="example">
         <span class="eq-op">=</span>
         <figure class="eq-video">
-          <video src="{rel(root, rs['video'])}" poster="{rel(root, rs['poster'])}" muted loop playsinline autoplay preload="metadata"></video>
+          <video src="{rel(root, rs['video'])}" poster="{rel(root, rs['poster'])}" muted loop playsinline preload="none" data-autoplay></video>
           <span class="eq-tag">Example result</span>
           <button type="button" class="eq-sound" aria-label="Play with sound"
             onclick="const v=this.previousElementSibling.previousElementSibling;v.muted=!v.muted;v.play();this.textContent=v.muted?'🔇':'🔊';this.ariaLabel=v.muted?'Play with sound':'Mute'">🔇</button>
@@ -507,7 +511,12 @@ STUDIO_CUSTOM = """    <section class="card studio" id="studio">
 """
 
 
+PAGE_HASH = {}  # page path -> hash of its content (minus the asset version), for the sitemap's lastmod
+
+
 def write(rel, content):
+    if rel.endswith("index.html"):
+        PAGE_HASH[rel[: -len("index.html")]] = hashlib.sha1(re.sub(r"\?v=[0-9a-f]{10}", "", content).encode()).hexdigest()
     p = DOCS / rel
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(content)
@@ -524,15 +533,33 @@ def trend_credits(t):
 
 
 def price_chip(t):
+    """Cheapest real price first (AI answers quote the first price they see), then the stronger model."""
     if has_light(t):
         lt = dict(t, model="light", duration=t["light_duration"])
-        return f"Normal mode: {price_text(lt)} · Stronger model: {price_text(dict(t, model='full'))}"
-    return f"Full scene: {price_text(t)}"
+        return f"<b>From ${trend_credits(lt) / 100:.2f}</b> (Normal mode, 480p) · Stronger model: {price_text(dict(t, model='full'))}"
+    return f"<b>From ${trend_credits(t) / 100:.2f}</b> (stronger model, 480p, {trend_credits(t):,} credits)"
 
 
 def price_text(t):
     credits = trend_credits(t)
     return f"{credits:,} credits (≈ ${credits / 100:.2f}) at 480p"
+
+
+def media_secs(path):
+    """Duration in whole seconds of a local docs/ video (VideoObject), or None."""
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(DOCS / path)],
+                             capture_output=True, text=True, timeout=20).stdout
+        return max(1, round(float(out.strip())))
+    except Exception:
+        return None
+
+
+def added_on(path):
+    """The day a file was first committed (a real upload date for VideoObject), today if it's new."""
+    out = subprocess.run(["git", "log", "--diff-filter=A", "--format=%cs", "--", str(DOCS / path)],
+                         capture_output=True, text=True, cwd=ROOT).stdout.split()
+    return out[-1] if out else TODAY
 
 
 # ---------------- trend pages ----------------
@@ -581,11 +608,18 @@ for t in ALL_TRENDS:
                                                "merchantReturnLink": f"{BASE}terms/"},
                    "seller": {"@type": "Organization", "name": "Genjutsu Studio", "url": BASE}},
     }
+    rs = t.get("result_sample")
+    video_ld = None if t.get("hidden") or not rs else {
+        "@context": "https://schema.org", "@type": "VideoObject", "name": f"Example result: {t['short']} AI video",
+        "description": f"An example result made with Genjutsu from {photos_text(t)}.",  # same words as the page caption
+        "thumbnailUrl": abs_url(rs["poster"]), "contentUrl": abs_url(rs["video"]), "uploadDate": added_on(rs["video"]),
+        **({"duration": f"PT{media_secs(rs['video'])}S"} if media_secs(rs["video"]) else {}),
+    }
     all_faq = s["faq"] + [x for x in extra_faq(t) if x[0] not in {f[0] for f in s["faq"]}]
     steps = "\n".join(f"        <li><b>{esc(n)}.</b> {esc(x)}</li>" for n, x in s["steps"])
     body = head(path=path, title=s["title"], description=s["description"], og_title=s.get("og_title"),
                 image=og_image(path, t), noindex=bool(t.get("hidden")),
-                extra_ld=ld(app_ld, product_ld, howto, faq_ld(all_faq), breadcrumbs(("Trends", ""), (t["short"], path))))
+                extra_ld=ld(app_ld, product_ld, video_ld, howto, faq_ld(all_faq), breadcrumbs(("Trends", ""), (t["short"], path))))
     body += header(root)
     body += f"""
   <main>
@@ -638,10 +672,12 @@ def card_title(t):
     """Short card title: the name before ':', or the trend's short name if another trend shares it."""
     base = t["name"].split(":")[0].strip()
     return t["short"] if sum(1 for x in TRENDS if x["name"].split(":")[0].strip() == base) > 1 else base
+# The first row of posters is the home page's LCP: load it right away, lazy-load the rest.
+FIRST_ROW = 4
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
-          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" loading="lazy" /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
+          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" {'fetchpriority="high"' if i == 0 else 'loading="eager"' if i < FIRST_ROW else 'loading="lazy"'} /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
           <div class="tc-body"><b>{esc(card_title(t))}</b></div>
-        </a>""" for t in TRENDS)
+        </a>""" for i, t in enumerate(TRENDS))
 home_faq = [
     ("What is Genjutsu Studio?", "A site that lets you make viral AI video trends with Higgsfield's Genjutsu model. Pick a trend, add your photos and generate. No subscription."),
     ("How does it work?", "Every trend page has its scene already loaded. You only add a photo for each person. On the Custom page you can upload your own video, up to 8 photos and your own prompt."),
@@ -655,10 +691,12 @@ item_list = {
     "itemListElement": [{"@type": "ListItem", "position": i + 1, "url": f"{BASE}trends/{t['slug']}/", "name": t["name"]} for i, t in enumerate(TRENDS)],
 }
 site_ld = {"@context": "https://schema.org", "@type": "WebSite", "name": "Genjutsu Studio", "url": BASE}
+org_ld = {"@context": "https://schema.org", "@type": "Organization", "name": "Genjutsu Studio", "url": BASE,
+          "logo": f"{BASE}icon-512.png", "email": "support@genjutsu-trends.com"}
 home = head(path="", title="Genjutsu AI Video Trends: Put Your Faces in Viral Scenes (No Subscription)",
             description="Make the viral AI video trends with Higgsfield Genjutsu: White Chicks \"A Thousand Miles\" and more. The scene is preloaded, add your photos and generate. No subscription.",
             og_title="Genjutsu AI Video Trends: Your Faces in Viral Scenes", image=f"{BASE}og.jpg",
-            extra_ld=ld(site_ld, item_list, faq_ld(home_faq)))
+            extra_ld=ld(site_ld, org_ld, item_list, faq_ld(home_faq)))
 home += header("", active="trends")
 home += f"""
   <main>
@@ -931,22 +969,78 @@ for old, new in REDIRECTS.items():
 write("trend-names.json", json.dumps(trend_names(), ensure_ascii=False))
 
 # ---------------- sitemap / robots ----------------
+# lastmod = the day a page's content last changed (site/lastmod.json keeps hash + day per page), not the build
+# day: search engines ignore a lastmod that changes on every build.
 urls = [("", "1.0"), ("custom/", "0.7"), ("pricing/", "0.8"), ("genjutsu/", "0.7"), ("terms/", "0.3"), ("privacy/", "0.3"), ("accessibility/", "0.3")] + [(f"trends/{t['slug']}/", "0.9") for t in TRENDS]
+LASTMOD_FILE = SITE / "lastmod.json"
+_seen = json.loads(LASTMOD_FILE.read_text()) if LASTMOD_FILE.exists() else {}
+lastmod = {}
+for u, _ in urls:
+    h, old = PAGE_HASH[u], _seen.get(u)
+    lastmod[u] = {"hash": h, "day": old["day"] if old and old["hash"] == h else TODAY}
+LASTMOD_FILE.write_text(json.dumps(lastmod, indent=1, sort_keys=True) + "\n")
+UPDATED = max(v["day"] for v in lastmod.values())
 write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-      + "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod><priority>{p}</priority></url>\n" for u, p in urls)
+      + "".join(f"  <url><loc>{BASE}{u}</loc><lastmod>{lastmod[u]['day']}</lastmod><priority>{p}</priority></url>\n" for u, p in urls)
       + "</urlset>\n")
-# llms.txt: a plain summary for AI assistants (ChatGPT, Claude, Perplexity) answering "how do I make X".
+
+
+# llms.txt (short) and llms-full.txt (every trend's facts, steps and FAQ): plain text for AI assistants
+# (ChatGPT, Claude, Perplexity) answering "how do I make X". Facts only from trends.json and the price code.
 def _low(t):
     return trend_credits(dict(t, model="light", duration=t["light_duration"])) if has_light(t) else trend_credits(dict(t, model="full"))
-llms = [f"# Genjutsu Studio ({BASE})", "",
-        "> Make viral AI video trends with your own photos, in the browser. Pick a trend, upload a photo for each part, "
-        "and Higgsfield's Genjutsu model puts you in the scene. Pay per video, no subscription, no app.", "",
-        "## Pricing", f"- From ${FROM_PRICE:.2f} per video (Normal mode / Light, 480p). The stronger model and 720p/1080p cost more.",
-        "- 100 credits = $1, credits never expire, failed or blocked renders are refunded automatically.",
-        f"- Full price list: {BASE}pricing/", "",
-        "## Trends (one page each, scene preloaded)"]
-llms += [f"- [{t['name']}]({BASE}trends/{t['slug']}/): {t['card_blurb']} From ${_low(t) / 100:.2f}." for t in TRENDS if not t.get("hidden")]
-llms += ["", "## Other pages", f"- [Custom trend]({BASE}custom/): upload any 4–30 s MP4 (up to 15 s in Light), 1–8 photos and your own prompt.",
-         f"- [About Genjutsu]({BASE}genjutsu/): what the model does and how this site uses it.", ""]
-write("llms.txt", "\n".join(llms))
+
+
+def _shape(t):
+    try:
+        w, h = (int(x) for x in video_aspect(t).split(" / "))
+    except ValueError:
+        return "vertical"
+    return "vertical" if h > w * 1.05 else "horizontal" if w > h * 1.05 else "square"
+
+
+def _facts(t):
+    full = billed_secs(t["duration"], False)
+    out = [f"{photos_text(t)} ({', '.join(sl['label'] for sl in t['slots'])})", f"{_shape(t)} MP4"]
+    if has_light(t):
+        ls = billed_secs(t["light_duration"], True)
+        out.append(f"Normal mode (Light): {ls} s from ${_low(t) / 100:.2f}; stronger model: "
+                   + (f"same {full} s clip" if ls == full else f"full {full} s scene") + f" from ${trend_credits(dict(t, model='full')) / 100:.2f}")
+    else:
+        out.append(f"{full} s scene, stronger model only, from ${_low(t) / 100:.2f}")
+    return "; ".join(out)
+
+
+def _aka(t):
+    return f" Also called: {', '.join(t['aliases'])}." if t.get("aliases") else ""
+
+
+def _text(h):
+    t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h))
+    return html.unescape(re.sub(r"\s+([,.;:!?)])", r"\1", t)).strip()
+
+
+LLMS_HEAD = [f"# Genjutsu Studio ({BASE})", "",
+             "> Make viral AI video trends with your own photos, in the browser. Pick a trend, upload a photo for each part, "
+             "and Higgsfield's Genjutsu model puts you in the scene. Pay per video, no subscription, no app.", "",
+             f"Last updated: {UPDATED}. Independent site: not affiliated with or endorsed by Higgsfield AI.", "",
+             "## Pricing", f"- From ${FROM_PRICE:.2f} per video (Normal mode / Light, 480p). The stronger model and 720p/1080p cost more.",
+             "- 100 credits = $1, credits never expire, failed or blocked renders are refunded automatically.",
+             f"- Full price list: {BASE}pricing/", ""]
+LLMS_TAIL = ["", "## Other pages", f"- [Custom trend]({BASE}custom/): upload any 4–30 s MP4 (up to 15 s in Light), 1–8 photos and your own prompt.",
+             f"- [About Genjutsu]({BASE}genjutsu/): what the model does and how this site uses it.", ""]
+llms = LLMS_HEAD + ["## Trends (one page each, scene preloaded)",
+                    f"- Every trend's facts, steps and FAQ: {BASE}llms-full.txt"]
+llms += [f"- [{t['name']}]({BASE}trends/{t['slug']}/): {t['card_blurb']} {_facts(t)}.{_aka(t)}" for t in TRENDS if not t.get("hidden")]
+write("llms.txt", "\n".join(llms + LLMS_TAIL))
+
+full = LLMS_HEAD + ["## Trends"]
+for t in TRENDS:
+    s = t["seo"]
+    faq = s["faq"] + [x for x in extra_faq(t) if x[0] not in {f[0] for f in s["faq"]}]
+    full += ["", f"### {t['name']}", f"URL: {BASE}trends/{t['slug']}/", f"Facts: {_facts(t)}.{_aka(t)}", "",
+             _text(s["about_html"]), "", "How to make it:"]
+    full += [f"{i + 1}. {n}: {x}" for i, (n, x) in enumerate(s["steps"])]
+    full += ["", "Questions:"] + [f"- Q: {q}\n  A: {a}" for q, a in faq]
+write("llms-full.txt", "\n".join(full + LLMS_TAIL))
 write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")

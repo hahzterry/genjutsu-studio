@@ -774,6 +774,16 @@ initAuth();
   };
   layout(); addEventListener("resize", layout);
 })();
+// Example-result videos (preload="none" data-autoplay): download and play only once scrolled into view,
+// so a trend page doesn't fetch every MP4 on load.
+(function lazyAutoplay() {
+  const vids = document.querySelectorAll("video[data-autoplay]");
+  if (!vids.length) return;
+  const play = (v) => v.play().catch(() => {});
+  if (!("IntersectionObserver" in window)) return vids.forEach(play);
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { io.unobserve(e.target); play(e.target); } }), { rootMargin: "200px" });
+  vids.forEach((v) => io.observe(v));
+})();
 const cards = [...document.querySelectorAll(".trend-card .tc-media")].filter((m) => m.querySelector("video"));
 let soundOk = navigator.userActivation?.hasBeenActive ?? false;
 const badgeText = (v) => (v.muted ? "🔇 Tap for sound" : "🔊");
