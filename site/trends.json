@@ -2,6 +2,477 @@
   "base_url": "https://genjutsu-trends.com/",
   "trends": [
     {
+      "slug": "bad-times-duo",
+      "name": "Bad Times Duo: The Dispute Dance for Two",
+      "short": "Bad Times duo dance",
+      "card_blurb": "Two friends in suits do the \"Bad Times\" dispute dance: hands on heads, hands in the lens. Two faces in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times-duo.mp4",
+      "poster": "trends/bad-times-duo/poster.jpg",
+      "preview_url": "trends/bad-times-duo/preview.mp4",
+      "duration": 21.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the blond man in the dark suit with the first uploaded picture and the man in the blue suit and white T-shirt with the second uploaded picture, as realistic people. Keep their suits, the wooden fence and ivy, the dramatic arguing gestures, the hands reaching into the lens, the close-ups, the camera moves and timing.",
+      "slots": [
+        {
+          "label": "The first dancer",
+          "hint": "Blond, dark suit",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "The second dancer",
+          "hint": "Blue suit, white T-shirt",
+          "example": "assets/examples/white-chicks-b.jpg"
+        }
+      ],
+      "published": "2026-10-25",
+      "seo": {
+        "title": "Bad Times Duo AI Video Generator: Two Faces in the Dispute Dance (No Subscription)",
+        "description": "Put you and a friend in the viral \"Bad Times\" dispute dance for two. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Bad Times Duo AI Video Generator",
+        "lead": "The viral <b>\"Bad Times\"</b> dispute dance, as a duo: two friends in suits, hands on their heads and hands right in the lens. The 21-second clip is locked in: add two photos and click Generate.",
+        "og_title": "Bad Times Duo AI Video: Two Faces in the Dispute Dance",
+        "og_tagline": "Bad Times Duo AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The \"Bad Times\" trend is all about dramatic arguing gestures: hands on the head, a finger wag, a palm pushed right into the camera. This version does it as a pair, in sharp suits in front of a wooden fence.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds both people from your photos.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Bad Times Duo clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add two photos",
+            "One clear, front-facing, well-lit photo for each dancer."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Bad Times\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Bad Times Duo AI video?",
+            "Open this page. The Bad Times Duo clip is already loaded. Add two photos, then click Generate."
+          ],
+          [
+            "How much does the Bad Times Duo AI video cost?",
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 21-second clip for 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The first photo becomes the blond dancer in the dark suit, the second the dancer in the blue suit and white T-shirt."
+          ],
+          [
+            "What photos work best?",
+            "Clear, front-facing, well-lit photos of one person each. Avoid group photos and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times-duo.mp4",
+      "light_duration": 15.0,
+      "light_preview_url": "trends/bad-times-duo/preview-light.mp4"
+    },
+    {
+      "slug": "cheba-man-lights",
+      "name": "Cheba Man: String-Lights Stage",
+      "short": "Cheba Man string-lights stage",
+      "card_blurb": "The Cheba Man dance on an outdoor stage under string lights, crowd filming. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/stage-dance.mp4",
+      "poster": "trends/cheba-man-lights/poster.jpg",
+      "preview_url": "trends/cheba-man-lights/preview.mp4",
+      "duration": 21.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the performer in the yellow jacket and purple trousers dancing on the stage with the uploaded picture, as a realistic person. Keep the stage, the string lights, the crowd filming on their phones, the outfit, the dance moves, the camera and timing.",
+      "slots": [
+        {
+          "label": "The performer",
+          "hint": "On stage, yellow jacket",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-25",
+      "seo": {
+        "title": "Cheba Man Stage Dance AI Video Generator: You on Stage Under the Lights (No Subscription)",
+        "description": "Put your face on the Cheba Man in this viral stage dance under string lights, with the whole crowd filming. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Cheba Man String-Lights Stage AI Video Generator",
+        "lead": "Be the <b>Cheba Man</b> on an outdoor stage under string lights, dancing while the crowd holds up their phones. The 21-second clip is locked in: add one selfie and click Generate.",
+        "og_title": "Cheba Man AI Video: You on Stage Under the Lights",
+        "og_tagline": "Cheba Man AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>Another viral Cheba Man moment: the dancer in a bright yellow jacket and purple trousers on an outdoor stage under string lights, while the whole crowd films it. This version puts you on that stage.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the performer from your selfie.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Cheba Man clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one selfie",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default and the best fit for this clip: the dancer is small in the frame, so higher resolutions add little detail."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with \"Cheba Man\" as the sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Cheba Man string-lights AI video?",
+            "Open this page. The clip is already loaded. Add one selfie, then click Generate."
+          ],
+          [
+            "How much does the Cheba Man string-lights AI video cost?",
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 21-second clip for 1,102 credits (about $11.02). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your face goes on the Cheba Man on stage. The crowd, the string lights and the moves stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-stage-dance.mp4",
+      "light_duration": 15.0,
+      "light_preview_url": "trends/cheba-man-lights/preview-light.mp4"
+    },
+    {
+      "slug": "millionaire-lambo",
+      "name": "Millionaire Lambo: Shoes Off, Then the Supercar",
+      "short": "Millionaire Lambo meme",
+      "card_blurb": "The millionaire meme: walk out of the hotel, take your shoes off and slide into an orange Lamborghini. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/millionaire-lambo.mp4",
+      "poster": "trends/millionaire-lambo/poster.jpg",
+      "preview_url": "trends/millionaire-lambo/preview.mp4",
+      "duration": 29.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the man in the black T-shirt and black trousers who walks out of the hotel, takes off his red shoes and gets into the orange Lamborghini with the uploaded picture, as a realistic person. Keep the hotel entrance, the orange Lamborghini, the assistant standing next to the car, his outfit and red shoes, the moves, the camera and timing.",
+      "slots": [
+        {
+          "label": "The millionaire",
+          "hint": "Black outfit, red shoes",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-25",
+      "seo": {
+        "title": "Millionaire Lambo AI Video Generator: Shoes Off, Into the Supercar (No Subscription)",
+        "description": "Put your face in the viral millionaire meme: walk out of a hotel, take your shoes off and get into an orange Lamborghini. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Millionaire Lambo AI Video Generator",
+        "lead": "Live the <b>millionaire meme</b>: stroll out of a luxury hotel, take your shoes off so you don't scuff the leather, and slide into an orange Lamborghini. The 29-second clip is locked in: add one selfie and click Generate.",
+        "og_title": "Millionaire Lambo AI Video: You and the Supercar",
+        "og_tagline": "Millionaire Lambo AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The millionaire meme plays the flex completely straight: a man in all black walks out of a hotel, carefully takes off his red shoes before stepping into his orange Lamborghini, while an assistant waits by the door. This version makes you the millionaire.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your selfie.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Millionaire Lambo clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one selfie",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with the trend's sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Millionaire Lambo AI video?",
+            "Open this page. The Millionaire Lambo clip is already loaded. Add one selfie, then click Generate."
+          ],
+          [
+            "How much does the Millionaire Lambo AI video cost?",
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 29-second clip for 1,484 credits (about $14.84). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your face goes on the man in black who takes off his shoes and gets into the Lamborghini. The assistant, the hotel and the car stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-millionaire-lambo.mp4",
+      "light_duration": 15.0,
+      "light_preview_url": "trends/millionaire-lambo/preview-light.mp4"
+    },
+    {
+      "slug": "desert-truck-jump",
+      "name": "Desert Truck Jump: Don't Even Flinch",
+      "short": "Desert truck jump",
+      "card_blurb": "A 4x4 flies over a dune and lands right in front of you, sitting calm on a chair. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/desert-truck-jump.mp4",
+      "poster": "trends/desert-truck-jump/poster.jpg",
+      "preview_url": "trends/desert-truck-jump/preview.mp4",
+      "duration": 12.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the man in black sitting on the chair in the desert with the uploaded picture, as a realistic person. Keep his calm pose and outfit, the chair, the 4x4 jumping over the dune and landing behind him, the dust cloud, the golden-hour light, the camera and timing.",
+      "slots": [
+        {
+          "label": "The calm one",
+          "hint": "Sits on the chair",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-25",
+      "seo": {
+        "title": "Desert Truck Jump AI Video Generator: Sit Calm While a 4x4 Flies Over (No Subscription)",
+        "description": "Put your face in the viral desert truck jump: a 4x4 launches over a dune and lands right behind you while you sit calmly on a chair. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Desert Truck Jump AI Video Generator",
+        "lead": "Sit perfectly still on a chair in the desert while a <b>4x4 flies over the dune</b> and lands right behind you in a wall of dust. The 12-second clip is locked in: add one selfie and click Generate.",
+        "og_title": "Desert Truck Jump AI Video: Don't Even Flinch",
+        "og_tagline": "Desert Truck Jump AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>The joke is the contrast: a heavy 4x4 launches over a dune in a cloud of golden dust and lands a few meters away, while the man on the chair doesn't move a muscle. This version puts you on that chair.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your selfie.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The Desert Truck Jump clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one selfie",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with the trend's sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the Desert Truck Jump AI video?",
+            "Open this page. The clip is already loaded. Add one selfie, then click Generate."
+          ],
+          [
+            "How much does the Desert Truck Jump AI video cost?",
+            "In Normal mode (Light), the 12-second clip at 480p costs 280 credits (about $2.80). The stronger model renders the same 12-second clip for 673 credits (about $6.73). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your face goes on the man sitting on the chair. The 4x4, the dust and the desert stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-desert-truck-jump.mp4",
+      "light_duration": 12.0
+    },
+    {
+      "slug": "dance-your-style",
+      "name": "Dance Battle: Own the Stage",
+      "short": "Dance battle solo",
+      "card_blurb": "Your solo at a big dance battle: footwork, freezes and a crowd going wild. One face in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/dance-your-style.mp4",
+      "poster": "trends/dance-your-style/poster.jpg",
+      "preview_url": "trends/dance-your-style/preview.mp4",
+      "duration": 30.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the dancer in the flat cap, grey T-shirt and light trousers doing the solo on the stage with the uploaded picture, as a realistic person. Keep his outfit, the dance moves and floor work, the stage, the cheering crowd, the camera cuts and timing.",
+      "slots": [
+        {
+          "label": "The dancer",
+          "hint": "Flat cap, grey T-shirt",
+          "example": "assets/examples/white-chicks-a.jpg"
+        }
+      ],
+      "published": "2026-10-25",
+      "seo": {
+        "title": "Dance Battle AI Video Generator: Your Face in a Battle Solo (No Subscription)",
+        "description": "Put your face on the dancer in a big dance-battle solo, with footwork, freezes and a crowd going wild. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Dance Battle Solo AI Video Generator",
+        "lead": "Take the stage at a big <b>dance battle</b>: smooth footwork, floor moves and freezes while the whole arena cheers. The 30-second clip is locked in: add one selfie and click Generate.",
+        "og_title": "Dance Battle AI Video: Your Face, Your Solo",
+        "og_tagline": "Dance battle AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>Dance-battle solos are made for clips: a dancer in a flat cap owns the stage with footwork, spins and floor work while the crowd loses it. This version puts your face on the dancer.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the dancer from your selfie.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The dance battle clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one selfie",
+            "A clear, front-facing, well-lit photo of the person who'll take the part."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with the trend's sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the dance battle AI video?",
+            "Open this page. The clip is already loaded. Add one selfie, then click Generate."
+          ],
+          [
+            "How much does the dance battle AI video cost?",
+            "In Normal mode (Light), the 15-second version at 480p costs 325 credits (about $3.25). The stronger model renders the full 30-second clip for 1,531 credits (about $15.31). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "Your face goes on the dancer doing the solo. The crowd, the stage and the moves stay as they are."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-dance-your-style.mp4",
+      "light_duration": 15.0,
+      "light_preview_url": "trends/dance-your-style/preview-light.mp4"
+    },
+    {
+      "slug": "dojo-fight",
+      "name": "Dojo Fight: Karate vs the Hooded Monk",
+      "short": "Dojo karate fight",
+      "card_blurb": "A movie-style karate fight in a sunlit dojo: you in the white gi, a friend as the hooded monk if you like. One or two faces in.",
+      "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/dojo-fight.mp4",
+      "poster": "trends/dojo-fight/poster.jpg",
+      "preview_url": "trends/dojo-fight/preview.mp4",
+      "duration": 10.0,
+      "mode": "motion-transfer",
+      "resolution": "480p",
+      "prompt": "Replace the man in the white karate gi with the red belt with the first uploaded picture, as a realistic person. If a second picture is uploaded, also give the hooded monk in the brown robe that person's face, lowering his hood just enough to show it. Keep the gi and belt, the brown robe, the kicks, punches and throws, the sunlit dojo, the dust in the light, the camera and timing.",
+      "slots": [
+        {
+          "label": "The karate fighter",
+          "hint": "White gi, red belt",
+          "example": "assets/examples/white-chicks-a.jpg"
+        },
+        {
+          "label": "The opponent",
+          "hint": "Optional: the hooded monk",
+          "example": "assets/examples/white-chicks-b.jpg"
+        }
+      ],
+      "published": "2026-10-25",
+      "seo": {
+        "title": "Karate Dojo Fight AI Video Generator: Your Face in a Movie Fight Scene (No Subscription)",
+        "description": "Put your face on the karate fighter in a cinematic dojo fight against a hooded monk. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "h1": "Karate Dojo Fight AI Video Generator",
+        "lead": "Star in a movie-style <b>karate fight</b>: you in the white gi, trading kicks with a hooded monk in a sunlit dojo, right up to his final throw. The 10-second clip is locked in: add your selfie (and a friend's for the monk, if you like) and click Generate.",
+        "og_title": "Karate Dojo Fight AI Video: You vs the Hooded Monk",
+        "og_tagline": "Karate fight AI face swap · Genjutsu · Pay per video",
+        "about_html": "<p>A cinematic fight scene in an old dojo: golden light, dust in the air, and a fighter in a white gi taking on a hooded monk with kicks and punches, until the monk lands a final throw. This version puts your face on the karate fighter, and a friend's on the monk if you add a second photo.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the fighters from your photos.</p>",
+        "steps": [
+          [
+            "Open this page",
+            "The dojo fight clip and the prompt are already loaded. You don't need to find the video or a CapCut template."
+          ],
+          [
+            "Add one or two photos",
+            "A clear, front-facing, well-lit selfie for the karate fighter. Add a second photo if you want a friend as the hooded opponent."
+          ],
+          [
+            "Keep 480p",
+            "480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video."
+          ],
+          [
+            "Click Generate",
+            "You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back."
+          ],
+          [
+            "Download and post",
+            "Download the MP4 and post it with an epic fight sound."
+          ]
+        ],
+        "faq": [
+          [
+            "How do I make the karate dojo fight AI video?",
+            "Open this page. The clip is already loaded. Add your selfie, and optionally a second photo for the opponent, then click Generate."
+          ],
+          [
+            "How much does the karate dojo fight AI video cost?",
+            "In Normal mode (Light), the 10-second clip at 480p costs 250 credits (about $2.50). The stronger model renders the same 10-second clip for 577 credits (about $5.77). 720p and 1080p are sharper and cost more. No subscription."
+          ],
+          [
+            "Who goes where?",
+            "The first photo goes on the fighter in the white gi. Add a second photo to put a friend's face on the hooded monk; leave it empty and the monk keeps his face covered."
+          ],
+          [
+            "What photos work best?",
+            "A clear, front-facing, well-lit selfie of one person. Avoid sunglasses and heavy shadows. Only use photos of people who agreed to be in the video."
+          ],
+          [
+            "Can I use a different clip?",
+            "Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt."
+          ]
+        ]
+      },
+      "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-dojo-fight.mp4",
+      "light_duration": 10.0,
+      "min_photos": 1
+    },
+    {
       "slug": "smooth-criminal",
       "name": "Smooth Criminal: Michael Jackson's Lean",
       "short": "Smooth Criminal dance",

@@ -3,7 +3,7 @@
 > Make viral AI video trends with your own photos, in the browser. Pick a trend, upload a photo for each part, and Higgsfield's Genjutsu model puts you in the scene. Pay per video, no subscription, no app.
 
 ## Pricing
-- From $2.65 per video (Normal mode / Light, 480p). The stronger model and 720p/1080p cost more.
+- From $2.50 per video (Normal mode / Light, 480p). The stronger model and 720p/1080p cost more.
 - 100 credits = $1, credits never expire, failed or blocked renders are refunded automatically.
 - Full price list: https://genjutsu-trends.com/pricing/
 
@@ -11,6 +11,12 @@
 - [White Chicks: A Thousand Miles](https://genjutsu-trends.com/trends/white-chicks/): Terry Crews sings "A Thousand Miles" in the car. Put two faces in the seats. From $3.25.
 - [Hotel Lobby: Quavo & Takeoff](https://genjutsu-trends.com/trends/hotel-lobby/): Quavo & Takeoff's "Hotel Lobby" mic performance. Put two faces in front of the orange wall. From $3.25.
 - [Industry Baby: Prison Dance Squad](https://genjutsu-trends.com/trends/industry-baby/): The "Industry Baby" prison shower dance and phone scene. Cast the lead and up to 7 dancers. From $3.25.
+- [Bad Times Duo: The Dispute Dance for Two](https://genjutsu-trends.com/trends/bad-times-duo/): Two friends in suits do the "Bad Times" dispute dance: hands on heads, hands in the lens. Two faces in. From $3.25.
+- [Cheba Man: String-Lights Stage](https://genjutsu-trends.com/trends/cheba-man-lights/): The Cheba Man dance on an outdoor stage under string lights, crowd filming. One face in. From $3.25.
+- [Millionaire Lambo: Shoes Off, Then the Supercar](https://genjutsu-trends.com/trends/millionaire-lambo/): The millionaire meme: walk out of the hotel, take your shoes off and slide into an orange Lamborghini. One face in. From $3.25.
+- [Desert Truck Jump: Don't Even Flinch](https://genjutsu-trends.com/trends/desert-truck-jump/): A 4x4 flies over a dune and lands right in front of you, sitting calm on a chair. One face in. From $2.80.
+- [Dance Battle: Own the Stage](https://genjutsu-trends.com/trends/dance-your-style/): Your solo at a big dance battle: footwork, freezes and a crowd going wild. One face in. From $3.25.
+- [Dojo Fight: Karate vs the Hooded Monk](https://genjutsu-trends.com/trends/dojo-fight/): A movie-style karate fight in a sunlit dojo: you in the white gi, a friend as the hooded monk if you like. One or two faces in. From $2.50.
 - [Smooth Criminal: Michael Jackson's Lean](https://genjutsu-trends.com/trends/smooth-criminal/): Michael Jackson's "Smooth Criminal": the white suit, the hat and the famous lean. One face in. From $3.25.
 - [Thriller: The Red Jacket Zombie Dance](https://genjutsu-trends.com/trends/thriller-red-jacket/): Michael Jackson's "Thriller" in the red leather jacket, leading the zombies. One face in. From $3.25.
 - [Gas Station Dance: Three Friends, One Sunset](https://genjutsu-trends.com/trends/gas-station-dance/): The viral gas station dance at sunset: a dancer, a selfie and a sports-car entrance. Three faces in. From $3.25.
