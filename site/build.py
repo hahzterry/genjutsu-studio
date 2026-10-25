@@ -143,7 +143,7 @@ def footer(root, app=True, page=None):
     trend_links = " · ".join(f'<a href="{root}trends/{t["slug"]}/">{esc(t["short"])}</a>' for t in TRENDS)
     out = f"""  <footer>
     <nav class="foot-links"><a href="{root}">All trends</a> · {trend_links} · <a href="{root}custom/">Custom trend</a> · <a href="{root}pricing/">Pricing</a> · <a href="{root}genjutsu/">About Genjutsu</a> · <a href="{root}terms/">Terms</a> · <a href="{root}privacy/">Privacy</a> · <a href="{root}accessibility/">Accessibility</a></nav>
-    Independent service, not affiliated with or endorsed by Higgsfield AI. Videos are made with Higgsfield's Genjutsu model through its API. Not affiliated with the owners of the films and clips referenced.
+    Independent service, not affiliated with or endorsed by Higgsfield AI. Videos are made with Higgsfield's Genjutsu model through its API. Not affiliated with the owners of the films and clips referenced, and not affiliated with or endorsed by the artists or their estates.
   </footer>
 """
     if not app:
