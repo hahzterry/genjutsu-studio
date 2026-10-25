@@ -22,7 +22,7 @@ BASE = DATA["base_url"]
 ALL_TRENDS = DATA["trends"]
 # hidden trends (e.g. the 4s QA clip) get a page but stay out of the gallery, links and sitemap
 # Retired slugs keep a name, so old videos made on them don't show up as "Custom".
-TREND_ALIASES = {"hotel-lobby-v2": "hotel-lobby"}
+TREND_ALIASES = {"hotel-lobby-v2": "hotel-lobby", "desert-truck-jump": "car-jump"}
 
 
 def trend_names():
@@ -956,7 +956,7 @@ write("unsubscribe/index.html", unsub)
 
 # ---------------- old URLs → new pages ----------------
 REDIRECTS = {"white-chicks-ai-trend/": "trends/white-chicks/", "trends/mafia-daughter/": "trends/storm/",
-             "trends/hotel-lobby-v2/": "trends/hotel-lobby/"}
+             "trends/hotel-lobby-v2/": "trends/hotel-lobby/", "trends/desert-truck-jump/": "trends/car-jump/"}
 for old, new in REDIRECTS.items():
     write(f"{old}index.html", f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8" /><title>Moved</title>

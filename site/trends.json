@@ -3,7 +3,7 @@
   "trends": [
     {
       "slug": "bad-times-duo",
-      "name": "Bad Times Duo: The Dispute Dance for Two",
+      "name": "Bad Times Couple / Duo: Dispute Dance for Two",
       "short": "Bad Times duo dance",
       "card_blurb": "Two friends in suits do the \"Bad Times\" dispute dance: hands on heads, hands in the lens. Two faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times-duo.mp4",
@@ -27,11 +27,11 @@
       ],
       "published": "2026-10-25",
       "seo": {
-        "title": "Bad Times Duo AI Video Generator: Two Faces in the Dispute Dance (No Subscription)",
-        "description": "Put you and a friend in the viral \"Bad Times\" dispute dance for two. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Bad Times Duo AI Video Generator",
+        "title": "Bad Times Couple AI Trend: Duo Dispute Dance, 2 Photos",
+        "description": "Put you and a friend in the Bad Times dispute dance for two—suits, hands on heads, then into the lens. 2 photos. No subscription.",
+        "h1": "Bad Times Duo AI Video Generator (Couple or 2 Friends)",
         "lead": "The viral <b>\"Bad Times\"</b> dispute dance, as a duo: two friends in suits, hands on their heads and hands right in the lens. The 21-second clip is locked in: add two photos and click Generate.",
-        "og_title": "Bad Times Duo AI Video: Two Faces in the Dispute Dance",
+        "og_title": "Bad Times Couple AI Trend: Duo Dispute Dance, 2 Photos",
         "og_tagline": "Bad Times Duo AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The \"Bad Times\" trend is all about dramatic arguing gestures: hands on the head, a finger wag, a palm pushed right into the camera. This version does it as a pair, in sharp suits in front of a wooden fence.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds both people from your photos.</p>",
         "steps": [
@@ -58,7 +58,7 @@
         ],
         "faq": [
           [
-            "How do I make the Bad Times Duo AI video?",
+            "How do I make the Bad Times Couple / Duo AI video?",
             "Open this page. The Bad Times Duo clip is already loaded. Add two photos, then click Generate."
           ],
           [
@@ -81,7 +81,12 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times-duo.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/bad-times-duo/preview-light.mp4"
+      "light_preview_url": "trends/bad-times-duo/preview-light.mp4",
+      "aliases": [
+        "Bad Times couple",
+        "Bad Times duo",
+        "Bad Times two friends"
+      ]
     },
     {
       "slug": "cheba-man-lights",
@@ -104,11 +109,11 @@
       ],
       "published": "2026-10-25",
       "seo": {
-        "title": "Cheba Man Stage Dance AI Video Generator: You on Stage Under the Lights (No Subscription)",
-        "description": "Put your face on the Cheba Man in this viral stage dance under string lights, with the whole crowd filming. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "title": "Cheba Man AI Dance: Yellow Jacket on a String-Lights Stage",
+        "description": "Be the Cheba Man on an outdoor stage under string lights while the crowd films from below. 1 photo. Pay per video, no subscription.",
         "h1": "Cheba Man String-Lights Stage AI Video Generator",
         "lead": "Be the <b>Cheba Man</b> on an outdoor stage under string lights, dancing while the crowd holds up their phones. The 21-second clip is locked in: add one selfie and click Generate.",
-        "og_title": "Cheba Man AI Video: You on Stage Under the Lights",
+        "og_title": "Cheba Man AI Dance: Yellow Jacket on a String-Lights Stage",
         "og_tagline": "Cheba Man AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>Another viral Cheba Man moment: the dancer in a bright yellow jacket and purple trousers on an outdoor stage under string lights, while the whole crowd films it. This version puts you on that stage.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the performer from your selfie.</p>",
         "steps": [
@@ -135,7 +140,7 @@
         ],
         "faq": [
           [
-            "How do I make the Cheba Man string-lights AI video?",
+            "How do I make the Cheba Man AI video?",
             "Open this page. The clip is already loaded. Add one selfie, then click Generate."
           ],
           [
@@ -158,11 +163,14 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-stage-dance.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/cheba-man-lights/preview-light.mp4"
+      "light_preview_url": "trends/cheba-man-lights/preview-light.mp4",
+      "aliases": [
+        "Cheba Man string lights"
+      ]
     },
     {
       "slug": "millionaire-lambo",
-      "name": "Millionaire Lambo: Shoes Off, Then the Supercar",
+      "name": "Billionaire Lambo: Shoes Off, Then the Supercar",
       "short": "Millionaire Lambo meme",
       "card_blurb": "The millionaire meme: walk out of the hotel, take your shoes off and slide into an orange Lamborghini. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/millionaire-lambo.mp4",
@@ -181,13 +189,13 @@
       ],
       "published": "2026-10-25",
       "seo": {
-        "title": "Millionaire Lambo AI Video Generator: Shoes Off, Into the Supercar (No Subscription)",
-        "description": "Put your face in the viral millionaire meme: walk out of a hotel, take your shoes off and get into an orange Lamborghini. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Millionaire Lambo AI Video Generator",
+        "title": "Billionaire Lamborghini AI Trend: Shoes Off Meme",
+        "description": "Walk out of a hotel, kick off your shoes, and slide into an orange Lamborghini—the viral billionaire (or millionaire) meme. 1 photo. No subscription.",
+        "h1": "Billionaire Lambo AI Video Generator: The Shoes-Off Meme",
         "lead": "Live the <b>millionaire meme</b>: stroll out of a luxury hotel, take your shoes off so you don't scuff the leather, and slide into an orange Lamborghini. The 29-second clip is locked in: add one selfie and click Generate.",
-        "og_title": "Millionaire Lambo AI Video: You and the Supercar",
+        "og_title": "Billionaire Lamborghini AI Trend: Shoes Off Meme",
         "og_tagline": "Millionaire Lambo AI face swap · Genjutsu · Pay per video",
-        "about_html": "<p>The millionaire meme plays the flex completely straight: a man in all black walks out of a hotel, carefully takes off his red shoes before stepping into his orange Lamborghini, while an assistant waits by the door. This version makes you the millionaire.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your selfie.</p>",
+        "about_html": "<p>The millionaire meme plays the flex completely straight: a man in all black walks out of a hotel, carefully takes off his red shoes before stepping into his orange Lamborghini, while an assistant waits by the door. This version makes you the millionaire.</p><p>People search for it as the billionaire (or millionaire) meme: same scene, same shoes-off moment.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your selfie.</p>",
         "steps": [
           [
             "Open this page",
@@ -212,7 +220,7 @@
         ],
         "faq": [
           [
-            "How do I make the Millionaire Lambo AI video?",
+            "How do I make the Billionaire Lambo AI video?",
             "Open this page. The Millionaire Lambo clip is already loaded. Add one selfie, then click Generate."
           ],
           [
@@ -235,16 +243,21 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-millionaire-lambo.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/millionaire-lambo/preview-light.mp4"
+      "light_preview_url": "trends/millionaire-lambo/preview-light.mp4",
+      "aliases": [
+        "billionaire shoes off",
+        "millionaire Lambo meme",
+        "Lambo lifestyle"
+      ]
     },
     {
-      "slug": "desert-truck-jump",
-      "name": "Desert Truck Jump: Don't Even Flinch",
-      "short": "Desert truck jump",
+      "slug": "car-jump",
+      "name": "Car Jump: Sit Calm as a Truck Lands Beside You",
+      "short": "Car jump",
       "card_blurb": "A 4x4 flies over a dune and lands right in front of you, sitting calm on a chair. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/desert-truck-jump.mp4",
-      "poster": "trends/desert-truck-jump/poster.jpg",
-      "preview_url": "trends/desert-truck-jump/preview.mp4",
+      "poster": "trends/car-jump/poster.jpg",
+      "preview_url": "trends/car-jump/preview.mp4",
       "duration": 12.0,
       "mode": "motion-transfer",
       "resolution": "480p",
@@ -258,11 +271,11 @@
       ],
       "published": "2026-10-25",
       "seo": {
-        "title": "Desert Truck Jump AI Video Generator: Sit Calm While a 4x4 Flies Over (No Subscription)",
-        "description": "Put your face in the viral desert truck jump: a 4x4 launches over a dune and lands right behind you while you sit calmly on a chair. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Desert Truck Jump AI Video Generator",
+        "title": "Car Jump AI Trend: Sit Calm as a Truck Lands Beside You",
+        "description": "Sit dead calm on a chair while a 4x4 launches over a dune and lands a few meters in front of you. 1 photo. No subscription.",
+        "h1": "Car Jump AI Video Generator (Desert Truck Jump)",
         "lead": "Sit perfectly still on a chair in the desert while a <b>4x4 flies over the dune</b> and lands right behind you in a wall of dust. The 12-second clip is locked in: add one selfie and click Generate.",
-        "og_title": "Desert Truck Jump AI Video: Don't Even Flinch",
+        "og_title": "Car Jump AI Trend: Sit Calm as a Truck Lands Beside You",
         "og_tagline": "Desert Truck Jump AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The joke is the contrast: a heavy 4x4 launches over a dune in a cloud of golden dust and lands a few meters away, while the man on the chair doesn't move a muscle. This version puts you on that chair.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your selfie.</p>",
         "steps": [
@@ -289,7 +302,7 @@
         ],
         "faq": [
           [
-            "How do I make the Desert Truck Jump AI video?",
+            "How do I make the Car Jump AI video?",
             "Open this page. The clip is already loaded. Add one selfie, then click Generate."
           ],
           [
@@ -311,11 +324,17 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-desert-truck-jump.mp4",
-      "light_duration": 12.0
+      "light_duration": 12.0,
+      "aliases": [
+        "car jump AI trend",
+        "unbothered car jump",
+        "truck jump chair meme",
+        "desert truck jump"
+      ]
     },
     {
       "slug": "dance-your-style",
-      "name": "Dance Battle: Own the Stage",
+      "name": "Dance Battle Solo",
       "short": "Dance battle solo",
       "card_blurb": "Your solo at a big dance battle: footwork, freezes and a crowd going wild. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/dance-your-style.mp4",
@@ -334,11 +353,11 @@
       ],
       "published": "2026-10-25",
       "seo": {
-        "title": "Dance Battle AI Video Generator: Your Face in a Battle Solo (No Subscription)",
-        "description": "Put your face on the dancer in a big dance-battle solo, with footwork, freezes and a crowd going wild. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "title": "Dance Battle AI Trend: Your Face in a Battle Solo",
+        "description": "Own a dance-battle solo with footwork, freezes, and a crowd going wild—your face on the dancer. 1 photo. No subscription.",
         "h1": "Dance Battle Solo AI Video Generator",
         "lead": "Take the stage at a big <b>dance battle</b>: smooth footwork, floor moves and freezes while the whole arena cheers. The 30-second clip is locked in: add one selfie and click Generate.",
-        "og_title": "Dance Battle AI Video: Your Face, Your Solo",
+        "og_title": "Dance Battle AI Trend: Your Face in a Battle Solo",
         "og_tagline": "Dance battle AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>Dance-battle solos are made for clips: a dancer in a flat cap owns the stage with footwork, spins and floor work while the crowd loses it. This version puts your face on the dancer.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the dancer from your selfie.</p>",
         "steps": [
@@ -365,7 +384,7 @@
         ],
         "faq": [
           [
-            "How do I make the dance battle AI video?",
+            "How do I make the Dance Battle Solo AI video?",
             "Open this page. The clip is already loaded. Add one selfie, then click Generate."
           ],
           [
@@ -388,11 +407,15 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-dance-your-style.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/dance-your-style/preview-light.mp4"
+      "light_preview_url": "trends/dance-your-style/preview-light.mp4",
+      "aliases": [
+        "dance battle AI",
+        "battle solo"
+      ]
     },
     {
       "slug": "dojo-fight",
-      "name": "Dojo Fight: Karate vs the Hooded Monk",
+      "name": "Karate Dojo Fight: White Gi vs Hooded Monk",
       "short": "Dojo karate fight",
       "card_blurb": "A movie-style karate fight in a sunlit dojo: you in the white gi, a friend as the hooded monk if you like. One or two faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/dojo-fight.mp4",
@@ -416,11 +439,11 @@
       ],
       "published": "2026-10-25",
       "seo": {
-        "title": "Karate Dojo Fight AI Video Generator: Your Face in a Movie Fight Scene (No Subscription)",
-        "description": "Put your face on the karate fighter in a cinematic dojo fight against a hooded monk. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
+        "title": "Karate Dojo Fight AI Trend: Gi vs Hooded Monk",
+        "description": "You in a white gi and red belt in a sunlit dojo fight; optional second photo for the hooded monk. 1–2 photos. No subscription.",
         "h1": "Karate Dojo Fight AI Video Generator",
         "lead": "Star in a movie-style <b>karate fight</b>: you in the white gi, trading kicks with a hooded monk in a sunlit dojo, right up to his final throw. The 10-second clip is locked in: add your selfie (and a friend's for the monk, if you like) and click Generate.",
-        "og_title": "Karate Dojo Fight AI Video: You vs the Hooded Monk",
+        "og_title": "Karate Dojo Fight AI Trend: Gi vs Hooded Monk",
         "og_tagline": "Karate fight AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>A cinematic fight scene in an old dojo: golden light, dust in the air, and a fighter in a white gi taking on a hooded monk with kicks and punches, until the monk lands a final throw. This version puts your face on the karate fighter, and a friend's on the monk if you add a second photo.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the fighters from your photos.</p>",
         "steps": [
@@ -447,7 +470,7 @@
         ],
         "faq": [
           [
-            "How do I make the karate dojo fight AI video?",
+            "How do I make the Karate Dojo Fight AI video?",
             "Open this page. The clip is already loaded. Add your selfie, and optionally a second photo for the opponent, then click Generate."
           ],
           [
@@ -470,7 +493,11 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-dojo-fight.mp4",
       "light_duration": 10.0,
-      "min_photos": 1
+      "min_photos": 1,
+      "aliases": [
+        "karate dojo fight AI",
+        "dojo fight meme"
+      ]
     },
     {
       "slug": "smooth-criminal",
@@ -493,11 +520,11 @@
       ],
       "published": "2026-10-23",
       "seo": {
-        "title": "Smooth Criminal AI Video Generator: Put Your Face in Michael Jackson's Dance (No Subscription)",
-        "description": "Put your face in Michael Jackson's \"Smooth Criminal\" dance: white suit, hat and the famous lean. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Smooth Criminal AI Video Generator",
+        "title": "Smooth Criminal AI Trend: Michael Jackson Lean Dance",
+        "description": "White suit, hat, and Michael Jackson's famous Smooth Criminal lean—swap in your face and generate. 1 photo. No subscription.",
+        "h1": "Smooth Criminal AI Video Generator: MJ's Famous Lean",
         "lead": "Be the man in the white suit in Michael Jackson's <b>\"Smooth Criminal\"</b>: from the close-up under the hat to the moves and the famous lean. The 15-second clip is locked in: add one selfie and click Generate.",
-        "og_title": "Smooth Criminal AI Video: Your Face in Michael Jackson's Dance",
+        "og_title": "Smooth Criminal AI Trend: Michael Jackson Lean Dance",
         "og_tagline": "Smooth Criminal AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>\"Annie, are you OK?\" The \"Smooth Criminal\" dance, with its white suit, fedora and gravity-defying lean, is one of the most copied dance scenes ever. This AI version keeps the moves, the shadows and the suit, and puts your face on the dancer.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the dancer from your selfie.</p>",
         "steps": [
@@ -550,11 +577,16 @@
       "result_sample": {
         "video": "trends/smooth-criminal/result-sample.mp4",
         "poster": "trends/smooth-criminal/result-poster.jpg"
-      }
+      },
+      "aliases": [
+        "Smooth Criminal dance AI",
+        "Michael Jackson lean",
+        "Annie are you OK"
+      ]
     },
     {
       "slug": "thriller-red-jacket",
-      "name": "Thriller: The Red Jacket Zombie Dance",
+      "name": "Thriller Red Jacket: Alternate Take",
       "short": "Thriller red jacket dance",
       "card_blurb": "Michael Jackson's \"Thriller\" in the red leather jacket, leading the zombies. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/thriller-red-jacket.mp4",
@@ -573,11 +605,11 @@
       ],
       "published": "2026-10-23",
       "seo": {
-        "title": "Thriller Red Jacket AI Video Generator: Lead Michael Jackson's Zombies (No Subscription)",
-        "description": "Put your face in Michael Jackson's \"Thriller\" zombie dance, red leather jacket and all. The clip is preloaded: add one selfie and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Thriller Red Jacket AI Video Generator",
+        "title": "Thriller Red Jacket AI: Lead MJ's Zombie Line, 1 Selfie",
+        "description": "Lead the zombies in the red-leather Thriller take—an alternate page to the street-dance Thriller. 1 selfie. No subscription.",
+        "h1": "Thriller Red Jacket AI Video Generator (Alternate Take)",
         "lead": "Wear the red leather jacket and lead the zombies in Michael Jackson's <b>\"Thriller\"</b> dance. The 19-second clip is locked in: add one selfie and click Generate.",
-        "og_title": "Thriller AI Video: Your Face in the Red Jacket",
+        "og_title": "Thriller Red Jacket AI: Lead MJ's Zombie Line, 1 Selfie",
         "og_tagline": "Thriller AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The \"Thriller\" zombie dance is one of the most famous dance scenes ever filmed: the red leather jacket, the claw hands, the head tilts and a street full of zombies moving in sync. This version puts your face on the lead dancer and keeps everything else.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the dancer from your selfie.</p>",
         "steps": [
@@ -604,7 +636,7 @@
         ],
         "faq": [
           [
-            "How do I make the Thriller red jacket AI video?",
+            "How do I make the Thriller Red Jacket AI video?",
             "Open this page. The Thriller clip is already loaded. Add one selfie, then click Generate."
           ],
           [
@@ -627,11 +659,14 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller-red-jacket.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/thriller-red-jacket/preview-light.mp4"
+      "light_preview_url": "trends/thriller-red-jacket/preview-light.mp4",
+      "aliases": [
+        "Michael Jackson red jacket AI"
+      ]
     },
     {
       "slug": "gas-station-dance",
-      "name": "Gas Station Dance: Three Friends, One Sunset",
+      "name": "Gas Station Dance: 3 Friends at Sunset",
       "short": "Gas Station Dance trio",
       "card_blurb": "The viral gas station dance at sunset: a dancer, a selfie and a sports-car entrance. Three faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/gas-station-dance.mp4",
@@ -660,11 +695,11 @@
       ],
       "published": "2026-10-23",
       "seo": {
-        "title": "Gas Station Dance AI Video Generator: Put 3 Faces in the Viral Trend (No Subscription)",
-        "description": "Put you and two friends in the viral Gas Station Dance video. The clip is preloaded: add three photos and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Gas Station Dance AI Video Generator",
+        "title": "Gas Station Dance AI Trend: 3 Friends at Sunset",
+        "description": "Three friends at a sunset gas station: one dances, one films a selfie, one steps out of a sports car. 3 photos. No subscription.",
+        "h1": "Gas Station Dance AI Video Generator (3 Friends)",
         "lead": "The viral <b>gas station dance</b>: one friend dances on the forecourt, one films a selfie, one steps out of a sports car at sunset. The 15-second clip is locked in: add three photos and click Generate.",
-        "og_title": "Gas Station Dance AI Video: Three Faces in the Viral Trend",
+        "og_title": "Gas Station Dance AI Trend: 3 Friends at Sunset",
         "og_tagline": "Gas Station Dance AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The gas station dance trend is three friends goofing around on a road trip at sunset: one dances on the forecourt, one films a selfie, and one makes a cool entrance from a sports car. No choreography needed. This AI version keeps all three parts.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds all three people from your photos.</p>",
         "steps": [
@@ -713,11 +748,15 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-gas-station-dance.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "aliases": [
+        "gas station dance trend",
+        "3 friends road trip dance"
+      ]
     },
     {
       "slug": "white-chicks",
-      "name": "White Chicks: A Thousand Miles",
+      "name": "White Chicks: A Thousand Miles Car Scene",
       "short": "White Chicks car scene",
       "card_blurb": "Terry Crews sings \"A Thousand Miles\" in the car. Put two faces in the seats.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/white-chicks-car.mp4",
@@ -740,11 +779,11 @@
       ],
       "published": "2026-09-30",
       "seo": {
-        "title": "White Chicks AI Video Generator: A Thousand Miles Face Swap (No Subscription)",
-        "description": "Put your faces in the viral White Chicks car scene. The Terry Crews \"A Thousand Miles\" clip is preloaded: add two photos and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "White Chicks AI Video Generator",
+        "title": "White Chicks AI Trend: A Thousand Miles Car Scene",
+        "description": "You and a friend in the White Chicks A Thousand Miles car scene—driver and passenger seats. 2 photos. Works in the browser. No subscription.",
+        "h1": "White Chicks Car Scene AI Video Generator (A Thousand Miles)",
         "lead": "Put your faces in the viral <b>\"A Thousand Miles\"</b> car scene with Terry Crews. The scene is locked in: add a photo of each person and click Generate.",
-        "og_title": "White Chicks AI Video: Put Your Faces in the A Thousand Miles Scene",
+        "og_title": "White Chicks AI Trend: A Thousand Miles Car Scene",
         "og_tagline": "A Thousand Miles AI face swap · Genjutsu · No subscription",
         "about_html": "<p>In the 2004 comedy <i>White Chicks</i>, Terry Crews' character Latrell sings Vanessa Carlton's \"A Thousand Miles\" in his car, and the scene has been a meme for twenty years. In 2026 AI face swaps made it blow up again, peaking during the World Cup: people swap in themselves, their friends or their favorite players and post it to TikTok, Reels and Shorts.</p><p>Most face swap apps paste a flat face over the clip. <a href=\"../../genjutsu/\">Genjutsu</a> works differently. It keeps the original motion, camera move and timing and rebuilds the characters from your photos, so the car lighting and every head turn match.</p>",
         "steps": [
@@ -803,11 +842,16 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-white-chicks.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/white-chicks/preview-light.mp4"
+      "light_preview_url": "trends/white-chicks/preview-light.mp4",
+      "aliases": [
+        "White Chicks car scene",
+        "A Thousand Miles AI trend",
+        "Terry Crews car meme"
+      ]
     },
     {
       "slug": "hotel-lobby",
-      "name": "Hotel Lobby: Quavo & Takeoff",
+      "name": "Hotel Lobby: Quavo & Takeoff Mic Scene",
       "short": "Hotel Lobby mic scene",
       "card_blurb": "Quavo & Takeoff's \"Hotel Lobby\" mic performance. Put two faces in front of the orange wall.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/hotel-lobby.mp4",
@@ -831,11 +875,11 @@
       ],
       "published": "2026-10-11",
       "seo": {
-        "title": "Hotel Lobby AI Video Generator: Quavo & Takeoff Face Swap (No Subscription)",
-        "description": "Put two faces in the viral Quavo & Takeoff \"Hotel Lobby\" mic performance. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "Hotel Lobby AI Video Generator",
+        "title": "Hotel Lobby AI Trend: Quavo & Takeoff Mic Scene",
+        "description": "Two friends at the mic as Quavo & Takeoff in front of the orange Hotel Lobby wall. 2 photos. Works in the browser. No subscription.",
+        "h1": "Hotel Lobby AI Video Generator (Quavo & Takeoff)",
         "lead": "Put two faces in Quavo & Takeoff's <b>\"Hotel Lobby\"</b> mic performance. The clip is locked in: add a photo of each person and click Generate.",
-        "og_title": "Hotel Lobby AI Video: Put Your Faces in the Quavo & Takeoff Performance",
+        "og_title": "Hotel Lobby AI Trend: Quavo & Takeoff Mic Scene",
         "og_tagline": "Hotel Lobby AI face swap · Genjutsu · No subscription",
         "about_html": "<p>\"Hotel Lobby (Unc &amp; Phew)\" is the 2022 single by Quavo and Takeoff, and their performance in front of a bright orange wall and a single studio mic became one of the duo's most replayed clips. The AI trend recreates that shot with new people: two friends trading lines at the mic, with every hand move and head turn kept.</p><p>Most face swap apps paste a flat face over the clip. <a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera and timing and rebuilds both performers from your photos, so the lighting and the movement match the original.</p>",
         "steps": [
@@ -884,11 +928,16 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-hotel-lobby.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "aliases": [
+        "Hotel Lobby (Unc & Phew) AI",
+        "Quavo and Takeoff AI trend",
+        "orange wall mic scene"
+      ]
     },
     {
       "slug": "alors-on-danse",
-      "name": "Alors on Danse: Keyboard Dance",
+      "name": "Alors on Danse: Stromae Keyboard Dance",
       "short": "Alors on Danse keyboard scene",
       "card_blurb": "Two coworkers at a keyboard break into a dance to \"Alors on danse\". Put two faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/alors-on-danse.mp4",
@@ -912,11 +961,11 @@
       ],
       "published": "2026-10-11",
       "seo": {
-        "title": "Alors on Danse AI Video Generator: Keyboard Dance Face Swap (No Subscription)",
-        "description": "Put two faces in the viral \"Alors on danse\" keyboard dance. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "Alors on Danse AI Video Generator",
+        "title": "Alors on Danse AI Trend: Stromae Keyboard Dance, 2 Photos",
+        "description": "Two coworkers at a keyboard break into Stromae's Alors on danse office dance mid-shift. 2 photos. Works in the browser. No subscription.",
+        "h1": "Alors on Danse AI Video Generator (Stromae)",
         "lead": "Two guys in suits, a keyboard, and Stromae's <b>\"Alors on danse\"</b>. The clip is locked in: add a photo of each person and click Generate.",
-        "og_title": "Alors on Danse AI Video: Put Your Faces in the Keyboard Dance",
+        "og_title": "Alors on Danse AI Trend: Stromae Keyboard Dance, 2 Photos",
         "og_tagline": "Alors on danse AI face swap · Genjutsu · No subscription",
         "about_html": "<p>The \"Alors on danse\" trend takes Stromae's 2009 hit and drops it into an office moment: two men in suits at a keyboard and a laptop, playing it straight until the beat hits and they can't help dancing. The AI version swaps in you and a friend, a coworker or your boss.</p><p>Most face swap apps paste a flat face over the clip. <a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera and timing and rebuilds both people from your photos, so every dance move matches the original.</p>",
         "steps": [
@@ -965,11 +1014,15 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-alors-on-danse.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "aliases": [
+        "Stromae AI trend",
+        "Alors on danse office dance"
+      ]
     },
     {
       "slug": "apt",
-      "name": "APT.: ROSÉ & Bruno Mars",
+      "name": "APT.: ROSÉ & Bruno Mars Pink Studio",
       "short": "APT. music video",
       "card_blurb": "ROSÉ and Bruno Mars in the pink \"APT.\" studio. Put two faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/apt.mp4",
@@ -993,11 +1046,11 @@
       ],
       "published": "2026-10-11",
       "seo": {
-        "title": "APT. AI Video Generator: ROSÉ & Bruno Mars Face Swap (No Subscription)",
-        "description": "Put two faces in the ROSÉ & Bruno Mars \"APT.\" music video. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "APT. AI Video Generator",
+        "title": "APT. AI Video Trend: ROSÉ & Bruno Mars Pink Studio",
+        "description": "You and a friend as the singer and drummer in ROSÉ & Bruno Mars' pink APT. studio. 2 photos. Works in the browser. No subscription.",
+        "h1": "APT. AI Video Generator (ROSÉ & Bruno Mars)",
         "lead": "Put two faces in ROSÉ & Bruno Mars' <b>\"APT.\"</b> music video. The 20-second clip is locked in: add a photo for each part and click Generate.",
-        "og_title": "APT. AI Video: Put Your Faces in the ROSÉ & Bruno Mars Video",
+        "og_title": "APT. AI Video Trend: ROSÉ & Bruno Mars Pink Studio",
         "og_tagline": "APT. AI face swap · Genjutsu · No subscription",
         "about_html": "<p>\"APT.\" by ROSÉ and Bruno Mars came out in October 2024 and became one of the biggest songs in the world, with a pink-studio music video full of drum fills, leather jackets and the \"apateu, apateu\" chant. The AI trend recasts the video: you and a friend take ROSÉ's and Bruno's parts.</p><p>Most face swap apps paste a flat face over the clip. <a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera cuts and timing and rebuilds both performers from your photos, so every move lands on the beat.</p>",
         "steps": [
@@ -1048,11 +1101,17 @@
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-apt-04b.mp4",
       "light_duration": 14.973,
       "light_preview_url": "trends/apt/preview-light.mp4",
-      "light_start": 4
+      "light_start": 4,
+      "aliases": [
+        "APT AI video",
+        "ROSÉ and Bruno Mars AI",
+        "APT pink studio",
+        "singer and drummer"
+      ]
     },
     {
       "slug": "industry-baby",
-      "name": "Industry Baby: Prison Dance Squad",
+      "name": "Industry Baby: Lil Nas X Prison Dance Squad",
       "short": "Industry Baby squad",
       "card_blurb": "The \"Industry Baby\" prison shower dance and phone scene. Cast the lead and up to 7 dancers.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/industry-baby.mp4",
@@ -1101,11 +1160,11 @@
       ],
       "published": "2026-10-12",
       "seo": {
-        "title": "Industry Baby AI Video Generator: Prison Dance Face Swap for Up to 8 Friends",
-        "description": "Put your whole squad in the viral \"Industry Baby\" prison dance. The clip is preloaded: add 1 to 8 photos and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "Industry Baby AI Video Generator",
+        "title": "Industry Baby AI: Lil Nas X Prison Dance, Up to 8 Faces",
+        "description": "Cast the Lil Nas X Industry Baby prison dance: lead on the phone plus optional dancers. 1 to 8 photos. Works in the browser. No subscription.",
+        "h1": "Industry Baby AI Video Generator: Prison Dance Squad",
         "lead": "The <b>\"Industry Baby\"</b> shower-room dance and prison-phone scene, with your squad. Add the lead, then up to 7 dancers, and click Generate.",
-        "og_title": "Industry Baby AI Video: Put Your Squad in the Prison Dance",
+        "og_title": "Industry Baby AI: Lil Nas X Prison Dance, Up to 8 Faces",
         "og_tagline": "Industry Baby AI face swap · up to 8 people · No subscription",
         "about_html": "<p>Lil Nas X and Jack Harlow's \"Industry Baby\" (2021) came with a prison-themed video whose pink-and-teal shower dance became instantly recognizable. The AI trend recasts it: one lead who dances up front and sings into the prison phone, and a whole line of dancers behind.</p><p>This template takes up to 8 photos, so you can put a full team, a friend group or an office in it. <a href=\"../../genjutsu/\">Genjutsu</a> keeps the original choreography, camera cuts and timing and rebuilds each person from the photos.</p>",
         "steps": [
@@ -1155,11 +1214,15 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-industry-baby.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/industry-baby/preview-light.mp4"
+      "light_preview_url": "trends/industry-baby/preview-light.mp4",
+      "aliases": [
+        "Lil Nas X prison dance",
+        "Industry Baby group face swap"
+      ]
     },
     {
       "slug": "storm",
-      "name": "Genjutsu STORM: The Suit Crowd",
+      "name": "STORM: The Suit Crowd Drop",
       "short": "STORM suit crowd",
       "card_blurb": "The STORM trend: you stand calm in white while a crowd in suits erupts on the beat drop.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/mafia-daughter.mp4",
@@ -1183,13 +1246,13 @@
       ],
       "published": "2026-10-12",
       "seo": {
-        "title": "Genjutsu STORM AI Video Generator: Suit Crowd Trend (No Subscription)",
-        "description": "Make the viral Genjutsu STORM video: you stand calm in white while a crowd in suits erupts on the beat drop. Add a photo and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "Genjutsu STORM AI Video Generator",
+        "title": "STORM AI Trend: GENER8ION & Yung Lean Crowd Drop",
+        "description": "Stand calm in white while the suit crowd erupts on the drop: the trend set to GENER8ION & Yung Lean's STORM. 1–2 photos. No subscription.",
+        "h1": "STORM AI Video Generator: The Suit Crowd Drop Trend",
         "lead": "The <b>STORM</b> trend: you stay calm in white while the suit crowd loses control on the beat drop. Add your photo and click Generate.",
-        "og_title": "Genjutsu STORM: You Stay Still, the Suit Crowd Erupts",
+        "og_title": "STORM AI Trend: GENER8ION & Yung Lean Crowd Drop",
         "og_tagline": "STORM AI trend · Genjutsu · No subscription",
-        "about_html": "<p>STORM is the best-known Genjutsu trend: one calm figure in white stands still in the middle of a huge crowd in black suits, and on the beat drop everyone around them erupts. Creators recast the lead with themselves, and versions like the Thai \"mafia boss's daughter\" edit spread across TikTok, Reels and X.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original crowd, choreography and camera moves and rebuilds the lead from your photo. Add a second photo to put one face on the whole crowd.</p>",
+        "about_html": "<p>STORM is the best-known Genjutsu trend: one calm figure in white stands still in the middle of a huge crowd in black suits, and on the beat drop everyone around them erupts. Creators recast the lead with themselves, and versions like the Thai \"mafia boss's daughter\" edit spread across TikTok, Reels and X.</p><p>The trend is set to \"Storm\" by GENER8ION featuring Yung Lean (April 2026), whose Romain Gavras-directed video ends in a huge crowd dance.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original crowd, choreography and camera moves and rebuilds the lead from your photo. Add a second photo to put one face on the whole crowd.</p>",
         "steps": [
           [
             "Open this page",
@@ -1240,11 +1303,18 @@
         ]
       },
       "min_photos": 1,
-      "light_supported": false
+      "light_supported": false,
+      "aliases": [
+        "Yung Lean STORM AI",
+        "GENER8ION STORM",
+        "Genjutsu STORM",
+        "suit crowd trend",
+        "mafia boss's daughter video"
+      ]
     },
     {
       "slug": "shrek-raindance",
-      "name": "Shrek & Lord Farquaad: Raindance",
+      "name": "Shrek Raindance: Shrek & Lord Farquaad",
       "short": "Shrek Raindance scene",
       "card_blurb": "Shrek and Lord Farquaad's beach and dock moment to \"Raindance\". Become the two of them.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/shrek-raindance.mp4",
@@ -1268,11 +1338,11 @@
       ],
       "published": "2026-10-12",
       "seo": {
-        "title": "Shrek Raindance AI Video Generator: Shrek & Lord Farquaad Face Swap (No Subscription)",
-        "description": "Put two faces in the viral Shrek and Lord Farquaad \"Raindance\" video. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. No subscription, pay per video.",
-        "h1": "Shrek & Lord Farquaad AI Video Generator",
+        "title": "Shrek Raindance AI Trend: Shrek & Lord Farquaad",
+        "description": "Become Shrek and Lord Farquaad on the dock for the viral Raindance beach-and-pier meme. 2 photos. Works in the browser. No subscription.",
+        "h1": "Shrek Raindance AI Video Generator (Shrek & Lord Farquaad)",
         "lead": "The viral <b>Shrek and Lord Farquaad</b> beach moment set to \"Raindance\". The clip is locked in: add a photo for each and click Generate.",
-        "og_title": "Shrek Raindance AI Video: Be Shrek and Lord Farquaad",
+        "og_title": "Shrek Raindance AI Trend: Shrek & Lord Farquaad",
         "og_tagline": "Shrek AI face swap · Genjutsu · No subscription",
         "about_html": "<p>A realistic AI take on Shrek and Lord Farquaad, staring out at the sea on a dock and a beach to Dave and Tems' \"Raindance\", went viral on TikTok and Instagram. The trend: you and a friend become the two of them.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original poses, close-ups and timing and rebuilds both characters from your photos, outfits included.</p>",
         "steps": [
@@ -1319,11 +1389,15 @@
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-shrek-raindance-04.mp4",
       "light_duration": 15.0,
       "light_start": 4,
-      "light_preview_url": "trends/shrek-raindance/preview-light.mp4"
+      "light_preview_url": "trends/shrek-raindance/preview-light.mp4",
+      "aliases": [
+        "Shrek and Lord Farquaad AI",
+        "Shrek dock Raindance meme"
+      ]
     },
     {
       "slug": "raindance",
-      "name": "Raindance: Dave & Tems (Original Video)",
+      "name": "Raindance: Dave & Tems Pier Scene (Original)",
       "short": "Raindance pier scene",
       "card_blurb": "The golden-hour pier moment from Dave & Tems' \"Raindance\" video. Put two faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/raindance.mp4",
@@ -1347,11 +1421,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Raindance AI Video Generator: Dave & Tems Face Swap (No Subscription)",
-        "description": "Put two faces in the original Dave & Tems \"Raindance\" music video pier scene. The clip is preloaded: add two photos and generate with Higgsfield Genjutsu. Pay per video.",
+        "title": "Raindance AI Trend: Dave & Tems Pier Scene (Original)",
+        "description": "Two faces in the original Dave & Tems Raindance music-video pier scene at golden hour. 2 photos. Works in the browser. No subscription.",
         "h1": "Raindance AI Video Generator (Original Video)",
         "lead": "Put two faces in the golden-hour pier scene from Dave & Tems' <b>\"Raindance\"</b> music video. The 21-second clip is locked in: add a photo for each part and click Generate.",
-        "og_title": "Raindance AI Video: Put Your Faces in the Dave & Tems Pier Scene",
+        "og_title": "Raindance AI Trend: Dave & Tems Pier Scene (Original)",
         "og_tagline": "Raindance AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>\"Raindance\" by Dave featuring Tems became one of the year's biggest songs, and its music video's golden-hour pier moment became a duet trend of its own: one person waits on the pier, the other walks in singing by the water, and they end up side by side. This is the original music-video version; for the meme mashup, see the <a href=\"../shrek-raindance/\">Shrek Raindance</a> trend.</p><p>Most face swap apps paste a flat face over the clip. <a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera cuts and timing and rebuilds both people from your photos.</p>",
         "steps": [
@@ -1406,11 +1480,15 @@
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-raindance-04.mp4",
       "light_duration": 15.0,
       "light_preview_url": "trends/raindance/preview-light.mp4",
-      "light_start": 4
+      "light_start": 4,
+      "aliases": [
+        "Dave and Tems Raindance AI",
+        "Raindance pier"
+      ]
     },
     {
       "slug": "thriller",
-      "name": "Thriller: Michael Jackson Zombie Dance",
+      "name": "Thriller: Michael Jackson Zombie Street Dance",
       "short": "Thriller zombie dance",
       "card_blurb": "Lead the zombies through Michael Jackson's \"Thriller\" street dance. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/thriller-21.mp4",
@@ -1429,11 +1507,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Thriller AI Video Generator: Michael Jackson Zombie Dance Face Swap (No Subscription)",
-        "description": "Put your face in Michael Jackson's \"Thriller\" zombie dance. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Thriller AI Video Generator",
+        "title": "Thriller AI Trend: Michael Jackson Zombie Street Dance",
+        "description": "Lead the zombies through Michael Jackson's Thriller street dance with your face in. 1 photo. No subscription, no app. Works in the browser.",
+        "h1": "Thriller AI Video Generator: Michael Jackson Zombie Dance",
         "lead": "Lead the zombies in Michael Jackson's <b>\"Thriller\"</b> street dance. The 21-second clip is locked in: add one photo and click Generate.",
-        "og_title": "Thriller AI Video: Lead Michael Jackson's Zombie Dance",
+        "og_title": "Thriller AI Trend: Michael Jackson Zombie Street Dance",
         "og_tagline": "Thriller AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The \"Thriller\" zombie dance is one of the most copied routines ever: a zombie stare in close-up, then a whole street of ghouls behind the lead doing the shuffle, shoulder rolls and claw arms. The AI trend puts you in the red jacket at the front.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera cuts and timing and rebuilds the lead dancer from your photo, so every move lands on the beat.</p>",
         "steps": [
@@ -1483,7 +1561,11 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-thriller-15.mp4",
       "light_duration": 14.982,
-      "light_preview_url": "trends/thriller/preview-light.mp4"
+      "light_preview_url": "trends/thriller/preview-light.mp4",
+      "aliases": [
+        "Michael Jackson Thriller AI",
+        "zombie dance AI"
+      ]
     },
     {
       "slug": "turn-the-lights-off",
@@ -1506,11 +1588,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Turn the Lights Off AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
-        "description": "Put your face in the viral Turn the Lights Off video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Turn the Lights Off AI Video Generator",
+        "title": "Turn the Lights Off AI Trend: Jon Hamm Club Dance",
+        "description": "Eyes closed, swaying alone in a packed dark club—the viral Jon Hamm Turn the Lights Off meme. 1 photo. Works in the browser. No subscription.",
+        "h1": "Turn the Lights Off AI Video Generator (Jon Hamm Dance)",
         "lead": "Be the man in the Jon Hamm club meme: eyes closed, lost in the music in a packed, dark club. The 13-second clip is locked in: add one photo and click Generate.",
-        "og_title": "Turn the Lights Off AI Video: Put Your Face in the Viral Clip",
+        "og_title": "Turn the Lights Off AI Trend: Jon Hamm Club Dance",
         "og_tagline": "Turn the Lights Off AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The \"Turn the Lights Off\" meme comes from a TV club scene where Jon Hamm, eyes closed, sways alone in the middle of a crowded dark dance floor. The clip became a go-to reaction for \"me when the song comes on\", and the AI trend puts you in his place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
@@ -1559,7 +1641,12 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-turn-the-lights-off-13.mp4",
-      "light_duration": 13.0
+      "light_duration": 13.0,
+      "aliases": [
+        "Jon Hamm dancing",
+        "Jon Hamm club meme",
+        "me when the song comes on"
+      ]
     },
     {
       "slug": "cheba-man",
@@ -1582,11 +1669,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Cheba Man AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
-        "description": "Put your face in the viral Cheba Man video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Cheba Man AI Video Generator",
+        "title": "Cheba Man AI Trend: Tecktonik Stage Dance, 1 Photo",
+        "description": "Hit Tecktonik on a festival stage with the crowd filming from below—your face as Cheba Man. 1 photo. Works in the browser. No subscription.",
+        "h1": "Cheba Man AI Video Generator: Tecktonik Stage Dance",
         "lead": "Take the stage in the viral <b>Cheba Man</b> Tecktonik dance: arm waves on every beat while the crowd below films on their phones. The 20-second clip is locked in: add one photo and click Generate.",
-        "og_title": "Cheba Man AI Video: Put Your Face in the Viral Clip",
+        "og_title": "Cheba Man AI Trend: Tecktonik Stage Dance, 1 Photo",
         "og_tagline": "Cheba Man AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The Cheba Man clip shows a dancer on a festival stage above a packed night crowd, throwing Tecktonik arm waves on every beat while everyone below holds up their phones. It spread as a \"main character\" moment, and the AI trend puts you on that stage.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
@@ -1636,7 +1723,11 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-cheba-man.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/cheba-man/preview-light.mp4"
+      "light_preview_url": "trends/cheba-man/preview-light.mp4",
+      "aliases": [
+        "Cheba Man dance",
+        "Cheba Man Tecktonik"
+      ]
     },
     {
       "slug": "bulin-47",
@@ -1659,11 +1750,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Bulin 47 AI Video Generator: Put Your Face in the Viral Clip (No Subscription)",
-        "description": "Put your face in the viral Bulin 47 video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Bulin 47 AI Video Generator",
+        "title": "Bulin 47 AI Trend: Street Freestyle With Your Face",
+        "description": "Street freestyle at a red-lit venue entrance, rapping at a fan holding a speaker. 1 photo. Works in the browser. No subscription.",
+        "h1": "Bulin 47 Freestyle AI Video Generator",
         "lead": "Be the rapper in the viral <b>Bulin 47</b> street freestyle: stopped at a red-lit entrance by a fan with a speaker, you rap straight at him. The 15-second clip is locked in: add one photo and click Generate.",
-        "og_title": "Bulin 47 AI Video: Put Your Face in the Viral Clip",
+        "og_title": "Bulin 47 AI Trend: Street Freestyle With Your Face",
         "og_tagline": "Bulin 47 AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The Bulin 47 freestyle was filmed outside a red-lit venue entrance: a fan walks up with a portable speaker playing a dembow beat, and the Dominican artist Bulin 47 answers with an improvised freestyle, hands flying. The clip went viral and became an AI trend where you take the rapper's place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
@@ -1712,11 +1803,16 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bulin-47-15.mp4",
-      "light_duration": 15.0
+      "light_duration": 15.0,
+      "aliases": [
+        "Bulin 47 AI trend",
+        "Bulin 47 freestyle",
+        "speaker freestyle"
+      ]
     },
     {
       "slug": "bad-times",
-      "name": "Bad Times: Dispute Dance",
+      "name": "Bad Times: Imael Angel Dispute Dance",
       "short": "Bad Times dispute dance",
       "card_blurb": "The \"Bad Times\" dispute dance: big, dramatic arguing moves in the kitchen. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times.mp4",
@@ -1735,11 +1831,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Bad Times AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
-        "description": "Put your face in the viral Bad Times video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Bad Times AI Video Generator",
+        "title": "Bad Times AI Trend: Imael Angel Dispute Dance, 1 Photo",
+        "description": "Big dramatic arguing moves in the kitchen—the Imael Angel Bad Times dispute dance viral. 1 photo. Works in the browser. No subscription.",
+        "h1": "Bad Times AI Video Generator: The Dispute Dance",
         "lead": "Do the viral <b>\"Bad Times\"</b> dispute dance: big, dramatic arguing moves straight into the camera. The 20-second clip is locked in: add one photo and click Generate.",
-        "og_title": "Bad Times AI Video: Your Face in the Viral Trend",
+        "og_title": "Bad Times AI Trend: Imael Angel Dispute Dance, 1 Photo",
         "og_tagline": "Bad Times AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The \"Bad Times\" trend is set to Imael Angel's song: a dancer in a kitchen acts out a heated argument, with pointing, eye rolls and dramatic close-ups on every line. It became a widely copied dance, and the AI trend puts you in the argument.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
@@ -1789,11 +1885,16 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/bad-times/preview-light.mp4"
+      "light_preview_url": "trends/bad-times/preview-light.mp4",
+      "aliases": [
+        "Bad Times trend",
+        "Bad Times argument dance",
+        "Imael Angel Bad Times"
+      ]
     },
     {
       "slug": "bad-times-pet",
-      "name": "Bad Times Pet: Your Pet Does the Dispute Dance",
+      "name": "Bad Times Dog & Cat: Your Pet in the Trend",
       "short": "Bad Times pet dance",
       "card_blurb": "Your pet does the \"Bad Times\" dispute dance in the kitchen. One pet photo in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times-pet.mp4",
@@ -1812,11 +1913,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Bad Times Pet AI Video Generator: Put Your Pet in the Viral Trend (No Subscription)",
-        "description": "Put your pet in the viral Bad Times Pet video. The clip is preloaded: add one photo of your pet and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Bad Times Pet AI Video Generator",
+        "title": "Bad Times Dog & Cat AI Trend: Your Pet, 1 Photo",
+        "description": "Your dog or cat does the Bad Times dispute dance in the kitchen—clear pet photo in. 1 photo. Works in the browser. No subscription.",
+        "h1": "Bad Times Dog & Cat AI Video Generator",
         "lead": "Your pet does the viral <b>\"Bad Times\"</b> dispute dance, standing upright in the kitchen. The 20-second clip is locked in: add one photo of your pet and click Generate.",
-        "og_title": "Bad Times Pet AI Video: Your Pet in the Viral Trend",
+        "og_title": "Bad Times Dog & Cat AI Trend: Your Pet, 1 Photo",
         "og_tagline": "Bad Times Pet AI pet video · Genjutsu · Pay per video",
         "about_html": "<p>The pet version of the \"Bad Times\" trend swaps the dancer for a cat that stands upright and throws the same dramatic arguing moves. Cats, dogs and other pets all get the full routine.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds your pet from your photo.</p>",
         "steps": [
@@ -1843,7 +1944,7 @@
         ],
         "faq": [
           [
-            "How do I make the Bad Times Pet AI video?",
+            "How do I make the Bad Times Dog & Cat AI video?",
             "Open this page. The Bad Times Pet clip is already loaded. Add one photo of your pet, then click Generate."
           ],
           [
@@ -1866,11 +1967,16 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times-pet.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/bad-times-pet/preview-light.mp4"
+      "light_preview_url": "trends/bad-times-pet/preview-light.mp4",
+      "aliases": [
+        "Bad Times dog",
+        "Bad Times cat",
+        "Bad Times pet"
+      ]
     },
     {
       "slug": "bad-times-baby",
-      "name": "Bad Times Baby: Baby You Does the Dispute Dance",
+      "name": "Bad Times Toddler: You as a Baby",
       "short": "Bad Times baby dance",
       "card_blurb": "Baby you does the \"Bad Times\" dispute dance by the pool. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/bad-times-baby.mp4",
@@ -1889,11 +1995,11 @@
       ],
       "published": "2026-10-22",
       "seo": {
-        "title": "Bad Times Baby AI Video Generator: Turn Yourself Into a Dancing Baby (No Subscription)",
-        "description": "Turn yourself into a toddler doing the viral Bad Times dispute dance. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Bad Times Baby AI Video Generator",
+        "title": "Bad Times Toddler AI Trend: You as a Baby, 1 Photo",
+        "description": "Turn your adult selfie into a toddler doing the Bad Times dispute dance by the pool. 1 photo. Works in the browser. No subscription.",
+        "h1": "Bad Times Baby (Toddler) AI Video Generator",
         "lead": "Baby you does the viral <b>\"Bad Times\"</b> dispute dance by the pool. The 30-second clip is locked in: add one photo of yourself and click Generate.",
-        "og_title": "Bad Times Baby AI Video: Baby You in the Viral Trend",
+        "og_title": "Bad Times Toddler AI Trend: You as a Baby, 1 Photo",
         "og_tagline": "Bad Times Baby AI video · Genjutsu · Pay per video",
         "about_html": "<p>The baby version of the \"Bad Times\" trend turns you into a toddler throwing the same dramatic arguing moves: the finger wag, the hand in the camera, the shocked face. This one is set on a sunny poolside terrace.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the toddler from your photo: your face, your features, baby-sized.</p>",
         "steps": [
@@ -1920,7 +2026,7 @@
         ],
         "faq": [
           [
-            "How do I make the Bad Times Baby AI video?",
+            "How do I make the Bad Times Toddler AI video?",
             "Open this page. The Bad Times Baby clip is already loaded. Add one photo of yourself, then click Generate."
           ],
           [
@@ -1943,11 +2049,15 @@
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-bad-times-baby.mp4",
       "light_duration": 15.0,
-      "light_preview_url": "trends/bad-times-baby/preview-light.mp4"
+      "light_preview_url": "trends/bad-times-baby/preview-light.mp4",
+      "aliases": [
+        "Bad Times toddler",
+        "Bad Times baby version"
+      ]
     },
     {
       "slug": "i-feel-like-nicole",
-      "name": "I Feel Like Nicole: Street Duo Dance",
+      "name": "I Feel Like Nicole: ADÉLA Duo Dance",
       "short": "I Feel Like Nicole duo",
       "card_blurb": "The \"I Feel Like Nicole\" duo routine on a city street. Put two faces in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/i-feel-like-nicole.mp4",
@@ -1971,11 +2081,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "I Feel Like Nicole AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
-        "description": "Put your face in the viral I Feel Like Nicole video. The clip is preloaded: add 2 photos and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "I Feel Like Nicole AI Video Generator",
+        "title": "I Feel Like Nicole AI Trend: ADÉLA Duo Dance, 2 Photos",
+        "description": "You and a friend in ADÉLA's I Feel Like Nicole street duo routine, side by side. 2 photos. Works in the browser. No subscription.",
+        "h1": "I Feel Like Nicole AI Video Generator (Duo)",
         "lead": "Dance the <b>\"I Feel Like Nicole\"</b> routine with a friend on a city street. The 14-second clip is locked in: add a photo for each dancer and click Generate.",
-        "og_title": "I Feel Like Nicole AI Video: Your Face in the Viral Trend",
+        "og_title": "I Feel Like Nicole AI Trend: ADÉLA Duo Dance, 2 Photos",
         "og_tagline": "I Feel Like Nicole AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>\"I feel like Nicole\" is the hook of ADÉLA's song \"Nicole Kidman\", and its routine took over TikTok. This version is the side-by-side street duo, and the AI trend puts you and a friend in it.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds both people from your photos.</p>",
         "steps": [
@@ -2024,11 +2134,15 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-i-feel-like-nicole.mp4",
-      "light_duration": 13.607
+      "light_duration": 13.607,
+      "aliases": [
+        "I feel like Nicole duo",
+        "ADÉLA street duo"
+      ]
     },
     {
       "slug": "nicole-kidman-dance",
-      "name": "Nicole Kidman Dance: Solo Routine",
+      "name": "Nicole Kidman Dance: ADÉLA Solo",
       "short": "Nicole Kidman dance",
       "card_blurb": "The \"Nicole Kidman\" solo routine, straight to the camera. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/nicole-kidman-dance.mp4",
@@ -2047,11 +2161,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Nicole Kidman Dance AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
-        "description": "Put your face in the viral Nicole Kidman Dance video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Nicole Kidman Dance AI Video Generator",
+        "title": "Nicole Kidman Dance AI Trend: ADÉLA Solo, 1 Photo",
+        "description": "ADÉLA's Nicole Kidman solo routine straight to camera—swap in your face and generate. 1 photo. Works in the browser. No subscription.",
+        "h1": "Nicole Kidman Dance AI Video Generator (Solo)",
         "lead": "Dance the viral <b>\"Nicole Kidman\"</b> routine solo, straight to the camera. The 14-second clip is locked in: add one photo and click Generate.",
-        "og_title": "Nicole Kidman Dance AI Video: Your Face in the Viral Trend",
+        "og_title": "Nicole Kidman Dance AI Trend: ADÉLA Solo, 1 Photo",
         "og_tagline": "Nicole Kidman Dance AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>ADÉLA's \"Nicole Kidman\" turned into a huge TikTok dance trend. This is the classic solo version filmed at home, and the AI trend puts you in it.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
@@ -2100,7 +2214,11 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-nicole-kidman-dance.mp4",
-      "light_duration": 13.607
+      "light_duration": 13.607,
+      "aliases": [
+        "ADÉLA Nicole Kidman dance",
+        "Nicole Kidman TikTok dance (solo)"
+      ]
     },
     {
       "slug": "jawn-dance",
@@ -2123,11 +2241,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "The Jawn Dance AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
-        "description": "Put your face in the viral The Jawn Dance video. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "title": "The Jawn Dance AI Trend: Wait for the Drop, 1 Photo",
+        "description": "Deadpan with a teddy bear in hand, then bounce hard on the drop: the viral Jawn dance. 1 photo. Works in the browser. No subscription.",
         "h1": "The Jawn Dance AI Video Generator",
         "lead": "Do <b>The Jawn</b> dance: stand deadpan, wait for the beat to drop, then bounce. The 12-second clip is locked in: add one photo and click Generate.",
-        "og_title": "The Jawn Dance AI Video: Your Face in the Viral Trend",
+        "og_title": "The Jawn Dance AI Trend: Wait for the Drop, 1 Photo",
         "og_tagline": "The Jawn Dance AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The Jawn dance trend is all about the wait: you stand still and straight-faced while the song builds, then grin and bounce side to side when the beat drops. This garden version stars a tweed-jacket, teddy-bear character, and the AI trend puts you in his place.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the person from your photo.</p>",
         "steps": [
@@ -2176,11 +2294,15 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-jawn-dance-12.mp4",
-      "light_duration": 12.0
+      "light_duration": 12.0,
+      "aliases": [
+        "The Jawn AI trend",
+        "Jawn dance"
+      ]
     },
     {
       "slug": "jawn-baby",
-      "name": "The Jawn Dance Baby: Baby You Waits for the Drop",
+      "name": "Jawn Dance Baby: You as a Toddler",
       "short": "The Jawn baby dance",
       "card_blurb": "Baby you does the Jawn dance: deadpan, then bounce on the drop. One face in.",
       "video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/jawn-baby.mp4",
@@ -2199,11 +2321,11 @@
       ],
       "published": "2026-10-22",
       "seo": {
-        "title": "The Jawn Dance Baby AI Video Generator: Turn Yourself Into a Dancing Baby (No Subscription)",
-        "description": "Turn yourself into a toddler doing the viral Jawn dance. The clip is preloaded: add one photo and generate with Higgsfield Genjutsu. Pay per video.",
+        "title": "Jawn Dance Baby AI Trend: You as a Toddler, 1 Photo",
+        "description": "Baby you waits deadpan, then hits the Jawn drop. Adult selfie in, toddler out. 1 photo. Works in the browser. No subscription.",
         "h1": "The Jawn Dance Baby AI Video Generator",
         "lead": "Baby you does <b>The Jawn</b> dance: a straight face while the song builds, then a bounce when the beat drops. The 12-second clip is locked in: add one photo of yourself and click Generate.",
-        "og_title": "The Jawn Dance Baby AI Video: Baby You in the Viral Trend",
+        "og_title": "Jawn Dance Baby AI Trend: You as a Toddler, 1 Photo",
         "og_tagline": "Jawn Dance Baby AI video · Genjutsu · Pay per video",
         "about_html": "<p>The baby version of the Jawn dance trend turns you into a toddler in a red polo who waits, deadpan, for the beat to drop and then breaks into a grin and a bounce.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds the toddler from your photo: your face, your features, baby-sized.</p>",
         "steps": [
@@ -2252,7 +2374,11 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-jawn-baby.mp4",
-      "light_duration": 11.913
+      "light_duration": 11.913,
+      "aliases": [
+        "Jawn baby",
+        "baby Jawn dance"
+      ]
     },
     {
       "slug": "yeahh-yeahh",
@@ -2280,11 +2406,11 @@
       ],
       "published": "2026-10-21",
       "seo": {
-        "title": "Yeahh Yeahh AI Video Generator: Put Your Face in the Viral Trend (No Subscription)",
-        "description": "Put your face in the viral Yeahh Yeahh video. The clip is preloaded: add 2 photos and generate with Higgsfield Genjutsu. Pay per video.",
-        "h1": "Yeahh Yeahh AI Video Generator",
+        "title": "Yeahh Yeahh AI Trend: Car Seat Dance Duo, 2 Photos",
+        "description": "Two friends in red sunglasses seat-dancing hard in the car to Yeahh Yeahh. 2 photos. Works in the browser. No subscription.",
+        "h1": "Yeahh Yeahh AI Video Generator (Car Seat Duo)",
         "lead": "Seat-dance with a friend in the viral <b>\"Yeahh Yeahh\"</b> car clip, red sunglasses on. The 11-second clip is locked in: add a photo for each seat and click Generate.",
-        "og_title": "Yeahh Yeahh AI Video: Your Face in the Viral Trend",
+        "og_title": "Yeahh Yeahh AI Trend: Car Seat Dance Duo, 2 Photos",
         "og_tagline": "Yeahh Yeahh AI face swap · Genjutsu · Pay per video",
         "about_html": "<p>The \"Yeahh Yeahh\" car clip shows two friends in matching red sunglasses throwing synchronized seat-dance moves in the front of a car. The AI trend puts you and a friend in those seats.</p><p><a href=\"../../genjutsu/\">Genjutsu</a> keeps the original motion, camera moves and timing and rebuilds both people from your photos.</p>",
         "steps": [
@@ -2333,7 +2459,11 @@
         ]
       },
       "light_video_url": "https://tbljgxkbocunzoqvkoeu.supabase.co/storage/v1/object/public/presets/light-yeahh-yeahh-11.mp4",
-      "light_duration": 11.0
+      "light_duration": 11.0,
+      "aliases": [
+        "red sunglasses car dance",
+        "Yeahh Yeahh car trend"
+      ]
     },
     {
       "slug": "qa-4s",
