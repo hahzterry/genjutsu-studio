@@ -473,6 +473,9 @@ async function loadJobs() {
   else {
     const { data } = await sb.from("jobs").select("*").is("hidden_at", null).order("created_at", { ascending: false }).limit(50);
     state.jobs = data || [];
+    // The user's own private ratings (missing table or error: just show the stars unfilled).
+    const { data: rs } = await sb.from("ratings").select("job_id, stars").in("job_id", state.jobs.map((j) => j.id)).then((r) => r, () => ({ data: null }));
+    state.ratings = new Map((rs || []).map((r) => [r.job_id, r.stars]));
   }
   renderJobs(); poll();
 }
@@ -526,6 +529,7 @@ function jobCard(j) {
     const a = el.querySelector("a"); a.href = j.output_url;
     a.onclick = (e) => { e.preventDefault(); download(j.output_url, `genjutsu-${j.trend || "video"}-${j.id.slice(0, 8)}.mp4`, a); };
     el.querySelector(".share-btn").onclick = (e) => shareJob(j, e.currentTarget);
+    if (!DEMO) { el.appendChild(ratingBox(j)); el.appendChild(galleryBox(j)); }
   } else if (!TERMINAL.has(j.status)) {
     const late = age(j) >= GIVE_UP_MS;
     el.insertAdjacentHTML("beforeend", late
@@ -542,6 +546,48 @@ function jobCard(j) {
   }
   el._key = jobKey(j);
   return el;
+}
+// Private rating of a finished video: 1–5 stars, then an optional comment. Only we see it (dashboard).
+function ratingBox(j) {
+  const box = document.createElement("div"); box.className = "rate";
+  box.innerHTML = `<span class="rate-q">How did it come out?</span><span class="stars" role="radiogroup" aria-label="Rate this video"></span>
+    <div class="rate-more" hidden><textarea maxlength="500" rows="2" placeholder="Anything we should know? (optional)"></textarea><button type="button" class="btn">Send</button></div>
+    <span class="rate-thanks muted" hidden>Thanks for the feedback!</span>`;
+  const starsEl = box.querySelector(".stars"), more = box.querySelector(".rate-more"), thanks = box.querySelector(".rate-thanks");
+  let current = state.ratings?.get(j.id) || 0;
+  const paint = (n) => starsEl.querySelectorAll("button").forEach((b, i) => { b.textContent = i < n ? "★" : "☆"; b.setAttribute("aria-checked", String(i + 1 === n)); });
+  for (let i = 1; i <= 5; i++) {
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "radio"); b.setAttribute("aria-label", `${i} star${i > 1 ? "s" : ""}`);
+    b.onmouseenter = () => paint(i); b.onfocus = () => paint(i);
+    b.onclick = async () => {
+      const prev = current; current = i; paint(i);
+      try { await callFn("jobs", { job_id: j.id, action: "rate", stars: i }); state.ratings?.set(j.id, i); more.hidden = false; thanks.hidden = true; }
+      catch (e) { current = prev; paint(prev); toast(e.message || "Couldn't save your rating.", 4000); }
+    };
+    starsEl.appendChild(b);
+  }
+  starsEl.onmouseleave = () => paint(current);
+  paint(current);
+  more.querySelector("button").onclick = async (e) => {
+    const btn = e.currentTarget; btn.disabled = true;
+    try { await callFn("jobs", { job_id: j.id, action: "rate", stars: current, comment: more.querySelector("textarea").value }); more.hidden = true; thanks.hidden = false; }
+    catch (err) { toast(err.message || "Couldn't send it.", 4000); }
+    finally { btn.disabled = false; }
+  };
+  return box;
+}
+// Opt-in (unchecked by default) to let us feature this video and its prompt in the public gallery.
+function galleryBox(j) {
+  const l = document.createElement("label"); l.className = "gallery-opt";
+  l.innerHTML = `<input type="checkbox"> <span>Show this video and its prompt in the public gallery, so others can make their own. I have permission from everyone in it.</span>`;
+  const cb = l.querySelector("input"); cb.checked = !!j.gallery_opt_in_at;
+  cb.onchange = async () => {
+    cb.disabled = true;
+    try { const r = await callFn("jobs", { job_id: j.id, action: "gallery", opt_in: cb.checked }); j.gallery_opt_in_at = r.at || null; toast(cb.checked ? "Thanks! We may feature it in the gallery." : "OK, it won't be shown in the gallery."); }
+    catch (e) { cb.checked = !cb.checked; toast(e.message || "Couldn't save that.", 4000); }
+    finally { cb.disabled = false; }
+  };
+  return l;
 }
 // Share: the server makes a public link (/watch/?v=…) to this one finished video; anyone can open it.
 // Our own pop-up (link + Copy + a few apps); the system share sheet is only an optional "More…".
@@ -693,6 +739,30 @@ initAuth();
 
 // Gallery: hover a trend card to play its scene with sound. Browsers block sound until the visitor
 // has clicked/tapped the page once, so until then it plays muted and the 🔇 badge turns sound on.
+// Gallery masonry, row-first: CSS columns would fill top-to-bottom, so the best-ranked trends would stack in
+// the first column. Instead put each card (in ranked order) into the currently shortest column.
+(function masonry() {
+  const grid = document.querySelector(".trend-grid");
+  if (!grid) return;
+  const items = [...grid.querySelectorAll(":scope > .trend-card")];
+  let cols = 0;
+  const layout = () => {
+    const gap = innerWidth <= 520 ? 10 : 14, n = innerWidth <= 520 ? 2 : Math.max(1, Math.floor((grid.clientWidth + gap) / (230 + gap)));
+    if (n === cols) return;
+    cols = n;
+    const colEls = Array.from({ length: n }, () => Object.assign(document.createElement("div"), { className: "tg-col" }));
+    const width = (grid.clientWidth - gap * (n - 1)) / n;
+    const heights = new Array(n).fill(0);
+    for (const it of items) {
+      const m = it.querySelector(".tc-media"), r = (m && getComputedStyle(m).aspectRatio.split("/").map(Number)) || [9, 16];
+      const h = r.length === 2 && r[0] > 0 ? (width * r[1]) / r[0] : width * 16 / 9;
+      const k = heights.indexOf(Math.min(...heights));
+      colEls[k].appendChild(it); heights[k] += h + 60 + gap; // ~60px title bar
+    }
+    grid.replaceChildren(...colEls); grid.classList.add("js-masonry");
+  };
+  layout(); addEventListener("resize", layout);
+})();
 const cards = [...document.querySelectorAll(".trend-card .tc-media")].filter((m) => m.querySelector("video"));
 let soundOk = navigator.userActivation?.hasBeenActive ?? false;
 const badgeText = (v) => (v.muted ? "🔇 Tap for sound" : "🔊");

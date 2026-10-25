@@ -8,6 +8,7 @@ add an entry to trends.json, drop a 1200x630 og.jpg in docs/trends/<slug>/
 import html
 import json
 import math
+import subprocess
 from datetime import date
 from pathlib import Path
 
@@ -29,7 +30,25 @@ def trend_names():
 
 
 # Newest first (by "published"); trends published the same day keep their order in trends.json.
-TRENDS = sorted((t for t in ALL_TRENDS if not t.get("hidden")), key=lambda t: t.get("published", ""), reverse=True)
+# Gallery order: 60% popularity (paid videos in the last 30 days, site/popularity.py, log-scaled so one hit
+# can't bury the rest) + 40% newness (halves every 10 days after `published`). New-and-selling on top,
+# old-and-unbought at the bottom.
+_POP = json.loads((SITE / "popularity.json").read_text()) if (SITE / "popularity.json").exists() else {}
+for _old, _new in TREND_ALIASES.items():
+    _POP[_new] = _POP.get(_new, 0) + _POP.pop(_old, 0)
+_POP_MAX = max([1] + list(_POP.values()))
+
+
+def trend_score(t):
+    pop = math.log1p(_POP.get(t["slug"], 0)) / math.log1p(_POP_MAX)
+    try:
+        age = max(0, (date.today() - date.fromisoformat(t.get("published", "2026-01-01"))).days)
+    except ValueError:
+        age = 365
+    return 0.6 * pop + 0.4 * 0.5 ** (age / 10)
+
+
+TRENDS = sorted((t for t in ALL_TRENDS if not t.get("hidden")), key=lambda t: (trend_score(t), t.get("published", "")), reverse=True)
 TODAY = date.today().isoformat()
 CREDITS_PER_SEC_DEFAULT = 47.7  # 480p; keep in sync with docs/config.js
 FEE_CREDITS = 100
@@ -549,6 +568,17 @@ for t in ALL_TRENDS:
         "brand": {"@type": "Brand", "name": "Genjutsu Studio"}, "category": "AI video generation",
         "offers": {"@type": "Offer", "url": BASE + path, "priceCurrency": "USD", "price": f"{low / 100:.2f}",
                    "availability": "https://schema.org/InStock",
+                   # Digital product delivered online: free and instant. Matches the Terms: finished videos
+                   # can't be returned; failed or blocked renders are refunded automatically (credits).
+                   "shippingDetails": {"@type": "OfferShippingDetails",
+                                       "shippingRate": {"@type": "MonetaryAmount", "value": "0", "currency": "USD"},
+                                       "shippingDestination": {"@type": "DefinedRegion", "addressCountry": "US"},
+                                       "deliveryTime": {"@type": "ShippingDeliveryTime",
+                                                        "handlingTime": {"@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY"},
+                                                        "transitTime": {"@type": "QuantitativeValue", "minValue": 0, "maxValue": 0, "unitCode": "DAY"}}},
+                   "hasMerchantReturnPolicy": {"@type": "MerchantReturnPolicy", "applicableCountry": "US",
+                                               "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+                                               "merchantReturnLink": f"{BASE}terms/"},
                    "seller": {"@type": "Organization", "name": "Genjutsu Studio", "url": BASE}},
     }
     all_faq = s["faq"] + [x for x in extra_faq(t) if x[0] not in {f[0] for f in s["faq"]}]
@@ -593,12 +623,23 @@ for t in ALL_TRENDS:
     write(f"{path}index.html", body)
 
 # ---------------- home ----------------
+def video_aspect(t):
+    """The preview video's own width/height (cards keep the clip's shape); 9/16 if ffprobe can't tell."""
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height",
+                              "-of", "csv=p=0", str(DOCS / t.get("preview_url", ""))], capture_output=True, text=True, timeout=20).stdout
+        w, h = (int(x) for x in out.strip().split(",")[:2])
+        return f"{w} / {h}" if w > 0 and h > 0 else "9 / 16"
+    except Exception:
+        return "9 / 16"
+
+
 def card_title(t):
     """Short card title: the name before ':', or the trend's short name if another trend shares it."""
     base = t["name"].split(":")[0].strip()
     return t["short"] if sum(1 for x in TRENDS if x["name"].split(":")[0].strip() == base) > 1 else base
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
-          <div class="tc-media"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" loading="lazy" /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
+          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" loading="lazy" /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
           <div class="tc-body"><b>{esc(card_title(t))}</b></div>
         </a>""" for t in TRENDS)
 home_faq = [

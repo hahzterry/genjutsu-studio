@@ -160,14 +160,14 @@ main > .crumbs { padding-top: 6px; }
 .drop.locked:hover { border-color: var(--line); }
 .lock-tag { position: absolute; left: 10px; bottom: 10px; background: rgba(0,0,0,.75); font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; }
 .slot-hint { font-size: 12px; color: var(--muted); }
-.trend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-.trend-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+.trend-grid { columns: 230px 4; column-gap: 14px; }  /* masonry: each card keeps its video's shape */
+.trend-card { break-inside: avoid; margin-bottom: 14px; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
   color: var(--text); text-decoration: none; transition: transform .15s, border-color .15s; }
 .trend-card:hover { transform: translateY(-2px); border-color: var(--accent); }
-.tc-media { position: relative; aspect-ratio: 9/16; background: #000; }
+.tc-media { position: relative; aspect-ratio: 9/16; background: #000; }  /* overridden per card */
 .tc-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .tc-badge { position: absolute; top: 10px; left: 10px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
-.tc-custom { display: grid; place-items: center; font-size: 44px; background: linear-gradient(135deg, rgba(167,139,250,.25), rgba(236,72,153,.18)); }
+.tc-custom { aspect-ratio: 4 / 3; display: grid; place-items: center; font-size: 44px; background: linear-gradient(135deg, rgba(167,139,250,.25), rgba(236,72,153,.18)); }
 .tc-body { padding: 10px 12px 12px; display: grid; gap: 6px; }
 .tc-body span { color: var(--muted); font-size: 14px; line-height: 1.45; }
 .tc-body .tc-meta { font-size: 12px; color: #c4b5fd; }
@@ -310,4 +310,17 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 .example-result .ex-video { position: relative; margin: 10px 0 6px; max-width: 360px; }
 .example-result video { width: 100%; display: block; border-radius: 16px; }
 .example-result .eq-sound { position: absolute; right: 10px; bottom: 10px; }
-@media (max-width: 520px) { .trend-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .tc-body b { font-size: 14px; } }
+@media (max-width: 520px) { .trend-grid { columns: 2; column-gap: 10px; } .trend-card { margin-bottom: 10px; } .tc-body b { font-size: 14px; } }
+.rate { display: grid; gap: 8px; padding-top: 4px; }
+.rate-q { font-size: 14px; color: var(--muted); }
+.stars { display: flex; gap: 4px; }
+.stars button { background: none; border: 0; padding: 2px; font-size: 26px; line-height: 1; color: #fbbf24; cursor: pointer; }
+.stars button:focus-visible { outline: 2px solid var(--accent); border-radius: 6px; }
+.rate-more { display: grid; gap: 8px; }
+.rate-more textarea { width: 100%; box-sizing: border-box; background: var(--card2); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 8px; font: inherit; }
+.rate-more .btn { justify-self: start; }
+.gallery-opt { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--muted); line-height: 1.4; cursor: pointer; }
+.gallery-opt input { margin-top: 2px; width: 16px; height: 16px; flex: none; }
+.trend-grid.js-masonry { columns: auto; display: flex; gap: 14px; align-items: flex-start; }
+.trend-grid.js-masonry .tg-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+@media (max-width: 520px) { .trend-grid.js-masonry { gap: 10px; } }

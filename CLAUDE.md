@@ -33,6 +33,15 @@ committed+pushed, deployed (`supabase functions deploy`, GitHub Pages) or applie
 Background: on 2026-10-15..19 the public site ran on sandbox PayPal; strangers paid with fake sandbox cards and
 started real (paid) Higgsfield renders.
 
+### User videos in the gallery
+- A user's video may be featured in the gallery only if its owner ticked "Show this video and its prompt in the
+  public gallery" on My videos (`jobs.gallery_opt_in_at` is set), the job is NOT deleted (`hidden_at` is null) AND
+  it is at least 4 days old. Never sooner, even with consent. Re-check right before each gallery build: an opt-out
+  or a delete removes it. The checkbox also confirms permission from everyone in the video.
+- It's added as a new gallery item with the prompt the user used, so new users can recreate it.
+- Gallery order: `site/popularity.py` (paid videos per trend, last 30 days) then `site/build.py`
+  (score = 60% popularity, 40% newness halving every 10 days).
+
 ## Commands
 - Build the site: `python3 site/build.py` (regenerates every page in `docs/`, the sitemap and robots.txt).
 - Type-check an edge function: `deno check supabase/functions/<name>/index.ts`
