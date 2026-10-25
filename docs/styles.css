@@ -324,3 +324,4 @@ textarea[readonly] { color: var(--muted); cursor: default; }
 .trend-grid.js-masonry { columns: auto; display: flex; gap: 14px; align-items: flex-start; }
 .trend-grid.js-masonry .tg-col { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 @media (max-width: 520px) { .trend-grid.js-masonry { gap: 10px; } }
+.rate-share { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; background: var(--card2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }

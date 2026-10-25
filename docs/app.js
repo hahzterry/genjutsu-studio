@@ -529,7 +529,7 @@ function jobCard(j) {
     const a = el.querySelector("a"); a.href = j.output_url;
     a.onclick = (e) => { e.preventDefault(); download(j.output_url, `genjutsu-${j.trend || "video"}-${j.id.slice(0, 8)}.mp4`, a); };
     el.querySelector(".share-btn").onclick = (e) => shareJob(j, e.currentTarget);
-    if (!DEMO) { el.appendChild(ratingBox(j)); el.appendChild(galleryBox(j)); }
+    if (!DEMO) { const g = galleryBox(j); el.appendChild(ratingBox(j, g)); el.appendChild(g); }
   } else if (!TERMINAL.has(j.status)) {
     const late = age(j) >= GIVE_UP_MS;
     el.insertAdjacentHTML("beforeend", late
@@ -548,11 +548,12 @@ function jobCard(j) {
   return el;
 }
 // Private rating of a finished video: 1–5 stars, then an optional comment. Only we see it (dashboard).
-function ratingBox(j) {
+function ratingBox(j, gallery) {
   const box = document.createElement("div"); box.className = "rate";
   box.innerHTML = `<span class="rate-q">How did it come out?</span><span class="stars" role="radiogroup" aria-label="Rate this video"></span>
     <div class="rate-more" hidden><textarea maxlength="500" rows="2" placeholder="Anything we should know? (optional)"></textarea><button type="button" class="btn">Send</button></div>
-    <span class="rate-thanks muted" hidden>Thanks for the feedback!</span>`;
+    <span class="rate-thanks muted" hidden>Thanks for the feedback!</span>
+    <div class="rate-share" hidden><span>Love it? Share it in the public gallery so others can make their own.</span> <button type="button" class="btn">Yes, share it. I have permission from everyone in it.</button></div>`;
   const starsEl = box.querySelector(".stars"), more = box.querySelector(".rate-more"), thanks = box.querySelector(".rate-thanks");
   let current = state.ratings?.get(j.id) || 0;
   const paint = (n) => starsEl.querySelectorAll("button").forEach((b, i) => { b.textContent = i < n ? "★" : "☆"; b.setAttribute("aria-checked", String(i + 1 === n)); });
@@ -561,12 +562,22 @@ function ratingBox(j) {
     b.onmouseenter = () => paint(i); b.onfocus = () => paint(i);
     b.onclick = async () => {
       const prev = current; current = i; paint(i);
-      try { await callFn("jobs", { job_id: j.id, action: "rate", stars: i }); state.ratings?.set(j.id, i); more.hidden = false; thanks.hidden = true; }
+      try {
+        await callFn("jobs", { job_id: j.id, action: "rate", stars: i }); state.ratings?.set(j.id, i); more.hidden = false; thanks.hidden = true;
+        // A happy rating is the moment to ask (once, never pre-ticked): one tap ticks the gallery box.
+        const gcb = gallery?.querySelector("input");
+        box.querySelector(".rate-share").hidden = !(i >= 4 && gcb && !gcb.checked && !gcb.disabled);
+      }
       catch (e) { current = prev; paint(prev); toast(e.message || "Couldn't save your rating.", 4000); }
     };
     starsEl.appendChild(b);
   }
   starsEl.onmouseleave = () => paint(current);
+  box.querySelector(".rate-share button").onclick = () => {
+    const cb = gallery?.querySelector("input");
+    if (cb && !cb.checked && !cb.disabled) { cb.checked = true; cb.dispatchEvent(new Event("change")); }
+    box.querySelector(".rate-share").hidden = true;
+  };
   paint(current);
   more.querySelector("button").onclick = async (e) => {
     const btn = e.currentTarget; btn.disabled = true;
