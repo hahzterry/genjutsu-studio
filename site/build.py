@@ -58,7 +58,7 @@ RATES = {"480p": 47.7, "720p": 102.15, "1080p": 244.8}  # credits/sec, keep in s
 LIGHT_RATES = {"480p": 15, "720p": 30, "1080p": 60}  # Normal mode (Light), output + source billed; keep in sync
 # Changes whenever app.js / styles.css / config.js change, so browsers never run a stale copy.
 # Every file loaded with ?v=ASSET_VER must be in this list: Cloudflare tells browsers to keep ?v= files for a year.
-ASSET_VER = __import__("hashlib").sha1(b"".join((DOCS / f).read_bytes() for f in ("app.js", "styles.css", "config.js", "watch.js", "goatcounter.js"))).hexdigest()[:10]
+ASSET_VER = __import__("hashlib").sha1(b"".join((DOCS / f).read_bytes() for f in ("app.js", "styles.css", "config.js", "watch.js", "goatcounter.js", "vendor-supabase.js"))).hexdigest()[:10]
 
 esc = html.escape
 
@@ -71,6 +71,13 @@ def abs_url(p):
 def rel(root, p):
     """Site-relative asset path (or full URL) -> URL relative to the current page."""
     return p if p.startswith("http") else root + p
+
+
+def css_url(p):
+    """A path for a CSS url("..."): only plain URL characters, so it can't end the string or the style attribute."""
+    if not re.fullmatch(r"[A-Za-z0-9._~/:%-]+", p):
+        raise ValueError(f"unsafe CSS url: {p!r}")
+    return p
 
 
 def ld(*objs):
@@ -210,7 +217,7 @@ def footer(root, app=True, page=None):
 
   <script>window.PAGE = {json.dumps(page, ensure_ascii=False)}; window.TREND_NAMES = {json.dumps(names, ensure_ascii=False)};</script>
   <script src="{root}config.js?v={ASSET_VER}"></script>
-  <script src="{root}vendor-supabase.js?v=2.117.2"></script>
+  <script src="{root}vendor-supabase.js?v={ASSET_VER}"></script>
   <script type="module" src="{root}app.js?v={ASSET_VER}"></script>
 </body>
 </html>
@@ -377,7 +384,7 @@ def studio_trend_c(t, root):
     """Design C: video on the left, one control panel on the right (stacks on phones)."""
     return f"""    <section class="studio studio-c" id="studio">
       <div class="c-media">
-        <div class="drop locked" id="video-drop" style="width: 100%; aspect-ratio: {video_aspect(t)}; max-height: 324px; background: #000 url({rel(root, t['poster'])}) center / contain no-repeat">
+        <div class="drop locked" id="video-drop" style="width: 100%; aspect-ratio: {video_aspect(t)}; max-height: 324px; background: #000 url(&quot;{css_url(rel(root, t['poster']))}&quot;) center / contain no-repeat">
           <video id="video-preview" muted loop playsinline autoplay controls controlslist="nodownload noplaybackrate" hidden></video>
           <span class="lock-tag">🔒 {esc(t['short'])}</span>
 {short_chip(t)}
@@ -562,6 +569,23 @@ def added_on(path):
     return out[-1] if out else TODAY + "T00:00:00+00:00"
 
 
+def card_img(t):
+    """A 720 px copy of the poster for the home cards (the full poster weighs ~3x more), made with ffmpeg.
+    The name carries the poster's hash, so a new poster gets a new URL and the 7-day cache can't serve the old one."""
+    src = DOCS / t["poster"]
+    if t["poster"].startswith("http") or not src.exists():
+        return t["poster"]
+    name = f"card-{hashlib.sha256(src.read_bytes()).hexdigest()[:10]}.jpg"
+    out = src.parent / name
+    if not out.exists():
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", "scale='min(720,iw)':-2:flags=lanczos",
+                        "-q:v", "6", str(out)], check=True, timeout=60)
+    for old in src.parent.glob("card-*.jpg"):
+        if old != out:
+            old.unlink()
+    return str(out.relative_to(DOCS))
+
+
 def video_aspect(t):
     """The preview video's own width/height (cards keep the clip's shape); 9/16 if ffprobe can't tell."""
     try:
@@ -677,7 +701,7 @@ def card_title(t):
 # The first row of posters is the home page's LCP: load it right away, lazy-load the rest.
 FIRST_ROW = 4
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
-          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{rel('', t['poster'])}" alt="{esc(t['name'])} AI video trend" {'fetchpriority="high"' if i == 0 else 'loading="eager"' if i < FIRST_ROW else 'loading="lazy"'} /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
+          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{rel('', card_img(t))}" alt="{esc(t['name'])} AI video trend" {'fetchpriority="high"' if i == 0 else 'loading="eager"' if i < FIRST_ROW else 'loading="lazy"'} /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
           <div class="tc-body"><b>{esc(card_title(t))}</b></div>
         </a>""" for i, t in enumerate(TRENDS))
 home_faq = [
