@@ -57,7 +57,8 @@ FEE_CREDITS = 100
 RATES = {"480p": 47.7, "720p": 102.15, "1080p": 244.8}  # credits/sec, keep in sync with docs/config.js
 LIGHT_RATES = {"480p": 15, "720p": 30, "1080p": 60}  # Normal mode (Light), output + source billed; keep in sync
 # Changes whenever app.js / styles.css / config.js change, so browsers never run a stale copy.
-ASSET_VER = __import__("hashlib").sha1(b"".join((DOCS / f).read_bytes() for f in ("app.js", "styles.css", "config.js"))).hexdigest()[:10]
+# Every file loaded with ?v=ASSET_VER must be in this list: Cloudflare tells browsers to keep ?v= files for a year.
+ASSET_VER = __import__("hashlib").sha1(b"".join((DOCS / f).read_bytes() for f in ("app.js", "styles.css", "config.js", "watch.js", "goatcounter.js"))).hexdigest()[:10]
 
 esc = html.escape
 
@@ -132,8 +133,7 @@ def head(*, path, title, description, og_title=None, og_type="website", image, e
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="{root}styles.css?v={ASSET_VER}" />
   <script data-goatcounter="https://genjutsu-trends.goatcounter.com/count" async src="{root}goatcounter.js?v={ASSET_VER}"></script>
 {extra_ld}
@@ -377,7 +377,7 @@ def studio_trend_c(t, root):
     """Design C: video on the left, one control panel on the right (stacks on phones)."""
     return f"""    <section class="studio studio-c" id="studio">
       <div class="c-media">
-        <div class="drop locked" id="video-drop">
+        <div class="drop locked" id="video-drop" style="width: 100%; aspect-ratio: {video_aspect(t)}; max-height: 324px; background: #000 url({rel(root, t['poster'])}) center / contain no-repeat">
           <video id="video-preview" muted loop playsinline autoplay controls controlslist="nodownload noplaybackrate" hidden></video>
           <span class="lock-tag">🔒 {esc(t['short'])}</span>
 {short_chip(t)}
@@ -385,17 +385,17 @@ def studio_trend_c(t, root):
       </div>
       <aside class="c-panel card">
 {model_switch(t)}
-        <h3 class="c-h">Photos</h3>
+        <h2 class="c-h">Photos</h2>
         <div class="drop images" id="image-drop">
           <input type="file" id="image-input" accept="image/jpeg,image/png,image/webp" hidden />
           <div class="drop-empty" id="image-empty"></div>
           <div class="thumbs" id="thumbs" hidden></div>
         </div>
         <p class="c-note">One person per photo, facing the camera, good light, no sunglasses.</p>
-        <div class="c-head"><h3 class="c-h"><label for="prompt">Prompt</label></h3>
+        <div class="c-head"><h2 class="c-h"><label for="prompt">Prompt</label></h2>
           <button type="button" class="link-btn" id="prompt-reset" hidden>↺ Reset to default</button></div>
         <textarea id="prompt" rows="4" maxlength="2000">{esc(t['prompt'])}</textarea>
-        <h3 class="c-h">Resolution</h3>
+        <h2 class="c-h">Resolution</h2>
 {RES_ROW}{STARTED_NOTE}      </aside>
     </section>
 """
@@ -557,9 +557,20 @@ def media_secs(path):
 
 def added_on(path):
     """The day a file was first committed (a real upload date for VideoObject), today if it's new."""
-    out = subprocess.run(["git", "log", "--diff-filter=A", "--format=%cs", "--", str(DOCS / path)],
+    out = subprocess.run(["git", "log", "--diff-filter=A", "--format=%cI", "--", str(DOCS / path)],
                          capture_output=True, text=True, cwd=ROOT).stdout.split()
-    return out[-1] if out else TODAY
+    return out[-1] if out else TODAY + "T00:00:00+00:00"
+
+
+def video_aspect(t):
+    """The preview video's own width/height (cards keep the clip's shape); 9/16 if ffprobe can't tell."""
+    try:
+        out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height",
+                              "-of", "csv=p=0", str(DOCS / t.get("preview_url", ""))], capture_output=True, text=True, timeout=20).stdout
+        w, h = (int(x) for x in out.strip().split(",")[:2])
+        return f"{w} / {h}" if w > 0 and h > 0 else "9 / 16"
+    except Exception:
+        return "9 / 16"
 
 
 # ---------------- trend pages ----------------
@@ -581,14 +592,16 @@ for t in ALL_TRENDS:
         "image": og_image(path, t), "totalTime": "PT5M",
         "step": [{"@type": "HowToStep", "position": i + 1, "name": n, "text": x} for i, (n, x) in enumerate(s["steps"])],
     }
+    low = trend_credits(dict(t, model="light", duration=t["light_duration"])) if has_light(t) else trend_credits(dict(t, model="full"))
     app_ld = {
         "@context": "https://schema.org", "@type": "WebApplication", "name": f"{t['name']} AI video generator",
         "url": BASE + path, "applicationCategory": "MultimediaApplication", "operatingSystem": "Any (web browser)",
         "description": s["description"], "image": og_image(path, t),
+        # same lowest price as the Product offer below, so the two can't disagree
+        "offers": {"@type": "Offer", "price": f"{low / 100:.2f}", "priceCurrency": "USD", "url": BASE + path},
     }
     # Product markup (ChatGPT shopping / Google product results): the trend video at its lowest real price,
     # i.e. what the page itself shows first (Light at 480p when the trend has a Light clip).
-    low = trend_credits(dict(t, model="light", duration=t["light_duration"])) if has_light(t) else trend_credits(dict(t, model="full"))
     product_ld = None if t.get("hidden") else {
         "@context": "https://schema.org", "@type": "Product", "name": f"{t['name']} AI video",
         "description": s["description"], "image": og_image(path, t), "url": BASE + path,
@@ -657,17 +670,6 @@ for t in ALL_TRENDS:
     write(f"{path}index.html", body)
 
 # ---------------- home ----------------
-def video_aspect(t):
-    """The preview video's own width/height (cards keep the clip's shape); 9/16 if ffprobe can't tell."""
-    try:
-        out = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height",
-                              "-of", "csv=p=0", str(DOCS / t.get("preview_url", ""))], capture_output=True, text=True, timeout=20).stdout
-        w, h = (int(x) for x in out.strip().split(",")[:2])
-        return f"{w} / {h}" if w > 0 and h > 0 else "9 / 16"
-    except Exception:
-        return "9 / 16"
-
-
 def card_title(t):
     """Short card title: the name before ':', or the trend's short name if another trend shares it."""
     base = t["name"].split(":")[0].strip()
