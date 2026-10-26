@@ -572,18 +572,20 @@ def added_on(path):
 def card_img(t):
     """A 720 px copy of the poster for the home cards (the full poster weighs ~3x more), made with ffmpeg.
     The name carries the poster's hash, so a new poster gets a new URL and the 7-day cache can't serve the old one."""
-    src = DOCS / t["poster"]
+    src = (DOCS / t["poster"]).resolve()
     if t["poster"].startswith("http") or not src.exists():
         return t["poster"]
+    if not src.is_relative_to(DOCS.resolve()):
+        raise ValueError(f"poster outside docs/: {t['poster']!r}")
     name = f"card-{hashlib.sha256(src.read_bytes()).hexdigest()[:10]}.jpg"
     out = src.parent / name
     if not out.exists():
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-vf", "scale='min(720,iw)':-2:flags=lanczos",
-                        "-q:v", "6", str(out)], check=True, timeout=60)
+                        "-q:v", "6", "-map_metadata", "-1", "-fflags", "+bitexact", "-flags:v", "+bitexact", str(out)], check=True, timeout=60)
     for old in src.parent.glob("card-*.jpg"):
         if old != out:
             old.unlink()
-    return str(out.relative_to(DOCS))
+    return str(out.relative_to(DOCS.resolve()))
 
 
 def video_aspect(t):
@@ -701,7 +703,7 @@ def card_title(t):
 # The first row of posters is the home page's LCP: load it right away, lazy-load the rest.
 FIRST_ROW = 4
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
-          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{rel('', card_img(t))}" alt="{esc(t['name'])} AI video trend" {'fetchpriority="high"' if i == 0 else 'loading="eager"' if i < FIRST_ROW else 'loading="lazy"'} /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
+          <div class="tc-media" style="aspect-ratio: {video_aspect(t)}"><img src="{esc(rel('', card_img(t)))}" alt="{esc(t['name'])} AI video trend" {'fetchpriority="high"' if i == 0 else 'loading="eager"' if i < FIRST_ROW else 'loading="lazy"'} /><video data-src="{rel('', t.get('preview_url', t['video_url']))}" loop playsinline preload="none"></video><span class="tc-badge">🔥 Trending</span><span class="tc-sound" hidden>🔇</span></div>
           <div class="tc-body"><b>{esc(card_title(t))}</b></div>
         </a>""" for i, t in enumerate(TRENDS))
 home_faq = [

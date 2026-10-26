@@ -458,6 +458,7 @@ async function generate() {
       }
     }
     state.started = true;
+    track(`generate/${trend}`);
     await loadCredits();
     if (DEMO) { state.jobs.unshift(job); }
     toast("Generating! Find it in My videos.");
@@ -677,7 +678,13 @@ function packList() {
   const tag = short >= MIN_EXACT ? "No leftovers" : "Minimum $2";
   return [{ id: "exact", label: "Just this video", tag, credits, usd: (credits / 100).toFixed(2) }, ...C.PACKS];
 }
+// Funnel counts in GoatCounter (buy-open -> purchase/<pack> -> generate/<trend>): event names only, no
+// amounts or user data. Demo and ?mock= test runs are not counted.
+function track(name) {
+  try { if (!DEMO && !MOCK) window.goatcounter?.count?.({ path: name, title: name, event: true }); } catch {}
+}
 function openBuy(reason) {
+  track("buy-open");
   if (estimate() - state.credits > 0) state.pack = "exact";
   else if (state.pack === "exact") state.pack = C.PACKS[0].id;
   $("buy-reason").textContent = reason || "One-time payment. No subscription.";
@@ -730,6 +737,7 @@ async function renderPayPal() {
       onApprove: async ({ orderID }) => {
         const r = await callFn("paypal", { action: "capture", order_id: orderID });
         if (r?.error) { $("buy-err").textContent = r.error; return; } // pending: credits arrive later
+        track(`purchase/${pack.id}`); // only after the server captured the payment
         onPaid(r.credits_added);
       },
       onError: (err) => { $("buy-err").textContent = err?.message || "Payment failed. You were not charged."; },
