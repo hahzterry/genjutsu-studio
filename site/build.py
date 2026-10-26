@@ -50,6 +50,7 @@ def trend_score(t):
     return 0.6 * pop + 0.4 * 0.5 ** (age / 10)
 
 
+assert all(re.fullmatch(r"[a-z0-9-]{1,40}", t["slug"]) for t in ALL_TRENDS), "bad slug in trends.json"
 TRENDS = sorted((t for t in ALL_TRENDS if not t.get("hidden")), key=lambda t: (trend_score(t), t.get("published", "")), reverse=True)
 TODAY = date.today().isoformat()
 CREDITS_PER_SEC_DEFAULT = 47.7  # 480p; keep in sync with docs/config.js
@@ -172,7 +173,7 @@ def header(root, app=True, active=""):
 def footer(root, app=True, page=None):
     trend_links = " · ".join(f'<a href="{root}trends/{t["slug"]}/">{esc(t["short"])}</a>' for t in TRENDS)
     out = f"""  <footer>
-    <nav class="foot-links"><a href="{root}">All trends</a> · {trend_links} · <a href="{root}custom/">Custom trend</a> · <a href="{root}pricing/">Pricing</a> · <a href="{root}genjutsu/">About Genjutsu</a> · <a href="{root}terms/">Terms</a> · <a href="{root}privacy/">Privacy</a> · <a href="{root}accessibility/">Accessibility</a></nav>
+    <nav class="foot-links"><a href="{root}">All trends</a> · <!--rank-->{trend_links}<!--/rank--> · <a href="{root}custom/">Custom trend</a> · <a href="{root}pricing/">Pricing</a> · <a href="{root}genjutsu/">About Genjutsu</a> · <a href="{root}terms/">Terms</a> · <a href="{root}privacy/">Privacy</a> · <a href="{root}accessibility/">Accessibility</a></nav>
     Independent service, not affiliated with or endorsed by Higgsfield AI. Videos are made with Higgsfield's Genjutsu model through its API. Not affiliated with the owners of the films and clips referenced, and not affiliated with or endorsed by the artists or their estates.
   </footer>
 """
@@ -523,7 +524,9 @@ PAGE_HASH = {}  # page path -> hash of its content (minus the asset version), fo
 
 def write(rel, content):
     if rel.endswith("index.html"):
-        PAGE_HASH[rel[: -len("index.html")]] = hashlib.sha1(re.sub(r"\?v=[0-9a-f]{10}", "", content).encode()).hexdigest()
+        # Lists that follow the gallery ranking (<!--rank-->…<!--/rank-->) reorder with popularity; that isn't a content change.
+        stable = re.sub(r"<!--rank-->.*?<!--/rank-->", "", re.sub(r"\?v=[0-9a-f]{10}", "", content), flags=re.S)
+        PAGE_HASH[rel[: -len("index.html")]] = hashlib.sha1(stable.encode()).hexdigest()
     p = DOCS / rel
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(content)
@@ -597,6 +600,26 @@ def video_aspect(t):
         return f"{w} / {h}" if w > 0 and h > 0 else "9 / 16"
     except Exception:
         return "9 / 16"
+
+
+def card_title(t):
+    """Short card title: the name before ':', or the trend's short name if another trend shares it."""
+    base = t["name"].split(":")[0].strip()
+    return t["short"] if sum(1 for x in TRENDS if x["name"].split(":")[0].strip() == base) > 1 else base
+
+
+# Words that don't make two trends siblings (bad-times-baby and industry-baby aren't related).
+_GENERIC = {"the", "dance", "baby", "man", "car", "i", "feel", "like", "lights", "off", "turn", "your", "style"}
+
+
+def related(t, n=4):
+    """In-page links to similar trends: same family first (bad-times-*, thriller-*), then the trends ranked just
+    after this one in the gallery, so every trend page gets a few links from other trend pages."""
+    words = set(t["slug"].split("-")) - _GENERIC
+    i = next((k for k, x in enumerate(TRENDS) if x["slug"] == t["slug"]), -1)
+    ring = [x for x in TRENDS[i + 1:] + TRENDS[:max(i, 0)] if x["slug"] != t["slug"]]
+    family = [x for x in ring if words & set(x["slug"].split("-"))]
+    return (family + [x for x in ring if x not in family])[:n]
 
 
 # ---------------- trend pages ----------------
@@ -687,6 +710,7 @@ for t in ALL_TRENDS:
 
     <section class="more">
       <h2>More trends</h2>
+      <p>Similar trends: <!--rank-->{" · ".join(f'<a href="{root}trends/{x["slug"]}/">{esc(card_title(x))}</a>' for x in related(t))}<!--/rank-->.</p>
       <p><a href="{root}">Browse all trends</a> or make your own on the <a href="{root}custom/">Custom</a> page.</p>
     </section>
   </main>
@@ -696,10 +720,6 @@ for t in ALL_TRENDS:
     write(f"{path}index.html", body)
 
 # ---------------- home ----------------
-def card_title(t):
-    """Short card title: the name before ':', or the trend's short name if another trend shares it."""
-    base = t["name"].split(":")[0].strip()
-    return t["short"] if sum(1 for x in TRENDS if x["name"].split(":")[0].strip() == base) > 1 else base
 # The first row of posters is the home page's LCP: load it right away, lazy-load the rest.
 FIRST_ROW = 4
 cards = "\n".join(f"""        <a class="trend-card" href="trends/{t['slug']}/">
