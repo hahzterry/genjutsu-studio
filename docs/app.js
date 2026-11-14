@@ -548,7 +548,11 @@ const LABEL = { submitting: "Starting", queued: "In queue", in_progress: "Render
   submit_unknown: "Checking", failed: "Failed · refunded", nsfw: "Blocked · refunded", canceled: "Canceled · refunded" };
 // Cards are keyed by job and only rebuilt when their state changes, so a video being watched keeps playing.
 const jobEls = new Map();
-const jobKey = (j) => `${j.status}|${j.output_url || ""}|${j.error || ""}|${!TERMINAL.has(j.status) && age(j) >= GIVE_UP_MS}`;
+// The provider deletes a finished video 7 days after it's made; only published videos have our own copy (feed_video).
+const KEEP_MS = 7 * 24 * 60 * 60 * 1000;
+const ownCopy = (j) => (feedUrl(j.feed_video) ? j.feed_video : null);
+const expired = (j) => !DEMO && !ownCopy(j) && age(j) >= KEEP_MS;
+const jobKey = (j) => `${j.status}|${j.output_url || ""}|${j.feed_video || ""}|${j.error || ""}|${!TERMINAL.has(j.status) && age(j) >= GIVE_UP_MS}|${expired(j)}`;
 function jobCard(j) {
   const el = document.createElement("div"); el.className = "job";
   const when = new Date(j.created_at).toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
@@ -558,13 +562,23 @@ function jobCard(j) {
   const st = el.querySelector(".status");
   st.textContent = LABEL[j.status] || "Processing";
   if (LABEL[j.status]) st.classList.add(j.status);
-  if (j.status === "completed" && j.output_url) {
+  if (j.status === "completed" && j.output_url && expired(j)) {
+    st.textContent = "Expired"; st.classList.remove("completed");
+    el.insertAdjacentHTML("beforeend", `<p class="job-meta">This video was deleted 7 days after it was made. We keep finished videos for 7 days only.</p>`);
+  } else if (j.status === "completed" && j.output_url) {
+    const src = ownCopy(j) || j.output_url;
     el.insertAdjacentHTML("beforeend", `<video controls playsinline preload="metadata"></video>
-      <div class="job-actions"><a class="btn" href="#">Download</a><button type="button" class="btn share-btn">↗ Share</button></div>`);
-    el.querySelector("video").src = j.output_url;
-    const a = el.querySelector("a"); a.href = j.output_url;
-    a.onclick = (e) => { e.preventDefault(); download(j.output_url, `genjutsu-${j.trend || "video"}-${j.id.slice(0, 8)}.mp4`, a); };
-    el.querySelector(".share-btn").onclick = (e) => shareJob(j, e.currentTarget);
+      <div class="job-actions"><a class="btn" href="#">Download</a><button type="button" class="btn share-btn">↗ Share</button></div>
+      <p class="job-meta keep-note"></p>`);
+    el.querySelector("video").src = src;
+    const a = el.querySelector("a"); a.href = src;
+    a.onclick = (e) => { e.preventDefault(); download(src, `genjutsu-${j.trend || "video"}-${j.id.slice(0, 8)}.mp4`, a); };
+    // Share links play the provider's file, so they stop working after 7 days even for published videos.
+    const sb7 = el.querySelector(".share-btn");
+    if (age(j) >= KEEP_MS) sb7.remove(); else sb7.onclick = (e) => shareJob(j, e.currentTarget);
+    const until = new Date(new Date(j.created_at).getTime() + KEEP_MS).toLocaleDateString([], { dateStyle: "medium" });
+    el.querySelector(".keep-note").textContent = ownCopy(j) ? "Kept while it's published to the feed. Download it to keep a copy."
+      : `⚠ Download it to keep it: this video is deleted on ${until} (we keep finished videos for 7 days).`;
     if (!DEMO) { const g = publishBox(j); el.appendChild(ratingBox(j, g)); if (g) el.appendChild(g); }
   } else if (!TERMINAL.has(j.status)) {
     const late = age(j) >= GIVE_UP_MS;

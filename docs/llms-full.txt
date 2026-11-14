@@ -2,7 +2,7 @@
 
 > Make viral AI video trends with your own photos, in the browser. Pick a trend, upload a photo for each part, and Higgsfield's Genjutsu model puts you in the scene. Pay per video, no subscription, no app.
 
-Last updated: 2026-11-08. Independent site: not affiliated with or endorsed by Higgsfield AI.
+Last updated: 2026-11-15. Independent site: not affiliated with or endorsed by Higgsfield AI.
 
 ## Pricing
 - From $2.50 per video (Budget mode / Genjutsu Light, 480p). Premium mode and 720p/1080p cost more.
@@ -52,7 +52,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Hotel Lobby: Quavo & Takeoff Mic Scene
 URL: https://genjutsu-trends.com/trends/hotel-lobby/
@@ -93,7 +93,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Industry Baby: Lil Nas X Prison Dance Squad
 URL: https://genjutsu-trends.com/trends/industry-baby/
@@ -134,89 +134,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
-
-### Ozil AI Goal: Dodge the Keeper and Score
-URL: https://genjutsu-trends.com/trends/ozil-ai-goal/
-Facts: 1–2 photos (You, You again); vertical MP4; Budget mode (Genjutsu Light) only: 15 s from $3.25. Also called: Ozil goal AI trend, Ozil AI video, football goal AI trend, soccer goal AI trend.
-
-The Ozil AI goal trend replays a famous solo goal on a big night game: a man in a light blazer takes the ball round the diving goalkeeper, waits for the defenders to slide past and taps it in while the stadium watches. This Genjutsu take puts you in place of the scorer, with the clothes from your photo. Genjutsu keeps the stadium, the players, the ball and the camera moves as filmed, and swaps only the scorer for you.
-
-How to make it:
-1. Open this page: The Ozil AI goal clip is already loaded. You don't need to find the video or a CapCut template.
-2. Add your photo: One clear, full-body photo of you, facing the camera. Add a second photo of the same person if you have one.
-3. Keep 480p: 480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video.
-4. Click Generate: You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back.
-5. Download and post: Download the MP4 and post it with the trend's sound.
-
-Questions:
-- Q: How do I make the Ozil AI goal video?
-  A: Open this page. The clip is already loaded. Add one photo of yourself, then click Generate. No prompt needed.
-- Q: How much does it cost?
-  A: In Budget mode (Genjutsu Light), the 15-second clip at 480p costs 325 credits (about $3.25). 720p and 1080p are sharper and cost more. No subscription.
-- Q: Who do I replace?
-  A: You replace the scorer, the man in the light blazer who takes the ball round the keeper. The goalkeeper, the defenders and the crowd stay as filmed.
-- Q: What will I wear in the video?
-  A: The clothes from your photo. Use a full-body photo in the outfit you want to score in.
-- Q: Can I use a different clip?
-  A: Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt.
-- Q: Do I need to download an app?
-  A: No. Everything runs in your browser, on a phone or a computer. Sign in with your email (we send a 6-digit code) and you're ready.
-- Q: How long does it take?
-  A: Usually a few minutes. You can close the tab: the video keeps rendering, it appears under "My videos" and we email you when it's ready.
-- Q: Why is there only Budget mode for this trend?
-  A: Budget mode uses the Genjutsu Light model, and for this scene it gave clearly better results than Premium in our tests. It's also the cheaper one.
-- Q: Which resolution should I pick?
-  A: 480p is the default and looks fine on TikTok, Reels and Shorts. 720p and 1080p are sharper and cost more; the price updates as you switch.
-- Q: What if the video doesn't come out well?
-  A: If the render fails or is blocked by the automatic content check, your credits are refunded automatically. A finished video can't be refunded, because the render has already been paid for, so use a clear, well-lit photo for the best result.
-- Q: Will the video follow my prompt exactly?
-  A: Not always. The video is made by an AI model, and like every AI video model today it can miss or change details of a prompt, or keep details from the original scene, such as clothing or accessories. The setting comes from the trend's scene and the outfit from your photo. Some ideas take more than one try, so start at 480p to see how it looks.
-- Q: Can I use photos of celebrities?
-  A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
-- Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
-
-### Slam Dunk in a Suit: Dunk in a Packed Arena
-URL: https://genjutsu-trends.com/trends/suit-slam-dunk/
-Facts: 1–2 photos (You, You again); vertical MP4; Budget mode (Genjutsu Light) only: 15 s from $3.25. Also called: slam dunk AI trend, basketball dunk AI video, suit dunk trend, dunk in a suit AI.
-
-The slam dunk trend shows a man in a suit who dribbles down the court of a packed arena, takes off and slams the ball through the hoop while the crowd goes wild. This Genjutsu take puts you in place of the dunker, with the clothes from your photo. Genjutsu keeps the arena, the crowd, the ball and the camera moves as filmed, and swaps only the dunker for you.
-
-How to make it:
-1. Open this page: The slam dunk clip is already loaded. You don't need to find the video or a CapCut template.
-2. Add your photo: One clear, full-body photo of you, facing the camera. Add a second photo of the same person if you have one.
-3. Keep 480p: 480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video.
-4. Click Generate: You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back.
-5. Download and post: Download the MP4 and post it with the trend's sound.
-
-Questions:
-- Q: How do I make the slam dunk AI video?
-  A: Open this page. The clip is already loaded. Add one photo of yourself, then click Generate. No prompt needed.
-- Q: How much does it cost?
-  A: In Budget mode (Genjutsu Light), the 15-second clip at 480p costs 325 credits (about $3.25). 720p and 1080p are sharper and cost more. No subscription.
-- Q: Who do I replace?
-  A: You replace the man in the suit who dribbles and dunks. The arena, the crowd and the referee stay as filmed.
-- Q: What will I wear in the video?
-  A: The clothes from your photo. Use a full-body photo in the outfit you want to dunk in.
-- Q: Can I use a different clip?
-  A: Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt.
-- Q: Do I need to download an app?
-  A: No. Everything runs in your browser, on a phone or a computer. Sign in with your email (we send a 6-digit code) and you're ready.
-- Q: How long does it take?
-  A: Usually a few minutes. You can close the tab: the video keeps rendering, it appears under "My videos" and we email you when it's ready.
-- Q: Why is there only Budget mode for this trend?
-  A: Budget mode uses the Genjutsu Light model, and for this scene it gave clearly better results than Premium in our tests. It's also the cheaper one.
-- Q: Which resolution should I pick?
-  A: 480p is the default and looks fine on TikTok, Reels and Shorts. 720p and 1080p are sharper and cost more; the price updates as you switch.
-- Q: What if the video doesn't come out well?
-  A: If the render fails or is blocked by the automatic content check, your credits are refunded automatically. A finished video can't be refunded, because the render has already been paid for, so use a clear, well-lit photo for the best result.
-- Q: Will the video follow my prompt exactly?
-  A: Not always. The video is made by an AI model, and like every AI video model today it can miss or change details of a prompt, or keep details from the original scene, such as clothing or accessories. The setting comes from the trend's scene and the outfit from your photo. Some ideas take more than one try, so start at 480p to see how it looks.
-- Q: Can I use photos of celebrities?
-  A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
-- Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Alors on Danse: Stromae Keyboard Dance
 URL: https://genjutsu-trends.com/trends/alors-on-danse/
@@ -257,7 +175,89 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
+
+### Ozil AI Goal: Dodge the Keeper and Score
+URL: https://genjutsu-trends.com/trends/ozil-ai-goal/
+Facts: 1–2 photos (You, You again); vertical MP4; Budget mode (Genjutsu Light) only: 15 s from $3.25. Also called: Ozil goal AI trend, Ozil AI video, football goal AI trend, soccer goal AI trend.
+
+The Ozil AI goal trend replays a famous solo goal on a big night game: a man in a light blazer takes the ball round the diving goalkeeper, waits for the defenders to slide past and taps it in while the stadium watches. This Genjutsu take puts you in place of the scorer, with the clothes from your photo. Genjutsu keeps the stadium, the players, the ball and the camera moves as filmed, and swaps only the scorer for you.
+
+How to make it:
+1. Open this page: The Ozil AI goal clip is already loaded. You don't need to find the video or a CapCut template.
+2. Add your photo: One clear, full-body photo of you, facing the camera. Add a second photo of the same person if you have one.
+3. Keep 480p: 480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video.
+4. Click Generate: You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back.
+5. Download and post: Download the MP4 and post it with the trend's sound.
+
+Questions:
+- Q: How do I make the Ozil AI goal video?
+  A: Open this page. The clip is already loaded. Add one photo of yourself, then click Generate. No prompt needed.
+- Q: How much does it cost?
+  A: In Budget mode (Genjutsu Light), the 15-second clip at 480p costs 325 credits (about $3.25). 720p and 1080p are sharper and cost more. No subscription.
+- Q: Who do I replace?
+  A: You replace the scorer, the man in the light blazer who takes the ball round the keeper. The goalkeeper, the defenders and the crowd stay as filmed.
+- Q: What will I wear in the video?
+  A: The clothes from your photo. Use a full-body photo in the outfit you want to score in.
+- Q: Can I use a different clip?
+  A: Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt.
+- Q: Do I need to download an app?
+  A: No. Everything runs in your browser, on a phone or a computer. Sign in with your email (we send a 6-digit code) and you're ready.
+- Q: How long does it take?
+  A: Usually a few minutes. You can close the tab: the video keeps rendering, it appears under "My videos" and we email you when it's ready.
+- Q: Why is there only Budget mode for this trend?
+  A: Budget mode uses the Genjutsu Light model, and for this scene it gave clearly better results than Premium in our tests. It's also the cheaper one.
+- Q: Which resolution should I pick?
+  A: 480p is the default and looks fine on TikTok, Reels and Shorts. 720p and 1080p are sharper and cost more; the price updates as you switch.
+- Q: What if the video doesn't come out well?
+  A: If the render fails or is blocked by the automatic content check, your credits are refunded automatically. A finished video can't be refunded, because the render has already been paid for, so use a clear, well-lit photo for the best result.
+- Q: Will the video follow my prompt exactly?
+  A: Not always. The video is made by an AI model, and like every AI video model today it can miss or change details of a prompt, or keep details from the original scene, such as clothing or accessories. The setting comes from the trend's scene and the outfit from your photo. Some ideas take more than one try, so start at 480p to see how it looks.
+- Q: Can I use photos of celebrities?
+  A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
+- Q: Can I download and share it?
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
+
+### Slam Dunk in a Suit: Dunk in a Packed Arena
+URL: https://genjutsu-trends.com/trends/suit-slam-dunk/
+Facts: 1–2 photos (You, You again); vertical MP4; Budget mode (Genjutsu Light) only: 15 s from $3.25. Also called: slam dunk AI trend, basketball dunk AI video, suit dunk trend, dunk in a suit AI.
+
+The slam dunk trend shows a man in a suit who dribbles down the court of a packed arena, takes off and slams the ball through the hoop while the crowd goes wild. This Genjutsu take puts you in place of the dunker, with the clothes from your photo. Genjutsu keeps the arena, the crowd, the ball and the camera moves as filmed, and swaps only the dunker for you.
+
+How to make it:
+1. Open this page: The slam dunk clip is already loaded. You don't need to find the video or a CapCut template.
+2. Add your photo: One clear, full-body photo of you, facing the camera. Add a second photo of the same person if you have one.
+3. Keep 480p: 480p is the default: it's the cheapest and looks fine on TikTok, Reels and Shorts. Pick 720p or 1080p for a sharper video.
+4. Click Generate: You'll see the exact price first. The video renders in a few minutes, and you can close the tab and come back.
+5. Download and post: Download the MP4 and post it with the trend's sound.
+
+Questions:
+- Q: How do I make the slam dunk AI video?
+  A: Open this page. The clip is already loaded. Add one photo of yourself, then click Generate. No prompt needed.
+- Q: How much does it cost?
+  A: In Budget mode (Genjutsu Light), the 15-second clip at 480p costs 325 credits (about $3.25). 720p and 1080p are sharper and cost more. No subscription.
+- Q: Who do I replace?
+  A: You replace the man in the suit who dribbles and dunks. The arena, the crowd and the referee stay as filmed.
+- Q: What will I wear in the video?
+  A: The clothes from your photo. Use a full-body photo in the outfit you want to dunk in.
+- Q: Can I use a different clip?
+  A: Yes. Use the Custom trend page to upload any MP4 between 4 and 30 seconds with your own photos and prompt.
+- Q: Do I need to download an app?
+  A: No. Everything runs in your browser, on a phone or a computer. Sign in with your email (we send a 6-digit code) and you're ready.
+- Q: How long does it take?
+  A: Usually a few minutes. You can close the tab: the video keeps rendering, it appears under "My videos" and we email you when it's ready.
+- Q: Why is there only Budget mode for this trend?
+  A: Budget mode uses the Genjutsu Light model, and for this scene it gave clearly better results than Premium in our tests. It's also the cheaper one.
+- Q: Which resolution should I pick?
+  A: 480p is the default and looks fine on TikTok, Reels and Shorts. 720p and 1080p are sharper and cost more; the price updates as you switch.
+- Q: What if the video doesn't come out well?
+  A: If the render fails or is blocked by the automatic content check, your credits are refunded automatically. A finished video can't be refunded, because the render has already been paid for, so use a clear, well-lit photo for the best result.
+- Q: Will the video follow my prompt exactly?
+  A: Not always. The video is made by an AI model, and like every AI video model today it can miss or change details of a prompt, or keep details from the original scene, such as clothing or accessories. The setting comes from the trend's scene and the outfit from your photo. Some ideas take more than one try, so start at 480p to see how it looks.
+- Q: Can I use photos of celebrities?
+  A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
+- Q: Can I download and share it?
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Car Jump With Your Own Car: It Lands Behind You
 URL: https://genjutsu-trends.com/trends/car-jump-your-car/
@@ -298,7 +298,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Bad Times Couple / Duo: Dispute Dance for Two
 URL: https://genjutsu-trends.com/trends/bad-times-duo/
@@ -339,7 +339,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Cheba Man: String-Lights Stage
 URL: https://genjutsu-trends.com/trends/cheba-man-lights/
@@ -380,7 +380,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Billionaire Lambo: Shoes Off, Then the Supercar
 URL: https://genjutsu-trends.com/trends/millionaire-lambo/
@@ -421,7 +421,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Car Jump: Sit Calm as a Truck Lands Behind You
 URL: https://genjutsu-trends.com/trends/car-jump/
@@ -462,7 +462,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Dance Battle Solo
 URL: https://genjutsu-trends.com/trends/dance-your-style/
@@ -503,7 +503,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Karate Dojo Fight: White Gi vs Hooded Monk
 URL: https://genjutsu-trends.com/trends/dojo-fight/
@@ -544,7 +544,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Gas Station Dance: 3 Friends at Sunset
 URL: https://genjutsu-trends.com/trends/gas-station-dance/
@@ -585,7 +585,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Bad Times Toddler: You as a Baby
 URL: https://genjutsu-trends.com/trends/bad-times-baby/
@@ -626,7 +626,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Jawn Dance Baby: You as a Toddler
 URL: https://genjutsu-trends.com/trends/jawn-baby/
@@ -667,7 +667,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Raindance: Dave & Tems Pier Scene (Original)
 URL: https://genjutsu-trends.com/trends/raindance/
@@ -708,7 +708,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Turn the Lights Off: Jon Hamm Club Dance
 URL: https://genjutsu-trends.com/trends/turn-the-lights-off/
@@ -749,7 +749,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Cheba Man: Tecktonik Stage Dance
 URL: https://genjutsu-trends.com/trends/cheba-man/
@@ -790,7 +790,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Bulin 47: Street Freestyle
 URL: https://genjutsu-trends.com/trends/bulin-47/
@@ -831,7 +831,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Bad Times: Imael Angel Dispute Dance
 URL: https://genjutsu-trends.com/trends/bad-times/
@@ -872,7 +872,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Bad Times Dog & Cat: Your Pet in the Trend
 URL: https://genjutsu-trends.com/trends/bad-times-pet/
@@ -913,7 +913,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### I Feel Like Nicole: ADÉLA Duo Dance
 URL: https://genjutsu-trends.com/trends/i-feel-like-nicole/
@@ -954,7 +954,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Nicole Kidman Dance: ADÉLA Solo
 URL: https://genjutsu-trends.com/trends/nicole-kidman-dance/
@@ -995,7 +995,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### The Jawn Dance: Wait for the Drop
 URL: https://genjutsu-trends.com/trends/jawn-dance/
@@ -1036,7 +1036,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### Yeahh Yeahh: Car Seat Dance Duo
 URL: https://genjutsu-trends.com/trends/yeahh-yeahh/
@@ -1077,7 +1077,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ### STORM: The Suit Crowd Drop
 URL: https://genjutsu-trends.com/trends/storm/
@@ -1118,7 +1118,7 @@ Questions:
 - Q: Can I use photos of celebrities?
   A: No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video.
 - Q: Can I download and share it?
-  A: Yes. Download the MP4 from "My videos" and post it anywhere, or share a link to it.
+  A: Yes. Download the MP4 from "My videos" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.
 
 ## Other pages
 - [Custom trend](https://genjutsu-trends.com/custom/): upload any 4–30 s MP4 (up to 15 s in Budget mode), 1–8 photos and your own prompt.

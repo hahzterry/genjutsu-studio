@@ -340,7 +340,7 @@ def extra_faq(t):
           ("What if the video doesn't come out well?", "If the render fails or is blocked by the automatic content check, your credits are refunded automatically. A finished video can't be refunded, because the render has already been paid for, so use a clear, well-lit photo for the best result."),
           ("Will the video follow my prompt exactly?", "Not always. The video is made by an AI model, and like every AI video model today it can miss or change details of a prompt, or keep details from the original scene, such as clothing or accessories. " + ("The setting comes from the trend's scene and the outfit from your photo." if t["mode"] == "object-swap" else "The outfit and the setting come from the trend's scene.") + " Some ideas take more than one try, so start at 480p to see how it looks."),
           ("Can I use photos of celebrities?", "No. Our video provider blocks photos of celebrities and public figures, so the video won't be made. The credits go back to your account automatically. Use your own photos, or photos of friends who agreed to be in the video."),
-          ("Can I download and share it?", "Yes. Download the MP4 from \"My videos\" and post it anywhere, or share a link to it.")]
+          ("Can I download and share it?", "Yes. Download the MP4 from \"My videos\" within 7 days (we keep finished videos for 7 days) and post it anywhere, or share a link to it.")]
     return q
 
 
@@ -1014,7 +1014,8 @@ mv += f"""  <main>
     <div class="crumbs"><a href="../">Trends</a> › My videos</div>
     <section class="hero small">
       <h1>My videos</h1>
-      <p class="lead">Every video you've made: follow its progress, watch it and download it. Download your videos to keep a copy.</p>
+      <p class="lead">Every video you've made: follow its progress, watch it and download it.</p>
+      <p class="keep-warn"><b>We keep finished videos for 7 days.</b> Download the ones you want to keep before then.</p>
     </section>
 {HISTORY}  </main>
   <dialog id="share-modal" class="modal">
@@ -1031,7 +1032,7 @@ mv += f"""  <main>
       <a id="share-fb" class="btn" target="_blank" rel="noopener noreferrer">Facebook</a>
       <button type="button" id="share-more" class="btn ghost" hidden>More…</button>
     </div>
-    <p class="fine">Deleting the video turns this link off.</p>
+    <p class="fine">The link works for 7 days after the video was made. Deleting the video turns it off sooner.</p>
   </dialog>
 """
 mv += footer("../", page={"kind": "videos"})
