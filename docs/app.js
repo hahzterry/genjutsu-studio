@@ -568,17 +568,13 @@ function jobCard(j) {
   } else if (j.status === "completed" && j.output_url) {
     const src = ownCopy(j) || j.output_url;
     el.insertAdjacentHTML("beforeend", `<video controls playsinline preload="metadata"></video>
-      <div class="job-actions"><a class="btn" href="#">Download</a><button type="button" class="btn share-btn">↗ Share</button></div>
-      <p class="job-meta keep-note"></p>`);
+      <div class="job-actions"><a class="btn" href="#">Download</a><button type="button" class="btn share-btn">↗ Share</button></div>`);
     el.querySelector("video").src = src;
     const a = el.querySelector("a"); a.href = src;
     a.onclick = (e) => { e.preventDefault(); download(src, `genjutsu-${j.trend || "video"}-${j.id.slice(0, 8)}.mp4`, a); };
     // Share links play the provider's file, so they stop working after 7 days even for published videos.
     const sb7 = el.querySelector(".share-btn");
     if (age(j) >= KEEP_MS) sb7.remove(); else sb7.onclick = (e) => shareJob(j, e.currentTarget);
-    const until = new Date(new Date(j.created_at).getTime() + KEEP_MS).toLocaleDateString([], { dateStyle: "medium" });
-    el.querySelector(".keep-note").textContent = ownCopy(j) ? "Kept while it's published to the feed. Download it to keep a copy."
-      : `⚠ Download it to keep it: this video is deleted on ${until} (we keep finished videos for 7 days).`;
     if (!DEMO) { const g = publishBox(j); el.appendChild(ratingBox(j, g)); if (g) el.appendChild(g); }
   } else if (!TERMINAL.has(j.status)) {
     const late = age(j) >= GIVE_UP_MS;

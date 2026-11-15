@@ -48,7 +48,7 @@ function readyMail(name: string, slug: string) {
 <h1 style="margin:0 0 10px;font-size:24px;line-height:1.25;">Your ${n} video is ready 🎬</h1>
 <p style="margin:0 0 20px;font-size:16px;line-height:1.5;color:#4a4658;">It took a few minutes, and it's waiting for you. Watch it, download the MP4 and post it.</p>
 <p style="margin:0 0 22px;">${btn(`${SITE}my-videos/?ref=email-ready`, "▶ Watch &amp; download")}</p>
-<p style="margin:0 0 6px;font-size:14px;line-height:1.5;color:#4a4658;"><b>Download it within 7 days.</b> We keep finished videos for 7 days, then they're deleted.</p>
+<p style="margin:0 0 6px;font-size:14px;line-height:1.5;color:#4a4658;">Tip: download it to keep a copy. Videos may not stay online forever.</p>
 </td></tr>
 <tr><td style="padding:8px 24px 22px;">
 <table role="presentation" width="100%" style="background:#f7f5fc;border-radius:12px;"><tr><td style="padding:14px 16px;font-size:15px;line-height:1.5;">
